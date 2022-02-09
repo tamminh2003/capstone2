@@ -107,6 +107,20 @@
 
                     ?>
 
+                    <!--Invalid Email: email format wrong-->
+                    <?php
+
+                    if(isset($_GET['NotAnAddress']))
+                    {
+                        $Message=$_GET['NotAnAddress'];
+                        $Message=" That is not an email address, what are you doing? ";
+                        ?>
+                        <div><?php echo $Message?></div>
+                        <?php
+                    }
+
+                    ?>
+
                     <!--Invalid Email: Double Jeopardy-->
                     <?php
 
@@ -156,6 +170,20 @@
                     {
                         $Message=$_GET['PasswordSize'];
                         $Message=" Password must have at least 6 characters. MAX password size: 100 characters ";
+                        ?>
+                        <div><?php echo $Message?></div>
+                        <?php
+                    }
+
+                    ?>
+
+                    <!--Password has no special characters-->
+                    <?php
+
+                    if(isset($_GET['PasswordNonono']))
+                    {
+                        $Message=$_GET['PasswordNonono'];
+                        $Message=" Password must have special characters ";
                         ?>
                         <div><?php echo $Message?></div>
                         <?php

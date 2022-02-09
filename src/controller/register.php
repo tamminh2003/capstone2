@@ -49,6 +49,11 @@ if(isset($_POST['Register']))
         {
             print("Name check good");
             print("Email check start");
+            if(!preg_match('/^([a-z0-9_\-]+)(\.[a-z0-9_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix', $Email)){
+                print("that's not an Email address");
+                header("location: register_form.php?NotAnAddress");//check for valid email address structure
+                exit();
+            }
             $query = " select * from users where user_email ='".$Email."'";
             $stmt = mysqli_prepare($con,$query);
 
@@ -87,6 +92,11 @@ if(isset($_POST['Register']))
                                         header("location: register_form.php?PasswordSize");
                                         exit();//change to just validation, length is part of it, must have special characters
                                     }
+                                    elseif(!preg_match('/^(?=.*\d)(?=.*[@#\-_$%^&+=§!])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!]+$/',trim($_POST["Password"]))
+                                    ){
+                                        header("location: register_form.php?PasswordNonono");
+                                        exit();//special characters test - working
+                                    }
                                     else{
                                         // Validate confirm password
                                         if($Password != $Password_confirmation){
@@ -94,13 +104,13 @@ if(isset($_POST['Register']))
                                             exit();
                                         }
                                         else {
-                                            $Hash = password_hash($Password, PASSWORD_DEFAULT);
+                                            $Hash = password_hash($Password, PASSWORD_ARGON2I);
                                             $query = " insert into users (user_firstname, user_lastname, user_email, user_type, user_username, user_password)
                                                         values ('$GivenName', '$FamilyName', '$Email', '$User_Type','$Username', '$Hash')";
                                             $result = mysqli_query($con, $query);
                                             mysqli_close($con);
                                             header("location: register_form.php?success");
-                                            exit();//try look for other hash algorithms
+                                            exit();//try look for other hash algorithms - changed to Bcyrpt for now, turns out it needs separate config support
                                         }
                                     }
                                 }
