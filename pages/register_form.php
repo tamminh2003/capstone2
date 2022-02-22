@@ -1,4 +1,4 @@
-<?php require_once('header.php'); ?>
+<?php require_once($_SERVER["DOCUMENT_ROOT"]."/Capstone2/module/header.php"); ?>
 
     <div>
         <div>
@@ -221,7 +221,7 @@
 
 
                     <div>
-                        <form action="register.php" method="POST"><!--add some labels-->
+                        <form action="/Capstone2/controller/register.php" method="POST"><!--add some labels-->
                             <input type="text" name="GivenName" placeholder="Given Name" ><br><br/>
                             <input type="text" name="FamilyName" placeholder="Family Name" ><br><br/>
                             <input type="text" name="Email" placeholder="Email" ><br><br/>
@@ -243,4 +243,4 @@
         </div>
     </div>
 
-<?php require_once('footer.php'); ?>
+<?php require_once($_SERVER["DOCUMENT_ROOT"]."/Capstone2/module/footer.php"); ?>
