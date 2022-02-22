@@ -1,8 +1,8 @@
-<?php require_once('header.php'); ?>
+<?php require_once($_SERVER["DOCUMENT_ROOT"]."/GeigerMark/module/header.php"); ?>
 <?php
 $UserName = "";
 $_SESSION['success'] = "";
-require_once('connection.php');
+require_once('../db/connection.php');
 
 if(isset($_POST['login']))
 {
@@ -36,7 +36,7 @@ if(isset($_POST['login']))
                 $_SESSION['Password']=$row['user_password'];
                 $_SESSION['user_type']=$row['user_type'];
 
-                header("location: dashboard.php?Well");
+                header("location: /GeigerMark/module/dashboard.php?Well");
 
             }
         }
@@ -72,4 +72,4 @@ if(isset($_POST['login']))
         </div>
     </div>
 
-<?php require_once('footer.php'); ?>
+<?php require_once($_SERVER["DOCUMENT_ROOT"]."/GeigerMark/module/footer.php"); ?>
