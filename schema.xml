@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<database name="default" defaultIdMethod="native" namespace="\Propel" defaultPhpNamingMethod="underscore">
+  <table name="disease" idMethod="native" phpName="Disease">
+    <column name="disease_id" phpName="DiseaseId" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="disease_api_key" phpName="DiseaseApiKey" type="VARCHAR" size="100"/>
+    <column name="disease_name" phpName="DiseaseName" type="VARCHAR" size="100"/>
+    <column name="disease_group" phpName="DiseaseGroup" type="VARCHAR" size="255"/>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="poct_device" idMethod="native" phpName="PoctDevice">
+    <column name="poct_device_id" phpName="PoctDeviceId" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="user_user_id" phpName="UserUserId" type="INTEGER" required="true"/>
+    <column name="poct_device_manufacture_name" phpName="PoctDeviceManufactureName" type="VARCHAR" size="255"/>
+    <column name="poct_device_generic_name" phpName="PoctDeviceGenericName" type="VARCHAR" size="255"/>
+    <column name="device_model" phpName="DeviceModel" type="VARCHAR" size="255"/>
+    <column name="device_image_url" phpName="DeviceImageUrl" type="VARCHAR" size="255"/>
+    <column name="device_type" phpName="DeviceType" type="VARCHAR" size="255"/>
+    <foreign-key foreignTable="users" name="fk_poct_device_user1">
+      <reference local="user_user_id" foreign="user_id"/>
+    </foreign-key>
+    <index name="fk_poct_device_user1_idx">
+      <index-column name="user_user_id"/>
+    </index>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="poct_device_aditional_info" idMethod="native" phpName="PoctDeviceAditionalInfo">
+    <column name="poct_device_aditional_info_id" phpName="PoctDeviceAditionalInfoId" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="idpoct_device" phpName="IdpoctDevice" type="INTEGER" required="true"/>
+    <column name="user_user_id" phpName="UserUserId" type="INTEGER" required="true"/>
+    <column name="poct_device_aditional_info_label" phpName="PoctDeviceAditionalInfoLabel" type="VARCHAR" size="100"/>
+    <column name="poct_device_aditional_info_type" phpName="PoctDeviceAditionalInfoType" type="VARCHAR" size="100"/>
+    <column name="poct_device_aditional_info_details" phpName="PoctDeviceAditionalInfoDetails" type="VARCHAR" size="100"/>
+    <foreign-key foreignTable="poct_device" name="fk_poct_device_aditional_info_poct_device1">
+      <reference local="idpoct_device" foreign="poct_device_id"/>
+    </foreign-key>
+    <foreign-key foreignTable="users" name="fk_poct_device_aditional_info_user1">
+      <reference local="user_user_id" foreign="user_id"/>
+    </foreign-key>
+    <index name="fk_poct_device_aditional_info_poct_device1_idx">
+      <index-column name="idpoct_device"/>
+    </index>
+    <index name="fk_poct_device_aditional_info_user1_idx">
+      <index-column name="user_user_id"/>
+    </index>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="poct_device_details_timestamps" idMethod="native" phpName="PoctDeviceDetailsTimestamps">
+    <column name="poct_device_details_timestamps_id" phpName="PoctDeviceDetailsTimestampsId" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="poct_device_poct_device_id" phpName="PoctDevicePoctDeviceId" type="INTEGER" required="true"/>
+    <column name="user_user_id" phpName="UserUserId" type="INTEGER" required="true"/>
+    <column name="create_time" phpName="CreateTime" type="TIMESTAMP" defaultExpr="CURRENT_TIMESTAMP"/>
+    <column name="update_time" phpName="UpdateTime" type="TIMESTAMP"/>
+    <column name="comment" phpName="Comment" type="VARCHAR" size="255"/>
+    <foreign-key foreignTable="poct_device" name="fk_poct_device_timestamps_poct_device1">
+      <reference local="poct_device_poct_device_id" foreign="poct_device_id"/>
+    </foreign-key>
+    <foreign-key foreignTable="users" name="fk_poct_device_timestamps_user1">
+      <reference local="user_user_id" foreign="user_id"/>
+    </foreign-key>
+    <index name="fk_poct_device_timestamps_poct_device1_idx">
+      <index-column name="poct_device_poct_device_id"/>
+    </index>
+    <index name="fk_poct_device_timestamps_user1_idx">
+      <index-column name="user_user_id"/>
+    </index>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="poct_device_has_disease" idMethod="native" phpName="PoctDeviceHasDisease">
+    <column name="poct_device_has_disease_id" phpName="PoctDeviceHasDiseaseId" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="poct_device_id" phpName="PoctDeviceId" type="INTEGER" required="true"/>
+    <column name="disease_id" phpName="DiseaseId" type="INTEGER" required="true"/>
+    <foreign-key foreignTable="disease" name="fk_poct_device_has_disease_disease1">
+      <reference local="disease_id" foreign="disease_id"/>
+    </foreign-key>
+    <foreign-key foreignTable="poct_device" name="fk_poct_device_has_disease_poct_device1">
+      <reference local="poct_device_id" foreign="poct_device_id"/>
+    </foreign-key>
+    <index name="fk_poct_device_has_disease_disease1_idx">
+      <index-column name="disease_id"/>
+    </index>
+    <index name="fk_poct_device_has_disease_poct_device1_idx">
+      <index-column name="poct_device_id"/>
+    </index>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="users" idMethod="native" phpName="Users">
+    <column name="user_id" phpName="UserId" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="user_firstname" phpName="UserFirstname" type="VARCHAR" size="100"/>
+    <column name="user_lastname" phpName="UserLastname" type="VARCHAR" size="100"/>
+    <column name="user_email" phpName="UserEmail" type="VARCHAR" size="255"/>
+    <column name="user_type" phpName="UserType" type="VARCHAR" size="100"/>
+    <column name="user_username" phpName="UserUsername" type="VARCHAR" size="100"/>
+    <column name="user_password" phpName="UserPassword" type="VARCHAR" size="100"/>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+</database>
