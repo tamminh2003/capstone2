@@ -1,0 +1,10 @@
+propel:
+    database:
+        connections:
+            default:
+                adapter: mysql
+                dsn: mysql:host=us-cdbr-east-05.cleardb.net;port=3306;dbname=heroku_f831c90fbf509fd
+                user: bef405b358942a
+                password: be31f73d
+                settings:
+                    charset: utf8

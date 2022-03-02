@@ -1,0 +1,23 @@
+{% extends "layout.twig" %}
+
+{% block content %}
+  <h1 style="text-align:center">Welcome to POCT Device Catalogue</h1>
+
+  <form method="post" accept-charset="UTF-8">
+    <input type="hidden" name="action" value="users/save-user">
+  
+    <h3><label for="deviceName">Device Generic Name</label></h3>
+    <input id="deviceName" type="text" name="deviceName" />
+
+    <h3><label for="deviceModel">Device Model</label></h3>
+    <input id="deviceModel" type="text" name="deviceModel" />
+  
+    <h3><label for="deviceImgUrl">Device Photo</label></h3>
+    <input id="deviceImgUrl" type="text" name="deviceImgUrl">
+
+    <h3><label for="deviceType">Device Type</label></h3>
+    <input id="deviceType" type="text" name="deviceType">
+
+    <input type="button" value="Register">
+  </form>
+{% endblock %}
