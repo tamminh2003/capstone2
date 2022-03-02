@@ -15,4 +15,6 @@ $twig->addExtension(new PhpFunctionExtension(["str_contains"]));
 
 $template = $twig->load("Dashboard.twig");
 
-echo $template->render(["uri" => $_SERVER["REQUEST_URI"]]);
+$user = ['type' => 'manufacturer'];
+
+echo $template->render(["uri" => $_SERVER["REQUEST_URI"], "user" => $user]);
