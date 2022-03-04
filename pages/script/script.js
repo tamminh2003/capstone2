@@ -113,7 +113,7 @@ function Register_userRegister() {
     userRegister_FormData.append("RegisterUsername", userRegisterCheck_Username);
     userRegister_FormData.append("RegisterPassword", userRegisterCheck_Password);
 
-    fetch("/capstone2/controller/register.php",{
+    fetch("/controller/register.php",{
         method: "POST",
         body: userRegister_FormData
     })
@@ -157,13 +157,13 @@ function Login_userVerif() {
     userVerif_FormData.append('processUsername', userVerif_Username);
     userVerif_FormData.append('processPassword', userVerif_Password);
 
-    fetch("/capstone2/controller/login.php",{
+    fetch("/controller/login.php",{
         method: "POST",
         body: userVerif_FormData
     })
         .then(response => response.text())
         .then(text =>{
-            if(text == 'verified') window.location.assign("/capstone2/pages/dashboard.php")
+            if(text == 'verified') window.location.assign("/pages/dashboard.php")
             else if(text =='Fail') document.querySelector("#DisplayDiv").innerHTML = "Username and Password incorrect"
         })
 }

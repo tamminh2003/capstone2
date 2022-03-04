@@ -3,9 +3,10 @@ require $_SERVER["DOCUMENT_ROOT"] . "/vendor/autoload.php";
 require $_SERVER["DOCUMENT_ROOT"] . "/generated-conf/config.php";
 
 //use Propel\Runtime\Propel; // composer install?
-use Propel\Map\UsersTableMap;
 use Propel\Users;
 use Propel\UsersQuery;
+use Propel\Runtime\Propel;
+use Propel\Map\UsersTableMap;
 
 
 $FirstName = $_POST['RegisterFirstName'];

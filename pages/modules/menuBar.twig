@@ -1,7 +1,11 @@
 {% set homeUri = '/pages/Homepage.php' %}
 {% set dashUri = '/pages/Dashboard.php' %}
+{% set loginUri = '/pages/Login.php' %}
+{% set registerUri = '/pages/Register.php' %}
 {% set isHome = str_contains(uri, 'Homepage') %}
 {% set isDash = str_contains(uri, 'Dashboard') %}
+{% set isLogin = str_contains(uri, 'Login') %}
+{% set isRegister = str_contains(uri, 'Register') %}
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
 	<div class="container-fluid">
@@ -16,6 +20,12 @@
 				</li>
 				<li class="nav-item">
 					<a class={{isDash ? "\"nav-link active\"" : "nav-link"}} href={{ isDash ? "#" : dashUri}}>Dashboard</a>
+				</li>
+				<li class="nav-item">
+					<a class={{isLogin ? "\"nav-link active\"" : "nav-link"}} href={{ isLogin ? "#" : loginUri}}>Login</a>
+				</li>
+				<li class="nav-item">
+					<a class={{isRegister ? "\"nav-link active\"" : "nav-link"}} href={{ isRegister ? "#" : registerUri}}>Register</a>
 				</li>
 			</ul>
 			<form class="d-flex">
