@@ -1,10 +1,8 @@
 <?php
-echo "This is Dashboard";
 
 use Umpirsky\Twig\Extension\PhpFunctionExtension;
 
 require $_SERVER["DOCUMENT_ROOT"] . "/vendor/autoload.php";
-require $_SERVER["DOCUMENT_ROOT"] . "/controller/search.php";
 
 $pathToPages = $_SERVER["DOCUMENT_ROOT"] . "/pages/";
 
