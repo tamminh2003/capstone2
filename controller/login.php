@@ -1,4 +1,5 @@
 <?php
+session_start();
 //require $_SERVER["DOCUMENT_ROOT"] . "/vendor/autoload.php";
 //require $_SERVER["DOCUMENT_ROOT"] . "/generated-conf/config.php";
 //
