@@ -163,7 +163,7 @@ function Login_userVerif() {
     })
         .then(response => response.text())
         .then(text =>{
-            if(text == 'verified') window.location.assign("/pages/dashboard.php")
+            if(text == 'verified') window.location.assign("/pages/Dashboard.php")
             else if(text =='Fail') document.querySelector("#DisplayDiv").innerHTML = "Username and Password incorrect"
         })
 }
