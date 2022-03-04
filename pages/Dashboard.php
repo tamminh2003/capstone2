@@ -1,4 +1,6 @@
 <?php
+session_start();
+var_dump($_SESSION);
 
 use Umpirsky\Twig\Extension\PhpFunctionExtension;
 
@@ -15,6 +17,6 @@ $twig->addExtension(new PhpFunctionExtension(["str_contains"]));
 
 $template = $twig->load("Dashboard.twig");
 
-$user = ['type' => 'manufacturer'];
+$userType = $_SESSION['user_type'];
 
-echo $template->render(["uri" => $_SERVER["REQUEST_URI"], "user" => $user]);
+echo $template->render(["uri" => $_SERVER["REQUEST_URI"], "userType" => $userType]);

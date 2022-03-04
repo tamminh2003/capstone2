@@ -10,11 +10,12 @@
 				<h3>Search for devices</h3>
 				<h3>Advanced Search</h3>
 
-				{% if user.type == 'researcher' %}
+				{% if userType == 'researcher' %}
 					<h3>Add research paper</h3>
+					<h3>Update research paper</h3>
 				{% endif %}
 
-				{% if user.type == 'manufacturer' %}
+				{% if userType == 'manufacturer' %}
 					<h3>Add device</h3>
 					<h3>Update Device</h3>
 					<h3>Remove device</h3>
