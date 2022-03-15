@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 use Umpirsky\Twig\Extension\PhpFunctionExtension;
 
@@ -14,4 +15,4 @@ $twig->addExtension(new PhpFunctionExtension(['str_contains']));
 
 $template = $twig->load("Homepage.twig");
 
-echo $template->render(["uri" => $_SERVER["REQUEST_URI"]]);
+echo $template->render(["uri" => $_SERVER["REQUEST_URI"], "session" => $_SESSION]);
