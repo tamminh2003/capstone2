@@ -4,11 +4,13 @@
 		"propel/propel": "~2.0@dev",
 		"twig/twig": "^3.3",
 		"sabre/http": "^5.1",
-		"tamminh/twig-php-function": "*"
+		"tamminh/twig-php-function": "*",
+		"buzzingpixel/twig-switch": "^1.0"
 	},
 	"autoload": {
 		"psr-4": {
-			"Propel\\": "./Propel/"
+			"Propel\\": "./Propel/",
+			"Utility\\": "./utility/"
 		}
 	},
 	"repositories": [
