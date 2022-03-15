@@ -54,13 +54,13 @@ function Register_userRegister() {
 
     let userRegisterCheck_UserType
     if(document.querySelector("#Doctor").checked) {
-        userRegisterCheck_UserType = document.querySelector("#Doctor").value;
+        userRegisterCheck_UserType = "DOCTOR";
     }
     else if(document.querySelector("#Researcher").checked) {
-        userRegisterCheck_UserType = document.querySelector("#Researcher").value;
+        userRegisterCheck_UserType = "RESEARCHER";
     }
     else if(document.querySelector("#Manufacturer").checked) {
-        userRegisterCheck_UserType = document.querySelector("#Manufacturer").value;
+        userRegisterCheck_UserType = "MANUFACTURER";
     }
     else {
         alert("User type is empty")
