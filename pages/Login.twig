@@ -1,21 +1,30 @@
 {% extends "layout.twig" %}
 
 {% block content %}
+	<div class="container">
+		<div class="row">
+			<div class="col"></div>
 
-	<h1 style="text-align:center">Login</h1>
+			<div class="col card bg-light bg-gradient mt-5" style="width:35%;height:400px">
 
-	<div class="card-title bg-primary text-white mt-5">
-		<h1 class="text-center py-2">Login Form</h1>
-	</div>
-	<div id="DisplayDiv" style="color:red; font-weight:bold"></div>
-	<div class="card-body">
+				<div class="card-title mt-3">
+					<h1 class="text-center text-primary py-2">Login Form</h1>
+				</div>
 
-		<form>
-			<input type="text" id="Username" placeholder="Username" class="form-control my-2" value="" required>
-			<input type="password" id="Password" placeholder="Password" class="form-control mb-3" value="" required>
-			<button type="button" class="btn btn-success" name="login" class="pt-3" onclick="Login_userVerif()">Login</button>
-		</form>
+				<div id="DisplayDiv" class="text-danger text-center" style="font-weight:bold"></div>
 
+				<div class="card-body mt-4">
+					<form>
+						<input type="text" id="Username" placeholder="Username" class="form-control my-2" value="" required>
+						<input type="password" id="Password" placeholder="Password" class="form-control mb-3" value="" required>
+						<button type="button" class="btn btn-success" name="login" class="pt-3" onclick="Login_userVerif()">Login</button>
+					</form>
+				</div>
+				
+			</div>
+			<div class="col"></div>
+
+		</div>
 	</div>
 
 {% endblock %}
