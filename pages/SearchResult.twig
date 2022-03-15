@@ -1,11 +1,20 @@
 {% extends "layout.twig" %}
 
 {% block content %}
-	<table>
-		{% for item in items %}
-			<tr>
-				<td>{{item}}</td>
-			</tr>
-		{% endfor %}
-	</table>
+
+	<form action="/pages/SearchResult.php" method="get">
+		<input type="text" name="searchText"/>
+		<input type="hidden" name="searchMethod" value="freeText"/>
+		<button type="submit">Search</button>
+	</form>
+
+	{% if items %}
+		<table>
+			{% for item in items %}
+				<tr>
+					<td>{{item}}</td>
+				</tr>
+			{% endfor %}
+		</table>
+	{% endif %}
 {% endblock %}
