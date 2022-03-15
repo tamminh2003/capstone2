@@ -12,8 +12,8 @@ class Search
 
 	public function __construct()
 	{
-		$searchMethod = $_POST["searchMethod"];
-		$searchText = $_POST["searchText"];
+		$searchMethod = $_GET["searchMethod"];
+		$searchText = $_GET["searchText"];
 
 		if ($searchMethod == "freeText") {
 			$q = UsersQuery::create()->findByUserFirstname($searchText);
