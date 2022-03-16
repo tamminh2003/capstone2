@@ -1,8 +1,8 @@
 <?php
 use Propel\PoctDevice;
 use Propel\PoctDeviceQuery;
-use Propel\Users;
-use Propel\UsersQuery;
+use Propel\User;
+use Propel\UserQuery;
 
 require $_SERVER["DOCUMENT_ROOT"] . "/vendor/autoload.php";
 require $_SERVER["DOCUMENT_ROOT"] . "/generated-conf/config.php";

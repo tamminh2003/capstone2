@@ -207,7 +207,7 @@ class PoctDeviceDetailsTimestampsTableMap extends TableMap
         // columns
         $this->addPrimaryKey('poct_device_details_timestamps_id', 'PoctDeviceDetailsTimestampsId', 'INTEGER', true, null, null);
         $this->addForeignKey('poct_device_poct_device_id', 'PoctDevicePoctDeviceId', 'INTEGER', 'poct_device', 'poct_device_id', true, null, null);
-        $this->addForeignKey('user_user_id', 'UserUserId', 'INTEGER', 'users', 'user_id', true, null, null);
+        $this->addForeignKey('user_user_id', 'UserUserId', 'INTEGER', 'user', 'user_id', true, null, null);
         $this->addColumn('create_time', 'CreateTime', 'TIMESTAMP', false, null, 'CURRENT_TIMESTAMP');
         $this->addColumn('update_time', 'UpdateTime', 'TIMESTAMP', false, null, null);
         $this->addColumn('comment', 'Comment', 'VARCHAR', false, 255, null);
@@ -226,14 +226,14 @@ class PoctDeviceDetailsTimestampsTableMap extends TableMap
     0 => ':poct_device_poct_device_id',
     1 => ':poct_device_id',
   ),
-), null, null, null, false);
-        $this->addRelation('Users', '\\Propel\\Users', RelationMap::MANY_TO_ONE, array (
+), 'NO ACTION', 'NO ACTION', null, false);
+        $this->addRelation('User', '\\Propel\\User', RelationMap::MANY_TO_ONE, array (
   0 =>
   array (
     0 => ':user_user_id',
     1 => ':user_id',
   ),
-), null, null, null, false);
+), 'NO ACTION', 'NO ACTION', null, false);
     } // buildRelations()
 
     /**

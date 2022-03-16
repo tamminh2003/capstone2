@@ -9,8 +9,7 @@
 	},
 	"autoload": {
 		"psr-4": {
-			"Propel\\": "./Propel/",
-			"Utility\\": "./utility/"
+			"Propel\\": "./Propel/"
 		}
 	},
 	"repositories": [

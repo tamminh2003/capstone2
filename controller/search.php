@@ -1,7 +1,7 @@
 <?php
 
-use Propel\Users;
-use Propel\UsersQuery;
+use Propel\User;
+use Propel\UserQuery;
 
 require $_SERVER["DOCUMENT_ROOT"] . "/vendor/autoload.php";
 require $_SERVER["DOCUMENT_ROOT"] . "/generated-conf/config.php";
@@ -16,7 +16,7 @@ class Search
 		$searchText = $_GET["searchText"];
 
 		if ($searchMethod == "freeText") {
-			$q = UsersQuery::create()->findByUserFirstname($searchText);
+			$q = UserQuery::create()->findByUserFirstname($searchText);
 
 			foreach ($q as $value) {
 				$this->result[] = $value->getUserFirstname();

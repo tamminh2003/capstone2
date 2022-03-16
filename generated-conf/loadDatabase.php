@@ -8,6 +8,6 @@ $serviceContainer->initDatabaseMaps(array (
     2 => '\\Propel\\Map\\PoctDeviceDetailsTimestampsTableMap',
     3 => '\\Propel\\Map\\PoctDeviceHasDiseaseTableMap',
     4 => '\\Propel\\Map\\PoctDeviceTableMap',
-    5 => '\\Propel\\Map\\UsersTableMap',
+    5 => '\\Propel\\Map\\UserTableMap',
   ),
 ));

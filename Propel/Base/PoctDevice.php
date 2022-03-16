@@ -12,8 +12,8 @@ use Propel\PoctDeviceDetailsTimestampsQuery as ChildPoctDeviceDetailsTimestampsQ
 use Propel\PoctDeviceHasDisease as ChildPoctDeviceHasDisease;
 use Propel\PoctDeviceHasDiseaseQuery as ChildPoctDeviceHasDiseaseQuery;
 use Propel\PoctDeviceQuery as ChildPoctDeviceQuery;
-use Propel\Users as ChildUsers;
-use Propel\UsersQuery as ChildUsersQuery;
+use Propel\User as ChildUser;
+use Propel\UserQuery as ChildUserQuery;
 use Propel\Map\PoctDeviceAditionalInfoTableMap;
 use Propel\Map\PoctDeviceDetailsTimestampsTableMap;
 use Propel\Map\PoctDeviceHasDiseaseTableMap;
@@ -122,9 +122,16 @@ abstract class PoctDevice implements ActiveRecordInterface
     protected $device_type;
 
     /**
-     * @var        ChildUsers
+     * The value for the device_descripition field.
+     *
+     * @var        string|null
      */
-    protected $aUsers;
+    protected $device_descripition;
+
+    /**
+     * @var        ChildUser
+     */
+    protected $aUser;
 
     /**
      * @var        ObjectCollection|ChildPoctDeviceAditionalInfo[] Collection to store aggregation of ChildPoctDeviceAditionalInfo objects.
@@ -471,6 +478,16 @@ abstract class PoctDevice implements ActiveRecordInterface
     }
 
     /**
+     * Get the [device_descripition] column value.
+     *
+     * @return string|null
+     */
+    public function getDeviceDescripition()
+    {
+        return $this->device_descripition;
+    }
+
+    /**
      * Set the value of [poct_device_id] column.
      *
      * @param int $v New value
@@ -507,8 +524,8 @@ abstract class PoctDevice implements ActiveRecordInterface
             $this->modifiedColumns[PoctDeviceTableMap::COL_USER_USER_ID] = true;
         }
 
-        if ($this->aUsers !== null && $this->aUsers->getUserId() !== $v) {
-            $this->aUsers = null;
+        if ($this->aUser !== null && $this->aUser->getUserId() !== $v) {
+            $this->aUser = null;
         }
 
         return $this;
@@ -615,6 +632,26 @@ abstract class PoctDevice implements ActiveRecordInterface
     } // setDeviceType()
 
     /**
+     * Set the value of [device_descripition] column.
+     *
+     * @param string|null $v New value
+     * @return $this|\Propel\PoctDevice The current object (for fluent API support)
+     */
+    public function setDeviceDescripition($v)
+    {
+        if ($v !== null) {
+            $v = (string) $v;
+        }
+
+        if ($this->device_descripition !== $v) {
+            $this->device_descripition = $v;
+            $this->modifiedColumns[PoctDeviceTableMap::COL_DEVICE_DESCRIPITION] = true;
+        }
+
+        return $this;
+    } // setDeviceDescripition()
+
+    /**
      * Indicates whether the columns in this object are only set to default values.
      *
      * This method can be used in conjunction with isModified() to indicate whether an object is both
@@ -670,6 +707,9 @@ abstract class PoctDevice implements ActiveRecordInterface
 
             $col = $row[TableMap::TYPE_NUM == $indexType ? 6 + $startcol : PoctDeviceTableMap::translateFieldName('DeviceType', TableMap::TYPE_PHPNAME, $indexType)];
             $this->device_type = (null !== $col) ? (string) $col : null;
+
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 7 + $startcol : PoctDeviceTableMap::translateFieldName('DeviceDescripition', TableMap::TYPE_PHPNAME, $indexType)];
+            $this->device_descripition = (null !== $col) ? (string) $col : null;
             $this->resetModified();
 
             $this->setNew(false);
@@ -678,7 +718,7 @@ abstract class PoctDevice implements ActiveRecordInterface
                 $this->ensureConsistency();
             }
 
-            return $startcol + 7; // 7 = PoctDeviceTableMap::NUM_HYDRATE_COLUMNS.
+            return $startcol + 8; // 8 = PoctDeviceTableMap::NUM_HYDRATE_COLUMNS.
 
         } catch (Exception $e) {
             throw new PropelException(sprintf('Error populating %s object', '\\Propel\\PoctDevice'), 0, $e);
@@ -700,8 +740,8 @@ abstract class PoctDevice implements ActiveRecordInterface
      */
     public function ensureConsistency()
     {
-        if ($this->aUsers !== null && $this->user_user_id !== $this->aUsers->getUserId()) {
-            $this->aUsers = null;
+        if ($this->aUser !== null && $this->user_user_id !== $this->aUser->getUserId()) {
+            $this->aUser = null;
         }
     } // ensureConsistency
 
@@ -742,7 +782,7 @@ abstract class PoctDevice implements ActiveRecordInterface
 
         if ($deep) {  // also de-associate any related objects?
 
-            $this->aUsers = null;
+            $this->aUser = null;
             $this->collPoctDeviceAditionalInfos = null;
 
             $this->collPoctDeviceDetailsTimestampss = null;
@@ -857,11 +897,11 @@ abstract class PoctDevice implements ActiveRecordInterface
             // method.  This object relates to these object(s) by a
             // foreign key reference.
 
-            if ($this->aUsers !== null) {
-                if ($this->aUsers->isModified() || $this->aUsers->isNew()) {
-                    $affectedRows += $this->aUsers->save($con);
+            if ($this->aUser !== null) {
+                if ($this->aUser->isModified() || $this->aUser->isNew()) {
+                    $affectedRows += $this->aUser->save($con);
                 }
-                $this->setUsers($this->aUsers);
+                $this->setUser($this->aUser);
             }
 
             if ($this->isNew() || $this->isModified()) {
@@ -973,6 +1013,9 @@ abstract class PoctDevice implements ActiveRecordInterface
         if ($this->isColumnModified(PoctDeviceTableMap::COL_DEVICE_TYPE)) {
             $modifiedColumns[':p' . $index++]  = 'device_type';
         }
+        if ($this->isColumnModified(PoctDeviceTableMap::COL_DEVICE_DESCRIPITION)) {
+            $modifiedColumns[':p' . $index++]  = 'device_descripition';
+        }
 
         $sql = sprintf(
             'INSERT INTO poct_device (%s) VALUES (%s)',
@@ -1004,6 +1047,9 @@ abstract class PoctDevice implements ActiveRecordInterface
                         break;
                     case 'device_type':
                         $stmt->bindValue($identifier, $this->device_type, PDO::PARAM_STR);
+                        break;
+                    case 'device_descripition':
+                        $stmt->bindValue($identifier, $this->device_descripition, PDO::PARAM_STR);
                         break;
                 }
             }
@@ -1088,6 +1134,9 @@ abstract class PoctDevice implements ActiveRecordInterface
             case 6:
                 return $this->getDeviceType();
                 break;
+            case 7:
+                return $this->getDeviceDescripition();
+                break;
             default:
                 return null;
                 break;
@@ -1125,6 +1174,7 @@ abstract class PoctDevice implements ActiveRecordInterface
             $keys[4] => $this->getDeviceModel(),
             $keys[5] => $this->getDeviceImageUrl(),
             $keys[6] => $this->getDeviceType(),
+            $keys[7] => $this->getDeviceDescripition(),
         );
         $virtualColumns = $this->virtualColumns;
         foreach ($virtualColumns as $key => $virtualColumn) {
@@ -1132,20 +1182,20 @@ abstract class PoctDevice implements ActiveRecordInterface
         }
 
         if ($includeForeignObjects) {
-            if (null !== $this->aUsers) {
+            if (null !== $this->aUser) {
 
                 switch ($keyType) {
                     case TableMap::TYPE_CAMELNAME:
-                        $key = 'users';
+                        $key = 'user';
                         break;
                     case TableMap::TYPE_FIELDNAME:
-                        $key = 'users';
+                        $key = 'user';
                         break;
                     default:
-                        $key = 'Users';
+                        $key = 'User';
                 }
 
-                $result[$key] = $this->aUsers->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
+                $result[$key] = $this->aUser->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
             }
             if (null !== $this->collPoctDeviceAditionalInfos) {
 
@@ -1247,6 +1297,9 @@ abstract class PoctDevice implements ActiveRecordInterface
             case 6:
                 $this->setDeviceType($value);
                 break;
+            case 7:
+                $this->setDeviceDescripition($value);
+                break;
         } // switch()
 
         return $this;
@@ -1293,6 +1346,9 @@ abstract class PoctDevice implements ActiveRecordInterface
         }
         if (array_key_exists($keys[6], $arr)) {
             $this->setDeviceType($arr[$keys[6]]);
+        }
+        if (array_key_exists($keys[7], $arr)) {
+            $this->setDeviceDescripition($arr[$keys[7]]);
         }
 
         return $this;
@@ -1357,6 +1413,9 @@ abstract class PoctDevice implements ActiveRecordInterface
         }
         if ($this->isColumnModified(PoctDeviceTableMap::COL_DEVICE_TYPE)) {
             $criteria->add(PoctDeviceTableMap::COL_DEVICE_TYPE, $this->device_type);
+        }
+        if ($this->isColumnModified(PoctDeviceTableMap::COL_DEVICE_DESCRIPITION)) {
+            $criteria->add(PoctDeviceTableMap::COL_DEVICE_DESCRIPITION, $this->device_descripition);
         }
 
         return $criteria;
@@ -1450,6 +1509,7 @@ abstract class PoctDevice implements ActiveRecordInterface
         $copyObj->setDeviceModel($this->getDeviceModel());
         $copyObj->setDeviceImageUrl($this->getDeviceImageUrl());
         $copyObj->setDeviceType($this->getDeviceType());
+        $copyObj->setDeviceDescripition($this->getDeviceDescripition());
 
         if ($deepCopy) {
             // important: temporarily setNew(false) because this affects the behavior of
@@ -1505,13 +1565,13 @@ abstract class PoctDevice implements ActiveRecordInterface
     }
 
     /**
-     * Declares an association between this object and a ChildUsers object.
+     * Declares an association between this object and a ChildUser object.
      *
-     * @param  ChildUsers $v
+     * @param  ChildUser $v
      * @return $this|\Propel\PoctDevice The current object (for fluent API support)
      * @throws PropelException
      */
-    public function setUsers(ChildUsers $v = null)
+    public function setUser(ChildUser $v = null)
     {
         if ($v === null) {
             $this->setUserUserId(NULL);
@@ -1519,10 +1579,10 @@ abstract class PoctDevice implements ActiveRecordInterface
             $this->setUserUserId($v->getUserId());
         }
 
-        $this->aUsers = $v;
+        $this->aUser = $v;
 
         // Add binding for other direction of this n:n relationship.
-        // If this object has already been added to the ChildUsers object, it will not be re-added.
+        // If this object has already been added to the ChildUser object, it will not be re-added.
         if ($v !== null) {
             $v->addPoctDevice($this);
         }
@@ -1533,26 +1593,26 @@ abstract class PoctDevice implements ActiveRecordInterface
 
 
     /**
-     * Get the associated ChildUsers object
+     * Get the associated ChildUser object
      *
      * @param  ConnectionInterface $con Optional Connection object.
-     * @return ChildUsers The associated ChildUsers object.
+     * @return ChildUser The associated ChildUser object.
      * @throws PropelException
      */
-    public function getUsers(ConnectionInterface $con = null)
+    public function getUser(ConnectionInterface $con = null)
     {
-        if ($this->aUsers === null && ($this->user_user_id != 0)) {
-            $this->aUsers = ChildUsersQuery::create()->findPk($this->user_user_id, $con);
+        if ($this->aUser === null && ($this->user_user_id != 0)) {
+            $this->aUser = ChildUserQuery::create()->findPk($this->user_user_id, $con);
             /* The following can be used additionally to
                 guarantee the related object contains a reference
                 to this object.  This level of coupling may, however, be
                 undesirable since it could result in an only partially populated collection
                 in the referenced object.
-                $this->aUsers->addPoctDevices($this);
+                $this->aUser->addPoctDevices($this);
              */
         }
 
-        return $this->aUsers;
+        return $this->aUser;
     }
 
 
@@ -1833,10 +1893,10 @@ abstract class PoctDevice implements ActiveRecordInterface
      * @return ObjectCollection|ChildPoctDeviceAditionalInfo[] List of ChildPoctDeviceAditionalInfo objects
      * @phpstan-return ObjectCollection&\Traversable<ChildPoctDeviceAditionalInfo}> List of ChildPoctDeviceAditionalInfo objects
      */
-    public function getPoctDeviceAditionalInfosJoinUsers(Criteria $criteria = null, ConnectionInterface $con = null, $joinBehavior = Criteria::LEFT_JOIN)
+    public function getPoctDeviceAditionalInfosJoinUser(Criteria $criteria = null, ConnectionInterface $con = null, $joinBehavior = Criteria::LEFT_JOIN)
     {
         $query = ChildPoctDeviceAditionalInfoQuery::create(null, $criteria);
-        $query->joinWith('Users', $joinBehavior);
+        $query->joinWith('User', $joinBehavior);
 
         return $this->getPoctDeviceAditionalInfos($query, $con);
     }
@@ -2094,10 +2154,10 @@ abstract class PoctDevice implements ActiveRecordInterface
      * @return ObjectCollection|ChildPoctDeviceDetailsTimestamps[] List of ChildPoctDeviceDetailsTimestamps objects
      * @phpstan-return ObjectCollection&\Traversable<ChildPoctDeviceDetailsTimestamps}> List of ChildPoctDeviceDetailsTimestamps objects
      */
-    public function getPoctDeviceDetailsTimestampssJoinUsers(Criteria $criteria = null, ConnectionInterface $con = null, $joinBehavior = Criteria::LEFT_JOIN)
+    public function getPoctDeviceDetailsTimestampssJoinUser(Criteria $criteria = null, ConnectionInterface $con = null, $joinBehavior = Criteria::LEFT_JOIN)
     {
         $query = ChildPoctDeviceDetailsTimestampsQuery::create(null, $criteria);
-        $query->joinWith('Users', $joinBehavior);
+        $query->joinWith('User', $joinBehavior);
 
         return $this->getPoctDeviceDetailsTimestampss($query, $con);
     }
@@ -2370,8 +2430,8 @@ abstract class PoctDevice implements ActiveRecordInterface
      */
     public function clear()
     {
-        if (null !== $this->aUsers) {
-            $this->aUsers->removePoctDevice($this);
+        if (null !== $this->aUser) {
+            $this->aUser->removePoctDevice($this);
         }
         $this->poct_device_id = null;
         $this->user_user_id = null;
@@ -2380,6 +2440,7 @@ abstract class PoctDevice implements ActiveRecordInterface
         $this->device_model = null;
         $this->device_image_url = null;
         $this->device_type = null;
+        $this->device_descripition = null;
         $this->alreadyInSave = false;
         $this->clearAllReferences();
         $this->resetModified();
@@ -2418,7 +2479,7 @@ abstract class PoctDevice implements ActiveRecordInterface
         $this->collPoctDeviceAditionalInfos = null;
         $this->collPoctDeviceDetailsTimestampss = null;
         $this->collPoctDeviceHasDiseases = null;
-        $this->aUsers = null;
+        $this->aUser = null;
     }
 
     /**

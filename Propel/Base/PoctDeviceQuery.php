@@ -27,6 +27,7 @@ use Propel\Runtime\Exception\PropelException;
  * @method     ChildPoctDeviceQuery orderByDeviceModel($order = Criteria::ASC) Order by the device_model column
  * @method     ChildPoctDeviceQuery orderByDeviceImageUrl($order = Criteria::ASC) Order by the device_image_url column
  * @method     ChildPoctDeviceQuery orderByDeviceType($order = Criteria::ASC) Order by the device_type column
+ * @method     ChildPoctDeviceQuery orderByDeviceDescripition($order = Criteria::ASC) Order by the device_descripition column
  *
  * @method     ChildPoctDeviceQuery groupByPoctDeviceId() Group by the poct_device_id column
  * @method     ChildPoctDeviceQuery groupByUserUserId() Group by the user_user_id column
@@ -35,6 +36,7 @@ use Propel\Runtime\Exception\PropelException;
  * @method     ChildPoctDeviceQuery groupByDeviceModel() Group by the device_model column
  * @method     ChildPoctDeviceQuery groupByDeviceImageUrl() Group by the device_image_url column
  * @method     ChildPoctDeviceQuery groupByDeviceType() Group by the device_type column
+ * @method     ChildPoctDeviceQuery groupByDeviceDescripition() Group by the device_descripition column
  *
  * @method     ChildPoctDeviceQuery leftJoin($relation) Adds a LEFT JOIN clause to the query
  * @method     ChildPoctDeviceQuery rightJoin($relation) Adds a RIGHT JOIN clause to the query
@@ -44,15 +46,15 @@ use Propel\Runtime\Exception\PropelException;
  * @method     ChildPoctDeviceQuery rightJoinWith($relation) Adds a RIGHT JOIN clause and with to the query
  * @method     ChildPoctDeviceQuery innerJoinWith($relation) Adds a INNER JOIN clause and with to the query
  *
- * @method     ChildPoctDeviceQuery leftJoinUsers($relationAlias = null) Adds a LEFT JOIN clause to the query using the Users relation
- * @method     ChildPoctDeviceQuery rightJoinUsers($relationAlias = null) Adds a RIGHT JOIN clause to the query using the Users relation
- * @method     ChildPoctDeviceQuery innerJoinUsers($relationAlias = null) Adds a INNER JOIN clause to the query using the Users relation
+ * @method     ChildPoctDeviceQuery leftJoinUser($relationAlias = null) Adds a LEFT JOIN clause to the query using the User relation
+ * @method     ChildPoctDeviceQuery rightJoinUser($relationAlias = null) Adds a RIGHT JOIN clause to the query using the User relation
+ * @method     ChildPoctDeviceQuery innerJoinUser($relationAlias = null) Adds a INNER JOIN clause to the query using the User relation
  *
- * @method     ChildPoctDeviceQuery joinWithUsers($joinType = Criteria::INNER_JOIN) Adds a join clause and with to the query using the Users relation
+ * @method     ChildPoctDeviceQuery joinWithUser($joinType = Criteria::INNER_JOIN) Adds a join clause and with to the query using the User relation
  *
- * @method     ChildPoctDeviceQuery leftJoinWithUsers() Adds a LEFT JOIN clause and with to the query using the Users relation
- * @method     ChildPoctDeviceQuery rightJoinWithUsers() Adds a RIGHT JOIN clause and with to the query using the Users relation
- * @method     ChildPoctDeviceQuery innerJoinWithUsers() Adds a INNER JOIN clause and with to the query using the Users relation
+ * @method     ChildPoctDeviceQuery leftJoinWithUser() Adds a LEFT JOIN clause and with to the query using the User relation
+ * @method     ChildPoctDeviceQuery rightJoinWithUser() Adds a RIGHT JOIN clause and with to the query using the User relation
+ * @method     ChildPoctDeviceQuery innerJoinWithUser() Adds a INNER JOIN clause and with to the query using the User relation
  *
  * @method     ChildPoctDeviceQuery leftJoinPoctDeviceAditionalInfo($relationAlias = null) Adds a LEFT JOIN clause to the query using the PoctDeviceAditionalInfo relation
  * @method     ChildPoctDeviceQuery rightJoinPoctDeviceAditionalInfo($relationAlias = null) Adds a RIGHT JOIN clause to the query using the PoctDeviceAditionalInfo relation
@@ -84,7 +86,7 @@ use Propel\Runtime\Exception\PropelException;
  * @method     ChildPoctDeviceQuery rightJoinWithPoctDeviceHasDisease() Adds a RIGHT JOIN clause and with to the query using the PoctDeviceHasDisease relation
  * @method     ChildPoctDeviceQuery innerJoinWithPoctDeviceHasDisease() Adds a INNER JOIN clause and with to the query using the PoctDeviceHasDisease relation
  *
- * @method     \Propel\UsersQuery|\Propel\PoctDeviceAditionalInfoQuery|\Propel\PoctDeviceDetailsTimestampsQuery|\Propel\PoctDeviceHasDiseaseQuery endUse() Finalizes a secondary criteria and merges it with its primary Criteria
+ * @method     \Propel\UserQuery|\Propel\PoctDeviceAditionalInfoQuery|\Propel\PoctDeviceDetailsTimestampsQuery|\Propel\PoctDeviceHasDiseaseQuery endUse() Finalizes a secondary criteria and merges it with its primary Criteria
  *
  * @method     ChildPoctDevice|null findOne(ConnectionInterface $con = null) Return the first ChildPoctDevice matching the query
  * @method     ChildPoctDevice findOneOrCreate(ConnectionInterface $con = null) Return the first ChildPoctDevice matching the query, or a new ChildPoctDevice object populated from the query conditions when no match is found
@@ -95,7 +97,8 @@ use Propel\Runtime\Exception\PropelException;
  * @method     ChildPoctDevice|null findOneByPoctDeviceGenericName(string $poct_device_generic_name) Return the first ChildPoctDevice filtered by the poct_device_generic_name column
  * @method     ChildPoctDevice|null findOneByDeviceModel(string $device_model) Return the first ChildPoctDevice filtered by the device_model column
  * @method     ChildPoctDevice|null findOneByDeviceImageUrl(string $device_image_url) Return the first ChildPoctDevice filtered by the device_image_url column
- * @method     ChildPoctDevice|null findOneByDeviceType(string $device_type) Return the first ChildPoctDevice filtered by the device_type column *
+ * @method     ChildPoctDevice|null findOneByDeviceType(string $device_type) Return the first ChildPoctDevice filtered by the device_type column
+ * @method     ChildPoctDevice|null findOneByDeviceDescripition(string $device_descripition) Return the first ChildPoctDevice filtered by the device_descripition column *
 
  * @method     ChildPoctDevice requirePk($key, ConnectionInterface $con = null) Return the ChildPoctDevice by primary key and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildPoctDevice requireOne(ConnectionInterface $con = null) Return the first ChildPoctDevice matching the query and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
@@ -107,6 +110,7 @@ use Propel\Runtime\Exception\PropelException;
  * @method     ChildPoctDevice requireOneByDeviceModel(string $device_model) Return the first ChildPoctDevice filtered by the device_model column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildPoctDevice requireOneByDeviceImageUrl(string $device_image_url) Return the first ChildPoctDevice filtered by the device_image_url column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildPoctDevice requireOneByDeviceType(string $device_type) Return the first ChildPoctDevice filtered by the device_type column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
+ * @method     ChildPoctDevice requireOneByDeviceDescripition(string $device_descripition) Return the first ChildPoctDevice filtered by the device_descripition column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  *
  * @method     ChildPoctDevice[]|ObjectCollection find(ConnectionInterface $con = null) Return ChildPoctDevice objects based on current ModelCriteria
  * @psalm-method ObjectCollection&\Traversable<ChildPoctDevice> find(ConnectionInterface $con = null) Return ChildPoctDevice objects based on current ModelCriteria
@@ -124,6 +128,8 @@ use Propel\Runtime\Exception\PropelException;
  * @psalm-method ObjectCollection&\Traversable<ChildPoctDevice> findByDeviceImageUrl(string $device_image_url) Return ChildPoctDevice objects filtered by the device_image_url column
  * @method     ChildPoctDevice[]|ObjectCollection findByDeviceType(string $device_type) Return ChildPoctDevice objects filtered by the device_type column
  * @psalm-method ObjectCollection&\Traversable<ChildPoctDevice> findByDeviceType(string $device_type) Return ChildPoctDevice objects filtered by the device_type column
+ * @method     ChildPoctDevice[]|ObjectCollection findByDeviceDescripition(string $device_descripition) Return ChildPoctDevice objects filtered by the device_descripition column
+ * @psalm-method ObjectCollection&\Traversable<ChildPoctDevice> findByDeviceDescripition(string $device_descripition) Return ChildPoctDevice objects filtered by the device_descripition column
  * @method     ChildPoctDevice[]|\Propel\Runtime\Util\PropelModelPager paginate($page = 1, $maxPerPage = 10, ConnectionInterface $con = null) Issue a SELECT query based on the current ModelCriteria and uses a page and a maximum number of results per page to compute an offset and a limit
  * @psalm-method \Propel\Runtime\Util\PropelModelPager&\Traversable<ChildPoctDevice> paginate($page = 1, $maxPerPage = 10, ConnectionInterface $con = null) Issue a SELECT query based on the current ModelCriteria and uses a page and a maximum number of results per page to compute an offset and a limit
  *
@@ -223,7 +229,7 @@ abstract class PoctDeviceQuery extends ModelCriteria
      */
     protected function findPkSimple($key, ConnectionInterface $con)
     {
-        $sql = 'SELECT poct_device_id, user_user_id, poct_device_manufacture_name, poct_device_generic_name, device_model, device_image_url, device_type FROM poct_device WHERE poct_device_id = :p0';
+        $sql = 'SELECT poct_device_id, user_user_id, poct_device_manufacture_name, poct_device_generic_name, device_model, device_image_url, device_type, device_descripition FROM poct_device WHERE poct_device_id = :p0';
         try {
             $stmt = $con->prepare($sql);
             $stmt->bindValue(':p0', $key, PDO::PARAM_INT);
@@ -364,7 +370,7 @@ abstract class PoctDeviceQuery extends ModelCriteria
      * $query->filterByUserUserId(array('min' => 12)); // WHERE user_user_id > 12
      * </code>
      *
-     * @see       filterByUsers()
+     * @see       filterByUser()
      *
      * @param     mixed $userUserId The value to use as filter.
      *              Use scalar values for equality.
@@ -528,44 +534,70 @@ abstract class PoctDeviceQuery extends ModelCriteria
     }
 
     /**
-     * Filter the query by a related \Propel\Users object
+     * Filter the query on the device_descripition column
      *
-     * @param \Propel\Users|ObjectCollection $users The related object(s) to use as filter
+     * Example usage:
+     * <code>
+     * $query->filterByDeviceDescripition('fooValue');   // WHERE device_descripition = 'fooValue'
+     * $query->filterByDeviceDescripition('%fooValue%', Criteria::LIKE); // WHERE device_descripition LIKE '%fooValue%'
+     * $query->filterByDeviceDescripition(['foo', 'bar']); // WHERE device_descripition IN ('foo', 'bar')
+     * </code>
+     *
+     * @param     string|string[] $deviceDescripition The value to use as filter.
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return $this|ChildPoctDeviceQuery The current query, for fluid interface
+     */
+    public function filterByDeviceDescripition($deviceDescripition = null, $comparison = null)
+    {
+        if (null === $comparison) {
+            if (is_array($deviceDescripition)) {
+                $comparison = Criteria::IN;
+            }
+        }
+
+        return $this->addUsingAlias(PoctDeviceTableMap::COL_DEVICE_DESCRIPITION, $deviceDescripition, $comparison);
+    }
+
+    /**
+     * Filter the query by a related \Propel\User object
+     *
+     * @param \Propel\User|ObjectCollection $user The related object(s) to use as filter
      * @param string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
      *
      * @throws \Propel\Runtime\Exception\PropelException
      *
      * @return ChildPoctDeviceQuery The current query, for fluid interface
      */
-    public function filterByUsers($users, $comparison = null)
+    public function filterByUser($user, $comparison = null)
     {
-        if ($users instanceof \Propel\Users) {
+        if ($user instanceof \Propel\User) {
             return $this
-                ->addUsingAlias(PoctDeviceTableMap::COL_USER_USER_ID, $users->getUserId(), $comparison);
-        } elseif ($users instanceof ObjectCollection) {
+                ->addUsingAlias(PoctDeviceTableMap::COL_USER_USER_ID, $user->getUserId(), $comparison);
+        } elseif ($user instanceof ObjectCollection) {
             if (null === $comparison) {
                 $comparison = Criteria::IN;
             }
 
             return $this
-                ->addUsingAlias(PoctDeviceTableMap::COL_USER_USER_ID, $users->toKeyValue('PrimaryKey', 'UserId'), $comparison);
+                ->addUsingAlias(PoctDeviceTableMap::COL_USER_USER_ID, $user->toKeyValue('PrimaryKey', 'UserId'), $comparison);
         } else {
-            throw new PropelException('filterByUsers() only accepts arguments of type \Propel\Users or Collection');
+            throw new PropelException('filterByUser() only accepts arguments of type \Propel\User or Collection');
         }
     }
 
     /**
-     * Adds a JOIN clause to the query using the Users relation
+     * Adds a JOIN clause to the query using the User relation
      *
      * @param     string $relationAlias optional alias for the relation
      * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
      *
      * @return $this|ChildPoctDeviceQuery The current query, for fluid interface
      */
-    public function joinUsers($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    public function joinUser($relationAlias = null, $joinType = Criteria::INNER_JOIN)
     {
         $tableMap = $this->getTableMap();
-        $relationMap = $tableMap->getRelation('Users');
+        $relationMap = $tableMap->getRelation('User');
 
         // create a ModelJoin object for this join
         $join = new ModelJoin();
@@ -580,14 +612,14 @@ abstract class PoctDeviceQuery extends ModelCriteria
             $this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
             $this->addJoinObject($join, $relationAlias);
         } else {
-            $this->addJoinObject($join, 'Users');
+            $this->addJoinObject($join, 'User');
         }
 
         return $this;
     }
 
     /**
-     * Use the Users relation Users object
+     * Use the User relation User object
      *
      * @see useQuery()
      *
@@ -595,19 +627,19 @@ abstract class PoctDeviceQuery extends ModelCriteria
      *                                   to be used as main alias in the secondary query
      * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
      *
-     * @return \Propel\UsersQuery A secondary query class using the current class as primary query
+     * @return \Propel\UserQuery A secondary query class using the current class as primary query
      */
-    public function useUsersQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    public function useUserQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
     {
         return $this
-            ->joinUsers($relationAlias, $joinType)
-            ->useQuery($relationAlias ? $relationAlias : 'Users', '\Propel\UsersQuery');
+            ->joinUser($relationAlias, $joinType)
+            ->useQuery($relationAlias ? $relationAlias : 'User', '\Propel\UserQuery');
     }
 
     /**
-     * Use the Users relation Users object
+     * Use the User relation User object
      *
-     * @param callable(\Propel\UsersQuery):\Propel\UsersQuery $callable A function working on the related query
+     * @param callable(\Propel\UserQuery):\Propel\UserQuery $callable A function working on the related query
      *
      * @param string|null $relationAlias optional alias for the relation
      *
@@ -615,12 +647,12 @@ abstract class PoctDeviceQuery extends ModelCriteria
      *
      * @return $this
      */
-    public function withUsersQuery(
+    public function withUserQuery(
         callable $callable,
         string $relationAlias = null,
         ?string $joinType = Criteria::INNER_JOIN
     ) {
-        $relatedQuery = $this->useUsersQuery(
+        $relatedQuery = $this->useUserQuery(
             $relationAlias,
             $joinType
         );
@@ -630,7 +662,7 @@ abstract class PoctDeviceQuery extends ModelCriteria
         return $this;
     }
     /**
-     * Use the relation to Users table for an EXISTS query.
+     * Use the relation to User table for an EXISTS query.
      *
      * @see \Propel\Runtime\ActiveQuery\ModelCriteria::useExistsQuery()
      *
@@ -638,26 +670,26 @@ abstract class PoctDeviceQuery extends ModelCriteria
      * @param string|null $modelAlias sets an alias for the nested query
      * @param string $typeOfExists Either ExistsCriterion::TYPE_EXISTS or ExistsCriterion::TYPE_NOT_EXISTS
      *
-     * @return \Propel\UsersQuery The inner query object of the EXISTS statement
+     * @return \Propel\UserQuery The inner query object of the EXISTS statement
      */
-    public function useUsersExistsQuery($modelAlias = null, $queryClass = null, $typeOfExists = 'EXISTS')
+    public function useUserExistsQuery($modelAlias = null, $queryClass = null, $typeOfExists = 'EXISTS')
     {
-        return $this->useExistsQuery('Users', $modelAlias, $queryClass, $typeOfExists);
+        return $this->useExistsQuery('User', $modelAlias, $queryClass, $typeOfExists);
     }
 
     /**
-     * Use the relation to Users table for a NOT EXISTS query.
+     * Use the relation to User table for a NOT EXISTS query.
      *
-     * @see useUsersExistsQuery()
+     * @see useUserExistsQuery()
      *
      * @param string|null $modelAlias sets an alias for the nested query
      * @param string|null $queryClass Allows to use a custom query class for the exists query, like ExtendedBookQuery::class
      *
-     * @return \Propel\UsersQuery The inner query object of the NOT EXISTS statement
+     * @return \Propel\UserQuery The inner query object of the NOT EXISTS statement
      */
-    public function useUsersNotExistsQuery($modelAlias = null, $queryClass = null)
+    public function useUserNotExistsQuery($modelAlias = null, $queryClass = null)
     {
-        return $this->useExistsQuery('Users', $modelAlias, $queryClass, 'NOT EXISTS');
+        return $this->useExistsQuery('User', $modelAlias, $queryClass, 'NOT EXISTS');
     }
     /**
      * Filter the query by a related \Propel\PoctDeviceAditionalInfo object

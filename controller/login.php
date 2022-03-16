@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-use Propel\UsersQuery;
+use Propel\UserQuery;
 
 try {
 	require $_SERVER["DOCUMENT_ROOT"] . "/vendor/autoload.php";
@@ -9,7 +9,7 @@ try {
 
 	$UserName = $_POST["processUsername"];
 	$Password = $_POST["processPassword"];
-	$retrieveUserData = UsersQuery::create()->findByUserUsername($UserName);
+	$retrieveUserData = UserQuery::create()->findByUserUsername($UserName);
 	$unit = $retrieveUserData->getFirst();
 
 	if (!empty($unit)) {

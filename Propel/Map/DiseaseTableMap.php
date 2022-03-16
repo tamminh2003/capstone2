@@ -199,7 +199,7 @@ class DiseaseTableMap extends TableMap
     0 => ':disease_id',
     1 => ':disease_id',
   ),
-), null, null, 'PoctDeviceHasDiseases', false);
+), 'NO ACTION', 'NO ACTION', 'PoctDeviceHasDiseases', false);
     } // buildRelations()
 
     /**

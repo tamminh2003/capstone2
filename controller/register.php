@@ -3,10 +3,10 @@ require $_SERVER["DOCUMENT_ROOT"] . "/vendor/autoload.php";
 require $_SERVER["DOCUMENT_ROOT"] . "/generated-conf/config.php";
 
 //use Propel\Runtime\Propel; // composer install?
-use Propel\Users;
-use Propel\UsersQuery;
+use Propel\User;
+use Propel\UserQuery;
 use Propel\Runtime\Propel;
-use Propel\Map\UsersTableMap;
+use Propel\Map\UserTableMap;
 
 
 $FirstName = $_POST['RegisterFirstName'];
@@ -18,8 +18,8 @@ $Password = $_POST['RegisterPassword'];
 $response = "";
 
 
-$con = Propel::getReadConnection(UsersTableMap::DATABASE_NAME);
-$numEmails = UsersQuery:: create()
+$con = Propel::getReadConnection(UserTableMap::DATABASE_NAME);
+$numEmails = UserQuery:: create()
     ->findByUserEmail($Email)
     ->count($con);
 
@@ -31,7 +31,7 @@ if($numEmails == 1)//check for email duplicates
 else
 {
 
-    $numUsernames = UsersQuery:: create()
+    $numUsernames = UserQuery:: create()
         ->findByUserUsername($Username)
         ->count($con);
 
@@ -43,7 +43,7 @@ else
     else
     {
         $Hash = password_hash($Password, PASSWORD_ARGON2I);
-        $register_user = new Users();
+        $register_user = new User();
         $register_user->setUserFirstname($FirstName);
         $register_user->setUserLastname($LastName);
         $register_user->setUserEmail($Email);

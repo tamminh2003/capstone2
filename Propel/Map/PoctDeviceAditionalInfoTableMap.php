@@ -208,7 +208,7 @@ class PoctDeviceAditionalInfoTableMap extends TableMap
         // columns
         $this->addPrimaryKey('poct_device_aditional_info_id', 'PoctDeviceAditionalInfoId', 'INTEGER', true, null, null);
         $this->addForeignKey('idpoct_device', 'IdpoctDevice', 'INTEGER', 'poct_device', 'poct_device_id', true, null, null);
-        $this->addForeignKey('user_user_id', 'UserUserId', 'INTEGER', 'users', 'user_id', true, null, null);
+        $this->addForeignKey('user_user_id', 'UserUserId', 'INTEGER', 'user', 'user_id', true, null, null);
         $this->addColumn('poct_device_aditional_info_label', 'PoctDeviceAditionalInfoLabel', 'VARCHAR', false, 100, null);
         $this->addColumn('poct_device_aditional_info_type', 'PoctDeviceAditionalInfoType', 'VARCHAR', false, 100, null);
         $this->addColumn('poct_device_aditional_info_details', 'PoctDeviceAditionalInfoDetails', 'VARCHAR', false, 100, null);
@@ -227,14 +227,14 @@ class PoctDeviceAditionalInfoTableMap extends TableMap
     0 => ':idpoct_device',
     1 => ':poct_device_id',
   ),
-), null, null, null, false);
-        $this->addRelation('Users', '\\Propel\\Users', RelationMap::MANY_TO_ONE, array (
+), 'NO ACTION', 'NO ACTION', null, false);
+        $this->addRelation('User', '\\Propel\\User', RelationMap::MANY_TO_ONE, array (
   0 =>
   array (
     0 => ':user_user_id',
     1 => ':user_id',
   ),
-), null, null, null, false);
+), 'NO ACTION', 'NO ACTION', null, false);
     } // buildRelations()
 
     /**
