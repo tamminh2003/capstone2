@@ -1,65 +1,65 @@
 function Register_userRegister() {
 
-    function nameCharCheck(str){
+    function nameCharCheck(str) {
         const basicCheck = /^[a-zA-Z]*$/;
         return basicCheck.test(str);
     }
 
-    function emailCharCheck(emi){
+    function emailCharCheck(emi) {
         const advCheck = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/; ///^([a-z0-9_\-]+)(\.[a-z0-9_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/;
         return advCheck.test(emi);
     }
 
-    function pwdCharCheck(pwd){
+    function pwdCharCheck(pwd) {
         const specialCheck = /^(?=.*\d)(?=.*[@#\-_$%^&+=§!])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!]+$/;
         return specialCheck.test(pwd);
     }
 
-    function usernameCharCheck(username){
+    function usernameCharCheck(username) {
         const userCheck = /^[a-zA-Z0-9_]+$/;
         return userCheck.test(username);
     }
 
-    if(!document.querySelector("#FirstName").value){
+    if (!document.querySelector("#FirstName").value) {
         alert("First name is empty")
         return;
     }
     let userRegisterCheck_FirstName = document.querySelector("#FirstName").value;
-    if(!nameCharCheck(userRegisterCheck_FirstName)){
+    if (!nameCharCheck(userRegisterCheck_FirstName)) {
         alert("First name has forbidden character")
         return;
     }
 
 
-    if(!document.querySelector("#LastName").value){
+    if (!document.querySelector("#LastName").value) {
         alert("Last name is empty")
         return;
     }
     let userRegisterCheck_LastName = document.querySelector("#LastName").value;
-    if(!nameCharCheck(userRegisterCheck_LastName)){
+    if (!nameCharCheck(userRegisterCheck_LastName)) {
         alert("Last name has forbidden character")
         return;
     }
 
 
-    if(!document.querySelector("#Email").value){
+    if (!document.querySelector("#Email").value) {
         alert("Email is empty")
         return;
     }
     let userRegisterCheck_Email = document.querySelector("#Email").value;
-    if(!emailCharCheck(userRegisterCheck_Email)){
+    if (!emailCharCheck(userRegisterCheck_Email)) {
         alert("Invalid email format")
         return;
     }
 
     let userRegisterCheck_UserType
-    if(document.querySelector("#Doctor").checked) {
+    if (document.querySelector("#Doctor").checked) {
         userRegisterCheck_UserType = "DOCTOR";
     }
-    else if(document.querySelector("#Researcher").checked) {
+    else if (document.querySelector("#Researcher").checked) {
         userRegisterCheck_UserType = "RESEARCHER";
     }
-    else if(document.querySelector("#Manufacturer").checked) {
+    else if (document.querySelector("#Manufacturer").checked) {
         userRegisterCheck_UserType = "MANUFACTURER";
     }
     else {
@@ -68,38 +68,38 @@ function Register_userRegister() {
     }
 
 
-    if(!document.querySelector("#Username").value){
+    if (!document.querySelector("#Username").value) {
         alert("Username is empty")
         return;
     }
     let userRegisterCheck_Username = document.querySelector("#Username").value;
-    if(!usernameCharCheck(userRegisterCheck_Username)){
+    if (!usernameCharCheck(userRegisterCheck_Username)) {
         alert("Username has forbidden characters")
         return;
     }
 
 
-    if(!document.querySelector("#Password").value){
+    if (!document.querySelector("#Password").value) {
         alert("Password is empty")
         return;
     }
     let userRegisterCheck_Password = document.querySelector("#Password").value;
-    if(userRegisterCheck_Password.length < 6 || userRegisterCheck_Password.length > 100){
+    if (userRegisterCheck_Password.length < 6 || userRegisterCheck_Password.length > 100) {
         alert("Password size out of bounds.\nCHARACTER LIMITS:\nMIN : 6\nMAX : 100")
         return;
     }
-    if(!pwdCharCheck(userRegisterCheck_Password)){
+    if (!pwdCharCheck(userRegisterCheck_Password)) {
         alert("Password does not contain special characters")
         return;
     }
 
 
-    if(!document.querySelector("#Confirm_Password").value){
+    if (!document.querySelector("#Confirm_Password").value) {
         alert("Password confirmation is empty")
         return;
     }
     let userRegisterCheck_ConfirmPassword = document.querySelector("#Confirm_Password").value;
-    if(userRegisterCheck_Password != userRegisterCheck_ConfirmPassword){
+    if (userRegisterCheck_Password != userRegisterCheck_ConfirmPassword) {
         alert("Password and confirmation do not match")
         return;
     }
@@ -113,22 +113,22 @@ function Register_userRegister() {
     userRegister_FormData.append("RegisterUsername", userRegisterCheck_Username);
     userRegister_FormData.append("RegisterPassword", userRegisterCheck_Password);
 
-    fetch("/controller/register.php",{
+    fetch("/controller/register.php", {
         method: "POST",
         body: userRegister_FormData
     })
         .then(response => response.text())
-        .then(text =>{
-            if(text == 'SUCCESS'){
+        .then(text => {
+            if (text == 'SUCCESS') {
                 document.querySelector("#DisplayDiv").innerHTML =
                     "You have successfully registered your account. " +
                     "Proceed to the Login page to login to system."
             }
-            else if(text == 'DOUBLE_JEOPARDY'){
+            else if (text == 'DOUBLE_JEOPARDY') {
                 document.querySelector("#DisplayDiv").innerHTML =
                     "You can only have 1 account registered for every email address."
             }
-            else if(text == 'USERNAME'){
+            else if (text == 'USERNAME') {
                 document.querySelector("#DisplayDiv").innerHTML =
                     "Username already taken. Please create a different one that works."
             }
@@ -137,7 +137,7 @@ function Register_userRegister() {
 
 function Login_userVerif() {
     let userVerif_Username
-    if(document.querySelector("#Username").value){
+    if (document.querySelector("#Username").value) {
         userVerif_Username = document.querySelector("#Username").value;
     }
     else {
@@ -145,7 +145,7 @@ function Login_userVerif() {
         return;
     }
     let userVerif_Password
-    if(document.querySelector("#Password").value){
+    if (document.querySelector("#Password").value) {
         userVerif_Password = document.querySelector("#Password").value;
     }
     else {
@@ -157,13 +157,42 @@ function Login_userVerif() {
     userVerif_FormData.append('processUsername', userVerif_Username);
     userVerif_FormData.append('processPassword', userVerif_Password);
 
-    fetch("/controller/login.php",{
+    fetch("/controller/login.php", {
         method: "POST",
         body: userVerif_FormData
     })
         .then(response => response.text())
-        .then(text =>{
-            if(text == 'verified') window.location.assign("/pages/Dashboard.php")
-            else if(text =='Fail') document.querySelector("#DisplayDiv").innerHTML = "Username and Password incorrect"
+        .then(text => {
+            if (text == 'verified') window.location.assign("/pages/Dashboard.php")
+            else if (text == 'Fail') document.querySelector("#DisplayDiv").innerHTML = "Username and Password incorrect"
         })
+}
+
+function DeviceAdd_handleSubmit(e) {
+    e.preventDefault();
+    const form = e.target;
+    let formData = new FormData(form);
+
+    fetch("/controller/deviceAdd.php", {
+        method: "POST",
+        body: formData
+    })
+        .then(response => {
+            if (response.headers.has('Content-Type') && response.headers.get('Content-Type') == 'application/json') {
+                return response.json();
+            }
+            if ((response.headers.has('Content-Type') && response.headers.get('Content-Type') == 'text/plain')) {
+                return response.text();
+            }
+        })
+        .then(data => {
+            if (typeof data === 'object') {
+                console.log("Device successfully added");
+                console.log(data.deviceId);
+                window.location.assign(`/pages/Device.php?id=${data.deviceId}`)
+            }
+            else {
+                console.log(data);
+            }
+        });
 }

@@ -5,12 +5,16 @@ use buzzingpixel\twigswitch\SwitchTwigExtension;
 use Umpirsky\Twig\Extension\PhpFunctionExtension;
 
 require $_SERVER["DOCUMENT_ROOT"] . "/vendor/autoload.php";
+require $_SERVER["DOCUMENT_ROOT"] . "/controller/search.php";
 
-if (!$_SESSION['user_type']) {
-  $url = $_SEVER['HTTP_HOST'] . '/pages/Login.php';
+var_dump($_SESSION);
+
+if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] != "MANUFACTURER") {
+  $url = $_SEVER['HTTP_HOST'] . '/pages/Dashboard.php';
   header("Location:" . $url);
+  exit();
 }
-else {
+
 $pathToPages = $_SERVER["DOCUMENT_ROOT"] . "/pages/";
 
 $twigLoader = new \Twig\Loader\FilesystemLoader($pathToPages);
@@ -20,8 +24,6 @@ $twig = new Twig\Environment($twigLoader);
 $twig->addExtension(new PhpFunctionExtension(["str_contains"]));
 $twig->addExtension(new SwitchTwigExtension());
 
-$template = $twig->load("Dashboard.twig");
+$template = $twig->load("./manufacturer/DeviceAdd.twig");
 
 echo $template->render(["uri" => $_SERVER["REQUEST_URI"], "session" => $_SESSION]);
-}
-
