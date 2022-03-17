@@ -6,3 +6,8 @@ pages/register.php ,
 script/script.js
 
 this is the geigermark branch
+
+
+3/17/2022:
+fixed register process to now include the company name,
+removed logout.php from controller folder as it was not used

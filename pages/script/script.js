@@ -20,6 +20,11 @@ function Register_userRegister() {
         return userCheck.test(username);
     }
 
+    function userCompanyCharCheck(company){
+        const userCompanyCheck = /^[a-zA-Z0-9_]+$/;
+        return userCompanyCheck.test(company);
+    }
+
     if(!document.querySelector("#FirstName").value){
         alert("First name is empty")
         return;
@@ -38,6 +43,16 @@ function Register_userRegister() {
     let userRegisterCheck_LastName = document.querySelector("#LastName").value;
     if(!nameCharCheck(userRegisterCheck_LastName)){
         alert("Last name has forbidden character")
+        return;
+    }
+
+    if(!document.querySelector("#Company").value){
+        alert("Company field is empty")
+        return;
+    }
+    let userRegisterCheck_Company = document.querySelector("#Company").value;
+    if(!userCompanyCharCheck(userRegisterCheck_Company)){
+        alert("Company name has forbidden characters")
         return;
     }
 
@@ -112,6 +127,7 @@ function Register_userRegister() {
     userRegister_FormData.append("RegisterUserType", userRegisterCheck_UserType);
     userRegister_FormData.append("RegisterUsername", userRegisterCheck_Username);
     userRegister_FormData.append("RegisterPassword", userRegisterCheck_Password);
+    userRegister_FormData.append("RegisterCompany", userRegisterCheck_Company);
 
     fetch("/controller/register.php",{
         method: "POST",
