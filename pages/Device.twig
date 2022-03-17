@@ -5,14 +5,37 @@
 	<div class="container-sm">
 		<div class="row">
 
-			<div class="col"></div>
+			<div class="col-3"></div>
 
-			<div class="col">
-				{{ device }}
-				{{ device.getPoctDeviceGenericName }}
+			<div class="col card bg-light bg-gradient mt-5">
+
+				<div class="card-title mt-3">
+					<h3 class="text-center text-primary py-2 mb-3 h3">{{ device.PoctDeviceManufactureName }}</h3>
+					<p class="text-center text-muted">{{ device.PoctDeviceGenericName }}</p>
+				</div>
+
+				<div class="container">
+					<div class="row">
+						<div class="col">
+							<div height="300px" width="300px">{{ device.DeviceImageUrl }}</div>
+						</div>
+						<div class="col">
+							<p>Device Model:{{ device.DeviceModel }}</p>
+							<p>Device Type:{{ device.DeviceType }}</p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col">
+							<p>Device Description:</p>
+							<p>{{ device.DeviceDescripition  }}</p>
+						</div>
+					</div>
+				</div>
+
+
 			</div>
 
-			<div class="col"></div>
+			<div class="col-3"></div>
 
 		</div>
 	</div>

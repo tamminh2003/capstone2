@@ -17,6 +17,16 @@ if (!isset($_GET['device_id'])) {
 
 $device = PoctDeviceQuery::create()->filterByPoctDeviceId($_GET['device_id'])->find()->getFirst();
 
+$passingVariable = [
+  "PoctDeviceId" => $device->getPoctDeviceId(),
+  "PoctDeviceManufactureName" => $device->getPoctDeviceManufactureName(),
+  "PoctDeviceGenericName" => $device->getPoctDeviceGenericName(),
+  "DeviceImageUrl" => $device->getDeviceImageUrl(),
+  "DeviceModel" => $device->getDeviceModel(),
+  "DeviceType" => $device->getDeviceType(),
+  "DeviceDescripition" => $device->getDeviceDescripition()
+];
+
 $pathToPages = $_SERVER["DOCUMENT_ROOT"] . "/pages/";
 
 $twigLoader = new \Twig\Loader\FilesystemLoader($pathToPages);
@@ -28,4 +38,4 @@ $twig->addExtension(new SwitchTwigExtension());
 
 $template = $twig->load("./Device.twig");
 
-echo $template->render(["uri" => $_SERVER["REQUEST_URI"], "session" => $_SESSION, "device" => $device]);
+echo $template->render(["uri" => $_SERVER["REQUEST_URI"], "session" => $_SESSION, "device" => $passingVariable]);
