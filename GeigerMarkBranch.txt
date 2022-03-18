@@ -1,6 +1,0 @@
-3/2/2022:
-Added remade controller/login.php ,
-controller/register.php ,
-pages/login.php ,
-pages/register.php ,
-script/script.js

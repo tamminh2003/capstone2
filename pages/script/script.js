@@ -189,7 +189,7 @@ function DeviceAdd_handleSubmit(e) {
             if (typeof data === 'object') {
                 console.log("Device successfully added");
                 console.log(data.deviceId);
-                window.location.assign(`/pages/Device.php?id=${data.deviceId}`)
+                window.location.assign(`/pages/Device.php?device_id=${data.deviceId}`)
             }
             else {
                 console.log(data);
