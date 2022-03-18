@@ -15,6 +15,7 @@ $Email = $_POST['RegisterEmail'];
 $UserType = $_POST['RegisterUserType'];
 $Username = $_POST['RegisterUsername'];
 $Password = $_POST['RegisterPassword'];
+$Company = $_POST['RegisterCompany'];
 $response = "";
 
 
@@ -50,6 +51,7 @@ else
         $register_user->setUserType($UserType);
         $register_user->setUserUsername($Username);
         $register_user->setUserPassword($Hash);
+        $register_user->setUserCompany($Company);
         $register_user->save();
         $response = "SUCCESS";
         echo $response;
