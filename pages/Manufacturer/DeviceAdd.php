@@ -11,7 +11,7 @@ const AUTHORIZED_USER = ['MANUFACTURER'];
 
 Utility\userAuthorization();
 
-$pathToPages = $_SERVER["DOCUMENT_ROOT"] . "/pages/";
+$pathToPages = "./";
 
 $twigLoader = new \Twig\Loader\FilesystemLoader($pathToPages);
 
