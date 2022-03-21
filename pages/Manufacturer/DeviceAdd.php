@@ -11,7 +11,7 @@ const AUTHORIZED_USER = ['MANUFACTURER'];
 
 Utility\userAuthorization();
 
-$pathToPages = "./";
+$pathToPages = $_SERVER["DOCUMENT_ROOT"] . "/pages/";
 
 $twigLoader = new \Twig\Loader\FilesystemLoader($pathToPages);
 
@@ -20,6 +20,6 @@ $twig = new Twig\Environment($twigLoader);
 $twig->addExtension(new PhpFunctionExtension(["str_contains"]));
 $twig->addExtension(new SwitchTwigExtension());
 
-$template = $twig->load("DeviceAdd.twig");
+$template = $twig->load("./Manufacturer/DeviceAdd.twig");
 
 echo $template->render(["uri" => $_SERVER["REQUEST_URI"], "session" => $_SESSION]);
