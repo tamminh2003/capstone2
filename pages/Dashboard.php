@@ -7,7 +7,7 @@ use Umpirsky\Twig\Extension\PhpFunctionExtension;
 require $_SERVER["DOCUMENT_ROOT"] . "/vendor/autoload.php";
 
 if (!$_SESSION['user_type']) {
-  $url = $_SEVER['HTTP_HOST'] . '/pages/Login.php';
+  $url = $_SERVER['HTTP_HOST'] . '/pages/Login.php';
   header("Location:" . $url);
 }
 else {

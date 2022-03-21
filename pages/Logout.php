@@ -1,9 +1,13 @@
 <?php
 
 require $_SERVER["DOCUMENT_ROOT"] . "/vendor/autoload.php";
+require $_SERVER["DOCUMENT_ROOT"] . "/controller/utility.php";
 
 session_start();
 session_destroy();
 
-$url = $_SEVER['HTTP_HOST'] . '/pages/Homepage.php';
+$url = '/pages/Homepage.php';
+
+Utility\log($url);
+
 header("Location:" . $url);

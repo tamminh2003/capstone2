@@ -196,3 +196,24 @@ function DeviceAdd_handleSubmit(e) {
             }
         });
 }
+
+function DeviceList_handleUpdate(element) {
+    location.assign(`/pages/Manufacturer/DeviceUpdate.php?device_id=${element.dataset.id}`);
+}
+
+function DeviceList_handleDelete(element) {
+    confirm("Please confirm you want to delete this device:");
+    let id = element.dataset.id;
+    let form = new FormData();
+
+    form.append("id", id);
+    fetch('/controller/deviceDelete.php', {
+        method: "POST",
+        body: form
+    })
+        .then(reponse => reponse.text())
+        .then(text => {
+            if (text == 'success') location.reload();
+            else if (text == 'fail') alert('Something went wrong, cannot delete record');
+        });
+}
