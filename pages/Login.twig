@@ -14,10 +14,10 @@
 				<div id="DisplayDiv" class="text-danger text-center" style="font-weight:bold"></div>
 
 				<div class="card-body mt-4">
-					<form>
+					<form onsubmit="Login_userVerif(event)">
 						<input type="text" id="Username" placeholder="Username" class="form-control my-2" value="" required>
 						<input type="password" id="Password" placeholder="Password" class="form-control mb-3" value="" required>
-						<button type="button" class="btn btn-success" name="login" class="pt-3" onclick="Login_userVerif()">Login</button>
+						<button type="submit" class="btn btn-success" name="login" class="pt-3" >Login</button>
 					</form>
 				</div>
 				

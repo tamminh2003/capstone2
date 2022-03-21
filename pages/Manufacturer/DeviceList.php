@@ -5,12 +5,15 @@ use buzzingpixel\twigswitch\SwitchTwigExtension;
 use Umpirsky\Twig\Extension\PhpFunctionExtension;
 
 require $_SERVER["DOCUMENT_ROOT"] . "/vendor/autoload.php";
+require $_SERVER["DOCUMENT_ROOT"] . "/controller/utility.php";
+require $_SERVER["DOCUMENT_ROOT"] . "/controller/deviceList.php";
 
-if (!$_SESSION['user_type']) {
-  $url = '/pages/Login.php';
-  header("Location:" . $url);
-}
-else {
+const AUTHORIZED_USER = ['MANUFACTURER'];
+
+Utility\userAuthorization();
+
+$devices = deviceList();
+
 $pathToPages = $_SERVER["DOCUMENT_ROOT"] . "/pages/";
 
 $twigLoader = new \Twig\Loader\FilesystemLoader($pathToPages);
@@ -20,8 +23,6 @@ $twig = new Twig\Environment($twigLoader);
 $twig->addExtension(new PhpFunctionExtension(["str_contains"]));
 $twig->addExtension(new SwitchTwigExtension());
 
-$template = $twig->load("Dashboard.twig");
+$template = $twig->load("./manufacturer/DeviceList.twig");
 
-echo $template->render(["uri" => $_SERVER["REQUEST_URI"], "session" => $_SESSION]);
-}
-
+echo $template->render(["uri" => $_SERVER["REQUEST_URI"], "session" => $_SESSION, "devices" => $devices]);
