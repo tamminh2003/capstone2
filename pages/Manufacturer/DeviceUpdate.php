@@ -22,6 +22,6 @@ $twig = new Twig\Environment($twigLoader);
 $twig->addExtension(new PhpFunctionExtension(["str_contains"]));
 $twig->addExtension(new SwitchTwigExtension());
 
-$template = $twig->load("./manufacturer/DeviceUpdate.twig");
+$template = $twig->load("DeviceUpdate.twig");
 
 echo $template->render(["uri" => $_SERVER["REQUEST_URI"], "session" => $_SESSION, "device" => $device]);

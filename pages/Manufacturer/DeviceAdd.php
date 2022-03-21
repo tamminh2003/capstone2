@@ -20,6 +20,6 @@ $twig = new Twig\Environment($twigLoader);
 $twig->addExtension(new PhpFunctionExtension(["str_contains"]));
 $twig->addExtension(new SwitchTwigExtension());
 
-$template = $twig->load("./manufacturer/DeviceAdd.twig");
+$template = $twig->load("DeviceAdd.twig");
 
 echo $template->render(["uri" => $_SERVER["REQUEST_URI"], "session" => $_SESSION]);
