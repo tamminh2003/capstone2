@@ -135,7 +135,9 @@ function Register_userRegister() {
         })
 }
 
-function Login_userVerif() {
+function Login_userVerif(event) {
+    event.preventDefault();
+
     let userVerif_Username
     if (document.querySelector("#Username").value) {
         userVerif_Username = document.querySelector("#Username").value;
@@ -153,7 +155,7 @@ function Login_userVerif() {
         return;
     }
 
-    let userVerif_FormData = new FormData();
+    userVerif_FormData = new FormData();
     userVerif_FormData.append('processUsername', userVerif_Username);
     userVerif_FormData.append('processPassword', userVerif_Password);
 
@@ -215,5 +217,34 @@ function DeviceList_handleDelete(element) {
         .then(text => {
             if (text == 'success') location.reload();
             else if (text == 'fail') alert('Something went wrong, cannot delete record');
+        });
+}
+
+function DeviceUpdate_handleSubmit(event) {
+    event.preventDefault();
+    const form = event.target;
+    let formData = new FormData(form);
+
+    fetch("/controller/deviceUpdate.php", {
+        method: "POST",
+        body: formData
+    })
+        .then(response => {
+            if (response.headers.has('Content-Type') && response.headers.get('Content-Type') == 'application/json') {
+                return response.json();
+            }
+            if ((response.headers.has('Content-Type') && response.headers.get('Content-Type') == 'text/plain')) {
+                return response.text();
+            }
+        })
+        .then(data => {
+            if (typeof data === 'object') {
+                console.log("Device successfully updated");
+                console.log(data.deviceId);
+                window.location.reload();
+            }
+            else {
+                console.log(data);
+            }
         });
 }

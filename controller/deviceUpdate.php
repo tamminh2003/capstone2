@@ -14,35 +14,26 @@ require $_SERVER["DOCUMENT_ROOT"] . "/generated-conf/config.php";
 	"manufactureName" => $manufactureName,
 	"deviceName" => $deviceName,
 	"deviceModel" => $deviceModel,
-	"deviceImgUrl" => $deviceImgUrl,
 	"deviceType" => $deviceType,
 	"deviceDescription" => $deviceDescription,
-	"user_id" => $userId
+	"device_id" =>$deviceId
 ] = $_POST;
 
-$device = new PoctDevice();
+$device = PoctDeviceQuery::create()->findOneByPoctDeviceId($deviceId);
+
 $device->setPoctDeviceManufactureName($manufactureName);
 $device->setPoctDeviceGenericName($deviceName);
 $device->setDeviceModel($deviceModel);
-$device->setDeviceImageUrl($deviceImgUrl);
 $device->setDeviceType($deviceType);
 $device->setDeviceDescripition($deviceDescription);
-$device->setUserUserId($userId);
 $saveResult = $device->save();
-
-$deviceId = PoctDeviceQuery::create()
-  ->limit(1)
-  ->orderByPoctDeviceId(Criteria::DESC)
-  ->find()
-  ->getFirst()
-	->getPoctDeviceId();
 
 $response = new Response();
 
 if ($saveResult == 0) {
-	$response->setStatus(409); // Conflict
+	$response->setStatus(400); // Bad request
 	$response->setBody(
-		'Warning: Already In Save. See Propel documentation.'
+		'Something went wrong.'
 	);
 	Sabre\HTTP\Sapi::sendResponse($response);
 	exit();

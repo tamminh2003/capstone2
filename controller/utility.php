@@ -32,6 +32,7 @@ function getDeviceById($deviceId)
   }
 
   $device = [];
+  $device["device_id"] = $query->getPoctDeviceId();
   $device["user_user_id"] = $query->getUserUserId();
   $device["poct_device_manufacture_name"] = $query->getPoctDeviceManufactureName();
   $device["poct_device_generic_name"] = $query->getPoctDeviceGenericName();

@@ -11,7 +11,8 @@
 					<h1 class="text-center text-primary py-2 mb-3">Device Update</h1>
 				</div>
 
-				<form method="post" accept-charset="UTF-8" id="CreateAdd" onsubmit="DeviceAdd_handleSubmit(event)">
+				<form method="post" accept-charset="UTF-8" id="CreateAdd" onsubmit="DeviceUpdate_handleSubmit(event)">
+					<input type="hidden" id="device_id" name="device_id" value={{device.device_id}}>
 					<input type="hidden" id="user_id" name="user_id" value={{ device.user_user_id }}>
 					<div class="mb-3">
 						<label for="manufactureName" class="form-label">Device Manufacture Name</label>
