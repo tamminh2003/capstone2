@@ -10,7 +10,7 @@ require $_SERVER["DOCUMENT_ROOT"] . "/generated-conf/config.php";
 function userAuthorization()
 {
   if (!in_array($_SESSION['user_type'], AUTHORIZED_USER, false)) {
-    $url = $_SERVER['HTTP_HOST'] . '/pages/Dashboard.php';
+    $url = '/pages/Dashboard.php';
     header("Location:" . $url);
     exit();
   }
