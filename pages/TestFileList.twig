@@ -1,0 +1,12 @@
+{% extends "layout.twig" %}
+
+{% block content %}
+	<ul>
+		{% for file in files %}
+			<li>{{file.id}} {{file.name}}</li>
+      <a href={{"/controller/download.php?fileId=" ~ file.id}}>Download</a>
+		{% else %}
+			No file found.
+		{% endfor %}
+	</ul>
+{% endblock %}
