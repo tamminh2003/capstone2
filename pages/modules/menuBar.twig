@@ -32,13 +32,6 @@
 				<li class="nav-item">
 					<a class={{isRegister ? "\"nav-link active\"" : "nav-link"}} href={{ isRegister ? "#" : registerUri}}>Register</a>
 				</li>
-<<<<<<< Updated upstream
-			</ul>
-			<form class="d-flex">
-				<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-				<button class="btn btn-outline-success" type="submit">Search</button>
-			</form>
-=======
 				{% if not session.user_id %}
 					<li class="nav-item">
 						<a class={{isRegister ? "\"nav-link active\"" : "nav-link"}} href={{ isRegister ? "#" : registerUri}}>Register</a>
@@ -54,7 +47,6 @@
 
 			</ul>
 
->>>>>>> Stashed changes
 		</div>
 	</div>
 </nav>
