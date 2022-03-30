@@ -1,0 +1,87 @@
+{% extends "layout.twig" %}
+
+{% block content %}
+
+	<div class="container">
+
+		<div class="row">
+
+
+			<div class="col card bg-light bg-gradient mt-5">
+
+				<div class="card-title mt-3">
+					<h1 class="text-center text-primary py-2">Free Text Search</h1>
+				</div>
+
+				<div class="card-body mt-4">
+					<form class="form" action="Search.php" method="get">
+						<div class="container">
+
+							<div class="row">
+
+								<div class="col-11">
+									<input type="text" class="form-control" id="free_text_search" name="free_text_search" placeholder="Search by Device ID, Device Generic/Manufacturer Name, Device Type, Device Model, Disease name and Disease ICD-11 Code"><br><br/>
+								</div>
+								<div class="col">
+									<button name="FreeTextSearch" class="btn btn-success mt-3,form-control" type="submit">Search</button><br><br/>
+								</div>
+							</div>
+
+
+						</div>
+
+
+					</form>
+				</div>
+			</div>
+
+		</div>
+
+		<div class="row">
+			{% for device in devices %}
+
+				<div class="col card bg-light bg-gradient mt-5">
+
+					<div class="card-title mt-3">
+						<p class="text-center text-muted">{{ device.ManufactureName }}</p>
+					</div>
+					<div class="card-body mt-4">
+						<div class="container">
+							<div class="row">
+								<div class="col">
+
+									<div height="300px" width="300px">
+										<iframe src='https://drive.google.com/file/d/1ABzNSkNTyqeqVlrtYLB7u_JjNY5sGh-3/preview' width='100' height='100' allow='autoplay'></iframe>
+									</div>
+
+
+									{# 	<div height="300px" width="300px">{{ device.DeviceImageUrl }}</div>
+														 #}
+
+								</div>
+								<div class="col">
+									<p>Device ID :
+										{{device.PoctDeviceId}}</p>
+									<p>Device Generic Name:{{ device.GenericName }}</p>
+									<p>Device Model:{{ device.DeviceModel }}</p>
+									<p>Device Type:{{ device.DeviceType }}</p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col">
+									<p>Device Description:</p>
+									<p>{{ device.DeviceDescription  }}</p>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+
+
+				<div class="w-100"></div>
+			{% endfor %}
+		</div>
+	</div>
+
+{% endblock %}
