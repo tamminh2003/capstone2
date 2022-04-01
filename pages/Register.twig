@@ -1,0 +1,113 @@
+{% extends "layout.twig" %}
+
+{% block content %}
+
+	<div class="container">
+
+		<div class="row">
+
+			<div class="col-3"></div>
+
+			<div class="col card bg-light bg-gradient mt-5">
+
+				<div class="card-title mt-3">
+					<h1 class="text-center text-primary py-2">Registration Form</h1>
+				</div>
+
+				<div id="DisplayDiv" class="text-danger text-center" style="font-weight:bold"></div>
+
+				<div class="card-body mt-4">
+					<form class="form">
+						<div class="container">
+
+							<div class="row">
+								<div class="col-4">
+									<label for="FirstName">First Name :</label>
+								</div>
+								<div class="col">
+									<input type="text" class="form-control" id="FirstName" name="FirstName" placeholder="First Name (Given Name)"><br><br/>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-4">
+									<label for="LastName">Last Name :</label>
+								</div>
+								<div class="col">
+									<input type="text" class="form-control" id="LastName" name="LastName" placeholder="Last Name (Family Name)"><br><br/>
+								</div>
+							</div>
+
+							<div class="row mt-5">
+								<div class="col-4">
+									<label for="Company">Company :</label>
+								</div>
+								<div class="col">
+									<input type="text" class="form-control" id="Company" name="Company" placeholder="Company"><br><br/>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-4">
+									<label for="Email">Email :</label>
+								</div>
+								<div class="col">
+									<input type="text" class="form-control" id="Email" name="Email" placeholder="Email"><br><br/>
+								</div>
+							</div>
+
+							<div class="row">
+								<legend>Please select user type :</legend>
+								<div class="form-check">
+									<input type="radio" class="form-check-input" name="user_type" id="Doctor">
+									<label class="form-check-label" for="doctor">Doctor</label>
+								</div>
+								<div class="form-check">
+									<input type="radio" class="form-check-input" name="user_type" id="Researcher">
+									<label class="form-check-label" for="researcher">Researcher</label>
+								</div>
+								<div class="form-check">
+									<input type="radio" class="form-check-input" name="user_type" id="Manufacturer">
+									<label class="form-check-label" for="manufacturer">Manufacturer</label>
+								</div>
+							</div>
+
+							<div class="row mt-5">
+								<div class="col-4">
+									<label for="Username">Username :</label>
+								</div>
+								<div class="col">
+									<input type="text" class="form-control" id="Username" name="Username" placeholder="Username"><br><br>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-4">
+									<label for="Password">Password :</label>
+								</div>
+								<div class="col">
+									<input type="password" class="form-control" id="Password" name="Password" placeholder="Enter Password "><br><br>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-4">
+									<label for="Confirm_Password">Confirm Password :</label>
+								</div>
+								<div class="col">
+									<input type="password" class="form-control" id="Confirm_Password" name="Confirm_Password" placeholder="Confirm Password "><br><br>
+								</div>
+							</div>
+							<button name="Register" class="btn btn-success mt-3" type="button" onclick="Register_userRegister()">Register</button>
+						</div>
+
+
+					</form>
+				</div>
+
+			</div>
+
+			<div class="col-3"></div>
+
+		</div>
+
+	</div>
+{% endblock %}

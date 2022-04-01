@@ -33,11 +33,14 @@ CREATE TABLE `poct_device`
     `device_model` VARCHAR(255),
     `device_image_url` VARCHAR(255),
     `device_type` VARCHAR(255),
+    `device_descripition` VARCHAR(255),
     PRIMARY KEY (`poct_device_id`),
     INDEX `fk_poct_device_user1_idx` (`user_user_id`),
     CONSTRAINT `fk_poct_device_user1`
         FOREIGN KEY (`user_user_id`)
-        REFERENCES `users` (`user_id`)
+        REFERENCES `user` (`user_id`)
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
 ) ENGINE=InnoDB;
 
 -- ---------------------------------------------------------------------
@@ -59,10 +62,14 @@ CREATE TABLE `poct_device_aditional_info`
     INDEX `fk_poct_device_aditional_info_user1_idx` (`user_user_id`),
     CONSTRAINT `fk_poct_device_aditional_info_poct_device1`
         FOREIGN KEY (`idpoct_device`)
-        REFERENCES `poct_device` (`poct_device_id`),
+        REFERENCES `poct_device` (`poct_device_id`)
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
     CONSTRAINT `fk_poct_device_aditional_info_user1`
         FOREIGN KEY (`user_user_id`)
-        REFERENCES `users` (`user_id`)
+        REFERENCES `user` (`user_id`)
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
 ) ENGINE=InnoDB;
 
 -- ---------------------------------------------------------------------
@@ -84,10 +91,14 @@ CREATE TABLE `poct_device_details_timestamps`
     INDEX `fk_poct_device_timestamps_user1_idx` (`user_user_id`),
     CONSTRAINT `fk_poct_device_timestamps_poct_device1`
         FOREIGN KEY (`poct_device_poct_device_id`)
-        REFERENCES `poct_device` (`poct_device_id`),
+        REFERENCES `poct_device` (`poct_device_id`)
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
     CONSTRAINT `fk_poct_device_timestamps_user1`
         FOREIGN KEY (`user_user_id`)
-        REFERENCES `users` (`user_id`)
+        REFERENCES `user` (`user_id`)
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
 ) ENGINE=InnoDB;
 
 -- ---------------------------------------------------------------------
@@ -106,19 +117,23 @@ CREATE TABLE `poct_device_has_disease`
     INDEX `fk_poct_device_has_disease_poct_device1_idx` (`poct_device_id`),
     CONSTRAINT `fk_poct_device_has_disease_disease1`
         FOREIGN KEY (`disease_id`)
-        REFERENCES `disease` (`disease_id`),
+        REFERENCES `disease` (`disease_id`)
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
     CONSTRAINT `fk_poct_device_has_disease_poct_device1`
         FOREIGN KEY (`poct_device_id`)
         REFERENCES `poct_device` (`poct_device_id`)
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
 ) ENGINE=InnoDB;
 
 -- ---------------------------------------------------------------------
--- users
+-- user
 -- ---------------------------------------------------------------------
 
-DROP TABLE IF EXISTS `users`;
+DROP TABLE IF EXISTS `user`;
 
-CREATE TABLE `users`
+CREATE TABLE `user`
 (
     `user_id` INTEGER NOT NULL AUTO_INCREMENT,
     `user_firstname` VARCHAR(100),
@@ -127,6 +142,7 @@ CREATE TABLE `users`
     `user_type` VARCHAR(100),
     `user_username` VARCHAR(100),
     `user_password` VARCHAR(100),
+    `user_company` VARCHAR(255),
     PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB;
 

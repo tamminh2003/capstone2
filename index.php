@@ -2,6 +2,10 @@
 
 require "vendor/autoload.php";
 require "generated-conf/config.php";
+require "controller/utility.php";
 
-$url = $_SEVER['HTTP_HOST'] . '/pages/Homepage.php';
+$url = '/pages/Homepage.php';
+
+Utility\log("Redirect to " . $url);
+
 header("Location:".$url);

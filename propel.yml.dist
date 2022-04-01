@@ -9,10 +9,10 @@
 propel:
     paths:
         # The directory where Propel expects to find your `schema.xml` file.
-        schemaDir: C:\php-projects\test2\capstone2
+        schemaDir: D:\heroku_php\capstone2
 
         # The directory where Propel should output generated object model classes.
-        phpDir: C:\php-projects\test2\capstone2
+        phpDir: D:\heroku_php\capstone2
 
 #   database:
 #       connections:

@@ -185,14 +185,14 @@ class PoctDeviceHasDiseaseTableMap extends TableMap
     0 => ':disease_id',
     1 => ':disease_id',
   ),
-), null, null, null, false);
+), 'NO ACTION', 'NO ACTION', null, false);
         $this->addRelation('PoctDevice', '\\Propel\\PoctDevice', RelationMap::MANY_TO_ONE, array (
   0 =>
   array (
     0 => ':poct_device_id',
     1 => ':poct_device_id',
   ),
-), null, null, null, false);
+), 'NO ACTION', 'NO ACTION', null, false);
     } // buildRelations()
 
     /**

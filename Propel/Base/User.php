@@ -10,12 +10,12 @@ use Propel\PoctDeviceAditionalInfoQuery as ChildPoctDeviceAditionalInfoQuery;
 use Propel\PoctDeviceDetailsTimestamps as ChildPoctDeviceDetailsTimestamps;
 use Propel\PoctDeviceDetailsTimestampsQuery as ChildPoctDeviceDetailsTimestampsQuery;
 use Propel\PoctDeviceQuery as ChildPoctDeviceQuery;
-use Propel\Users as ChildUsers;
-use Propel\UsersQuery as ChildUsersQuery;
+use Propel\User as ChildUser;
+use Propel\UserQuery as ChildUserQuery;
 use Propel\Map\PoctDeviceAditionalInfoTableMap;
 use Propel\Map\PoctDeviceDetailsTimestampsTableMap;
 use Propel\Map\PoctDeviceTableMap;
-use Propel\Map\UsersTableMap;
+use Propel\Map\UserTableMap;
 use Propel\Runtime\Propel;
 use Propel\Runtime\ActiveQuery\Criteria;
 use Propel\Runtime\ActiveQuery\ModelCriteria;
@@ -30,18 +30,18 @@ use Propel\Runtime\Map\TableMap;
 use Propel\Runtime\Parser\AbstractParser;
 
 /**
- * Base class that represents a row from the 'users' table.
+ * Base class that represents a row from the 'user' table.
  *
  *
  *
  * @package    propel.generator.Propel.Base
  */
-abstract class Users implements ActiveRecordInterface
+abstract class User implements ActiveRecordInterface
 {
     /**
      * TableMap class name
      */
-    const TABLE_MAP = '\\Propel\\Map\\UsersTableMap';
+    const TABLE_MAP = '\\Propel\\Map\\UserTableMap';
 
 
     /**
@@ -120,6 +120,13 @@ abstract class Users implements ActiveRecordInterface
     protected $user_password;
 
     /**
+     * The value for the user_company field.
+     *
+     * @var        string|null
+     */
+    protected $user_company;
+
+    /**
      * @var        ObjectCollection|ChildPoctDevice[] Collection to store aggregation of ChildPoctDevice objects.
      * @phpstan-var ObjectCollection&\Traversable<ChildPoctDevice> Collection to store aggregation of ChildPoctDevice objects.
      */
@@ -170,7 +177,7 @@ abstract class Users implements ActiveRecordInterface
     protected $poctDeviceDetailsTimestampssScheduledForDeletion = null;
 
     /**
-     * Initializes internal state of Propel\Base\Users object.
+     * Initializes internal state of Propel\Base\User object.
      */
     public function __construct()
     {
@@ -263,9 +270,9 @@ abstract class Users implements ActiveRecordInterface
     }
 
     /**
-     * Compares this with another <code>Users</code> instance.  If
-     * <code>obj</code> is an instance of <code>Users</code>, delegates to
-     * <code>equals(Users)</code>.  Otherwise, returns <code>false</code>.
+     * Compares this with another <code>User</code> instance.  If
+     * <code>obj</code> is an instance of <code>User</code>, delegates to
+     * <code>equals(User)</code>.  Otherwise, returns <code>false</code>.
      *
      * @param  mixed   $obj The object to compare to.
      * @return boolean Whether equal to the object specified.
@@ -464,10 +471,20 @@ abstract class Users implements ActiveRecordInterface
     }
 
     /**
+     * Get the [user_company] column value.
+     *
+     * @return string|null
+     */
+    public function getUserCompany()
+    {
+        return $this->user_company;
+    }
+
+    /**
      * Set the value of [user_id] column.
      *
      * @param int $v New value
-     * @return $this|\Propel\Users The current object (for fluent API support)
+     * @return $this|\Propel\User The current object (for fluent API support)
      */
     public function setUserId($v)
     {
@@ -477,7 +494,7 @@ abstract class Users implements ActiveRecordInterface
 
         if ($this->user_id !== $v) {
             $this->user_id = $v;
-            $this->modifiedColumns[UsersTableMap::COL_USER_ID] = true;
+            $this->modifiedColumns[UserTableMap::COL_USER_ID] = true;
         }
 
         return $this;
@@ -487,7 +504,7 @@ abstract class Users implements ActiveRecordInterface
      * Set the value of [user_firstname] column.
      *
      * @param string|null $v New value
-     * @return $this|\Propel\Users The current object (for fluent API support)
+     * @return $this|\Propel\User The current object (for fluent API support)
      */
     public function setUserFirstname($v)
     {
@@ -497,7 +514,7 @@ abstract class Users implements ActiveRecordInterface
 
         if ($this->user_firstname !== $v) {
             $this->user_firstname = $v;
-            $this->modifiedColumns[UsersTableMap::COL_USER_FIRSTNAME] = true;
+            $this->modifiedColumns[UserTableMap::COL_USER_FIRSTNAME] = true;
         }
 
         return $this;
@@ -507,7 +524,7 @@ abstract class Users implements ActiveRecordInterface
      * Set the value of [user_lastname] column.
      *
      * @param string|null $v New value
-     * @return $this|\Propel\Users The current object (for fluent API support)
+     * @return $this|\Propel\User The current object (for fluent API support)
      */
     public function setUserLastname($v)
     {
@@ -517,7 +534,7 @@ abstract class Users implements ActiveRecordInterface
 
         if ($this->user_lastname !== $v) {
             $this->user_lastname = $v;
-            $this->modifiedColumns[UsersTableMap::COL_USER_LASTNAME] = true;
+            $this->modifiedColumns[UserTableMap::COL_USER_LASTNAME] = true;
         }
 
         return $this;
@@ -527,7 +544,7 @@ abstract class Users implements ActiveRecordInterface
      * Set the value of [user_email] column.
      *
      * @param string|null $v New value
-     * @return $this|\Propel\Users The current object (for fluent API support)
+     * @return $this|\Propel\User The current object (for fluent API support)
      */
     public function setUserEmail($v)
     {
@@ -537,7 +554,7 @@ abstract class Users implements ActiveRecordInterface
 
         if ($this->user_email !== $v) {
             $this->user_email = $v;
-            $this->modifiedColumns[UsersTableMap::COL_USER_EMAIL] = true;
+            $this->modifiedColumns[UserTableMap::COL_USER_EMAIL] = true;
         }
 
         return $this;
@@ -547,7 +564,7 @@ abstract class Users implements ActiveRecordInterface
      * Set the value of [user_type] column.
      *
      * @param string|null $v New value
-     * @return $this|\Propel\Users The current object (for fluent API support)
+     * @return $this|\Propel\User The current object (for fluent API support)
      */
     public function setUserType($v)
     {
@@ -557,7 +574,7 @@ abstract class Users implements ActiveRecordInterface
 
         if ($this->user_type !== $v) {
             $this->user_type = $v;
-            $this->modifiedColumns[UsersTableMap::COL_USER_TYPE] = true;
+            $this->modifiedColumns[UserTableMap::COL_USER_TYPE] = true;
         }
 
         return $this;
@@ -567,7 +584,7 @@ abstract class Users implements ActiveRecordInterface
      * Set the value of [user_username] column.
      *
      * @param string|null $v New value
-     * @return $this|\Propel\Users The current object (for fluent API support)
+     * @return $this|\Propel\User The current object (for fluent API support)
      */
     public function setUserUsername($v)
     {
@@ -577,7 +594,7 @@ abstract class Users implements ActiveRecordInterface
 
         if ($this->user_username !== $v) {
             $this->user_username = $v;
-            $this->modifiedColumns[UsersTableMap::COL_USER_USERNAME] = true;
+            $this->modifiedColumns[UserTableMap::COL_USER_USERNAME] = true;
         }
 
         return $this;
@@ -587,7 +604,7 @@ abstract class Users implements ActiveRecordInterface
      * Set the value of [user_password] column.
      *
      * @param string|null $v New value
-     * @return $this|\Propel\Users The current object (for fluent API support)
+     * @return $this|\Propel\User The current object (for fluent API support)
      */
     public function setUserPassword($v)
     {
@@ -597,11 +614,31 @@ abstract class Users implements ActiveRecordInterface
 
         if ($this->user_password !== $v) {
             $this->user_password = $v;
-            $this->modifiedColumns[UsersTableMap::COL_USER_PASSWORD] = true;
+            $this->modifiedColumns[UserTableMap::COL_USER_PASSWORD] = true;
         }
 
         return $this;
     } // setUserPassword()
+
+    /**
+     * Set the value of [user_company] column.
+     *
+     * @param string|null $v New value
+     * @return $this|\Propel\User The current object (for fluent API support)
+     */
+    public function setUserCompany($v)
+    {
+        if ($v !== null) {
+            $v = (string) $v;
+        }
+
+        if ($this->user_company !== $v) {
+            $this->user_company = $v;
+            $this->modifiedColumns[UserTableMap::COL_USER_COMPANY] = true;
+        }
+
+        return $this;
+    } // setUserCompany()
 
     /**
      * Indicates whether the columns in this object are only set to default values.
@@ -639,26 +676,29 @@ abstract class Users implements ActiveRecordInterface
     {
         try {
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 0 + $startcol : UsersTableMap::translateFieldName('UserId', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 0 + $startcol : UserTableMap::translateFieldName('UserId', TableMap::TYPE_PHPNAME, $indexType)];
             $this->user_id = (null !== $col) ? (int) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 1 + $startcol : UsersTableMap::translateFieldName('UserFirstname', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 1 + $startcol : UserTableMap::translateFieldName('UserFirstname', TableMap::TYPE_PHPNAME, $indexType)];
             $this->user_firstname = (null !== $col) ? (string) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 2 + $startcol : UsersTableMap::translateFieldName('UserLastname', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 2 + $startcol : UserTableMap::translateFieldName('UserLastname', TableMap::TYPE_PHPNAME, $indexType)];
             $this->user_lastname = (null !== $col) ? (string) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 3 + $startcol : UsersTableMap::translateFieldName('UserEmail', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 3 + $startcol : UserTableMap::translateFieldName('UserEmail', TableMap::TYPE_PHPNAME, $indexType)];
             $this->user_email = (null !== $col) ? (string) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 4 + $startcol : UsersTableMap::translateFieldName('UserType', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 4 + $startcol : UserTableMap::translateFieldName('UserType', TableMap::TYPE_PHPNAME, $indexType)];
             $this->user_type = (null !== $col) ? (string) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 5 + $startcol : UsersTableMap::translateFieldName('UserUsername', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 5 + $startcol : UserTableMap::translateFieldName('UserUsername', TableMap::TYPE_PHPNAME, $indexType)];
             $this->user_username = (null !== $col) ? (string) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 6 + $startcol : UsersTableMap::translateFieldName('UserPassword', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 6 + $startcol : UserTableMap::translateFieldName('UserPassword', TableMap::TYPE_PHPNAME, $indexType)];
             $this->user_password = (null !== $col) ? (string) $col : null;
+
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 7 + $startcol : UserTableMap::translateFieldName('UserCompany', TableMap::TYPE_PHPNAME, $indexType)];
+            $this->user_company = (null !== $col) ? (string) $col : null;
             $this->resetModified();
 
             $this->setNew(false);
@@ -667,10 +707,10 @@ abstract class Users implements ActiveRecordInterface
                 $this->ensureConsistency();
             }
 
-            return $startcol + 7; // 7 = UsersTableMap::NUM_HYDRATE_COLUMNS.
+            return $startcol + 8; // 8 = UserTableMap::NUM_HYDRATE_COLUMNS.
 
         } catch (Exception $e) {
-            throw new PropelException(sprintf('Error populating %s object', '\\Propel\\Users'), 0, $e);
+            throw new PropelException(sprintf('Error populating %s object', '\\Propel\\User'), 0, $e);
         }
     }
 
@@ -712,13 +752,13 @@ abstract class Users implements ActiveRecordInterface
         }
 
         if ($con === null) {
-            $con = Propel::getServiceContainer()->getReadConnection(UsersTableMap::DATABASE_NAME);
+            $con = Propel::getServiceContainer()->getReadConnection(UserTableMap::DATABASE_NAME);
         }
 
         // We don't need to alter the object instance pool; we're just modifying this instance
         // already in the pool.
 
-        $dataFetcher = ChildUsersQuery::create(null, $this->buildPkeyCriteria())->setFormatter(ModelCriteria::FORMAT_STATEMENT)->find($con);
+        $dataFetcher = ChildUserQuery::create(null, $this->buildPkeyCriteria())->setFormatter(ModelCriteria::FORMAT_STATEMENT)->find($con);
         $row = $dataFetcher->fetch();
         $dataFetcher->close();
         if (!$row) {
@@ -743,8 +783,8 @@ abstract class Users implements ActiveRecordInterface
      * @param      ConnectionInterface $con
      * @return void
      * @throws PropelException
-     * @see Users::setDeleted()
-     * @see Users::isDeleted()
+     * @see User::setDeleted()
+     * @see User::isDeleted()
      */
     public function delete(ConnectionInterface $con = null)
     {
@@ -753,11 +793,11 @@ abstract class Users implements ActiveRecordInterface
         }
 
         if ($con === null) {
-            $con = Propel::getServiceContainer()->getWriteConnection(UsersTableMap::DATABASE_NAME);
+            $con = Propel::getServiceContainer()->getWriteConnection(UserTableMap::DATABASE_NAME);
         }
 
         $con->transaction(function () use ($con) {
-            $deleteQuery = ChildUsersQuery::create()
+            $deleteQuery = ChildUserQuery::create()
                 ->filterByPrimaryKey($this->getPrimaryKey());
             $ret = $this->preDelete($con);
             if ($ret) {
@@ -792,7 +832,7 @@ abstract class Users implements ActiveRecordInterface
         }
 
         if ($con === null) {
-            $con = Propel::getServiceContainer()->getWriteConnection(UsersTableMap::DATABASE_NAME);
+            $con = Propel::getServiceContainer()->getWriteConnection(UserTableMap::DATABASE_NAME);
         }
 
         return $con->transaction(function () use ($con) {
@@ -811,7 +851,7 @@ abstract class Users implements ActiveRecordInterface
                     $this->postUpdate($con);
                 }
                 $this->postSave($con);
-                UsersTableMap::addInstanceToPool($this);
+                UserTableMap::addInstanceToPool($this);
             } else {
                 $affectedRows = 0;
             }
@@ -919,36 +959,39 @@ abstract class Users implements ActiveRecordInterface
         $modifiedColumns = array();
         $index = 0;
 
-        $this->modifiedColumns[UsersTableMap::COL_USER_ID] = true;
+        $this->modifiedColumns[UserTableMap::COL_USER_ID] = true;
         if (null !== $this->user_id) {
-            throw new PropelException('Cannot insert a value for auto-increment primary key (' . UsersTableMap::COL_USER_ID . ')');
+            throw new PropelException('Cannot insert a value for auto-increment primary key (' . UserTableMap::COL_USER_ID . ')');
         }
 
          // check the columns in natural order for more readable SQL queries
-        if ($this->isColumnModified(UsersTableMap::COL_USER_ID)) {
+        if ($this->isColumnModified(UserTableMap::COL_USER_ID)) {
             $modifiedColumns[':p' . $index++]  = 'user_id';
         }
-        if ($this->isColumnModified(UsersTableMap::COL_USER_FIRSTNAME)) {
+        if ($this->isColumnModified(UserTableMap::COL_USER_FIRSTNAME)) {
             $modifiedColumns[':p' . $index++]  = 'user_firstname';
         }
-        if ($this->isColumnModified(UsersTableMap::COL_USER_LASTNAME)) {
+        if ($this->isColumnModified(UserTableMap::COL_USER_LASTNAME)) {
             $modifiedColumns[':p' . $index++]  = 'user_lastname';
         }
-        if ($this->isColumnModified(UsersTableMap::COL_USER_EMAIL)) {
+        if ($this->isColumnModified(UserTableMap::COL_USER_EMAIL)) {
             $modifiedColumns[':p' . $index++]  = 'user_email';
         }
-        if ($this->isColumnModified(UsersTableMap::COL_USER_TYPE)) {
+        if ($this->isColumnModified(UserTableMap::COL_USER_TYPE)) {
             $modifiedColumns[':p' . $index++]  = 'user_type';
         }
-        if ($this->isColumnModified(UsersTableMap::COL_USER_USERNAME)) {
+        if ($this->isColumnModified(UserTableMap::COL_USER_USERNAME)) {
             $modifiedColumns[':p' . $index++]  = 'user_username';
         }
-        if ($this->isColumnModified(UsersTableMap::COL_USER_PASSWORD)) {
+        if ($this->isColumnModified(UserTableMap::COL_USER_PASSWORD)) {
             $modifiedColumns[':p' . $index++]  = 'user_password';
+        }
+        if ($this->isColumnModified(UserTableMap::COL_USER_COMPANY)) {
+            $modifiedColumns[':p' . $index++]  = 'user_company';
         }
 
         $sql = sprintf(
-            'INSERT INTO users (%s) VALUES (%s)',
+            'INSERT INTO user (%s) VALUES (%s)',
             implode(', ', $modifiedColumns),
             implode(', ', array_keys($modifiedColumns))
         );
@@ -977,6 +1020,9 @@ abstract class Users implements ActiveRecordInterface
                         break;
                     case 'user_password':
                         $stmt->bindValue($identifier, $this->user_password, PDO::PARAM_STR);
+                        break;
+                    case 'user_company':
+                        $stmt->bindValue($identifier, $this->user_company, PDO::PARAM_STR);
                         break;
                 }
             }
@@ -1024,7 +1070,7 @@ abstract class Users implements ActiveRecordInterface
      */
     public function getByName($name, $type = TableMap::TYPE_PHPNAME)
     {
-        $pos = UsersTableMap::translateFieldName($name, $type, TableMap::TYPE_NUM);
+        $pos = UserTableMap::translateFieldName($name, $type, TableMap::TYPE_NUM);
         $field = $this->getByPosition($pos);
 
         return $field;
@@ -1061,6 +1107,9 @@ abstract class Users implements ActiveRecordInterface
             case 6:
                 return $this->getUserPassword();
                 break;
+            case 7:
+                return $this->getUserCompany();
+                break;
             default:
                 return null;
                 break;
@@ -1085,11 +1134,11 @@ abstract class Users implements ActiveRecordInterface
     public function toArray($keyType = TableMap::TYPE_PHPNAME, $includeLazyLoadColumns = true, $alreadyDumpedObjects = array(), $includeForeignObjects = false)
     {
 
-        if (isset($alreadyDumpedObjects['Users'][$this->hashCode()])) {
+        if (isset($alreadyDumpedObjects['User'][$this->hashCode()])) {
             return '*RECURSION*';
         }
-        $alreadyDumpedObjects['Users'][$this->hashCode()] = true;
-        $keys = UsersTableMap::getFieldNames($keyType);
+        $alreadyDumpedObjects['User'][$this->hashCode()] = true;
+        $keys = UserTableMap::getFieldNames($keyType);
         $result = array(
             $keys[0] => $this->getUserId(),
             $keys[1] => $this->getUserFirstname(),
@@ -1098,6 +1147,7 @@ abstract class Users implements ActiveRecordInterface
             $keys[4] => $this->getUserType(),
             $keys[5] => $this->getUserUsername(),
             $keys[6] => $this->getUserPassword(),
+            $keys[7] => $this->getUserCompany(),
         );
         $virtualColumns = $this->virtualColumns;
         foreach ($virtualColumns as $key => $virtualColumn) {
@@ -1164,11 +1214,11 @@ abstract class Users implements ActiveRecordInterface
      *                one of the class type constants TableMap::TYPE_PHPNAME, TableMap::TYPE_CAMELNAME
      *                TableMap::TYPE_COLNAME, TableMap::TYPE_FIELDNAME, TableMap::TYPE_NUM.
      *                Defaults to TableMap::TYPE_PHPNAME.
-     * @return $this|\Propel\Users
+     * @return $this|\Propel\User
      */
     public function setByName($name, $value, $type = TableMap::TYPE_PHPNAME)
     {
-        $pos = UsersTableMap::translateFieldName($name, $type, TableMap::TYPE_NUM);
+        $pos = UserTableMap::translateFieldName($name, $type, TableMap::TYPE_NUM);
 
         return $this->setByPosition($pos, $value);
     }
@@ -1179,7 +1229,7 @@ abstract class Users implements ActiveRecordInterface
      *
      * @param  int $pos position in xml schema
      * @param  mixed $value field value
-     * @return $this|\Propel\Users
+     * @return $this|\Propel\User
      */
     public function setByPosition($pos, $value)
     {
@@ -1205,6 +1255,9 @@ abstract class Users implements ActiveRecordInterface
             case 6:
                 $this->setUserPassword($value);
                 break;
+            case 7:
+                $this->setUserCompany($value);
+                break;
         } // switch()
 
         return $this;
@@ -1225,11 +1278,11 @@ abstract class Users implements ActiveRecordInterface
      *
      * @param      array  $arr     An array to populate the object from.
      * @param      string $keyType The type of keys the array uses.
-     * @return     $this|\Propel\Users
+     * @return     $this|\Propel\User
      */
     public function fromArray($arr, $keyType = TableMap::TYPE_PHPNAME)
     {
-        $keys = UsersTableMap::getFieldNames($keyType);
+        $keys = UserTableMap::getFieldNames($keyType);
 
         if (array_key_exists($keys[0], $arr)) {
             $this->setUserId($arr[$keys[0]]);
@@ -1252,6 +1305,9 @@ abstract class Users implements ActiveRecordInterface
         if (array_key_exists($keys[6], $arr)) {
             $this->setUserPassword($arr[$keys[6]]);
         }
+        if (array_key_exists($keys[7], $arr)) {
+            $this->setUserCompany($arr[$keys[7]]);
+        }
 
         return $this;
     }
@@ -1273,7 +1329,7 @@ abstract class Users implements ActiveRecordInterface
      * @param string $data The source data to import from
      * @param string $keyType The type of keys the array uses.
      *
-     * @return $this|\Propel\Users The current object, for fluid interface
+     * @return $this|\Propel\User The current object, for fluid interface
      */
     public function importFrom($parser, $data, $keyType = TableMap::TYPE_PHPNAME)
     {
@@ -1293,28 +1349,31 @@ abstract class Users implements ActiveRecordInterface
      */
     public function buildCriteria()
     {
-        $criteria = new Criteria(UsersTableMap::DATABASE_NAME);
+        $criteria = new Criteria(UserTableMap::DATABASE_NAME);
 
-        if ($this->isColumnModified(UsersTableMap::COL_USER_ID)) {
-            $criteria->add(UsersTableMap::COL_USER_ID, $this->user_id);
+        if ($this->isColumnModified(UserTableMap::COL_USER_ID)) {
+            $criteria->add(UserTableMap::COL_USER_ID, $this->user_id);
         }
-        if ($this->isColumnModified(UsersTableMap::COL_USER_FIRSTNAME)) {
-            $criteria->add(UsersTableMap::COL_USER_FIRSTNAME, $this->user_firstname);
+        if ($this->isColumnModified(UserTableMap::COL_USER_FIRSTNAME)) {
+            $criteria->add(UserTableMap::COL_USER_FIRSTNAME, $this->user_firstname);
         }
-        if ($this->isColumnModified(UsersTableMap::COL_USER_LASTNAME)) {
-            $criteria->add(UsersTableMap::COL_USER_LASTNAME, $this->user_lastname);
+        if ($this->isColumnModified(UserTableMap::COL_USER_LASTNAME)) {
+            $criteria->add(UserTableMap::COL_USER_LASTNAME, $this->user_lastname);
         }
-        if ($this->isColumnModified(UsersTableMap::COL_USER_EMAIL)) {
-            $criteria->add(UsersTableMap::COL_USER_EMAIL, $this->user_email);
+        if ($this->isColumnModified(UserTableMap::COL_USER_EMAIL)) {
+            $criteria->add(UserTableMap::COL_USER_EMAIL, $this->user_email);
         }
-        if ($this->isColumnModified(UsersTableMap::COL_USER_TYPE)) {
-            $criteria->add(UsersTableMap::COL_USER_TYPE, $this->user_type);
+        if ($this->isColumnModified(UserTableMap::COL_USER_TYPE)) {
+            $criteria->add(UserTableMap::COL_USER_TYPE, $this->user_type);
         }
-        if ($this->isColumnModified(UsersTableMap::COL_USER_USERNAME)) {
-            $criteria->add(UsersTableMap::COL_USER_USERNAME, $this->user_username);
+        if ($this->isColumnModified(UserTableMap::COL_USER_USERNAME)) {
+            $criteria->add(UserTableMap::COL_USER_USERNAME, $this->user_username);
         }
-        if ($this->isColumnModified(UsersTableMap::COL_USER_PASSWORD)) {
-            $criteria->add(UsersTableMap::COL_USER_PASSWORD, $this->user_password);
+        if ($this->isColumnModified(UserTableMap::COL_USER_PASSWORD)) {
+            $criteria->add(UserTableMap::COL_USER_PASSWORD, $this->user_password);
+        }
+        if ($this->isColumnModified(UserTableMap::COL_USER_COMPANY)) {
+            $criteria->add(UserTableMap::COL_USER_COMPANY, $this->user_company);
         }
 
         return $criteria;
@@ -1332,8 +1391,8 @@ abstract class Users implements ActiveRecordInterface
      */
     public function buildPkeyCriteria()
     {
-        $criteria = ChildUsersQuery::create();
-        $criteria->add(UsersTableMap::COL_USER_ID, $this->user_id);
+        $criteria = ChildUserQuery::create();
+        $criteria->add(UserTableMap::COL_USER_ID, $this->user_id);
 
         return $criteria;
     }
@@ -1395,7 +1454,7 @@ abstract class Users implements ActiveRecordInterface
      * If desired, this method can also make copies of all associated (fkey referrers)
      * objects.
      *
-     * @param      object $copyObj An object of \Propel\Users (or compatible) type.
+     * @param      object $copyObj An object of \Propel\User (or compatible) type.
      * @param      boolean $deepCopy Whether to also copy all rows that refer (by fkey) to the current row.
      * @param      boolean $makeNew Whether to reset autoincrement PKs and make the object new.
      * @throws PropelException
@@ -1408,6 +1467,7 @@ abstract class Users implements ActiveRecordInterface
         $copyObj->setUserType($this->getUserType());
         $copyObj->setUserUsername($this->getUserUsername());
         $copyObj->setUserPassword($this->getUserPassword());
+        $copyObj->setUserCompany($this->getUserCompany());
 
         if ($deepCopy) {
             // important: temporarily setNew(false) because this affects the behavior of
@@ -1449,7 +1509,7 @@ abstract class Users implements ActiveRecordInterface
      * objects.
      *
      * @param  boolean $deepCopy Whether to also copy all rows that refer (by fkey) to the current row.
-     * @return \Propel\Users Clone of current object.
+     * @return \Propel\User Clone of current object.
      * @throws PropelException
      */
     public function copy($deepCopy = false)
@@ -1539,7 +1599,7 @@ abstract class Users implements ActiveRecordInterface
      * If the $criteria is not null, it is used to always fetch the results from the database.
      * Otherwise the results are fetched from the database the first time, then cached.
      * Next time the same method is called without $criteria, the cached collection is returned.
-     * If this ChildUsers is new, it will return
+     * If this ChildUser is new, it will return
      * an empty collection or the current collection; the criteria is ignored on a new object.
      *
      * @param      Criteria $criteria optional Criteria object to narrow the query
@@ -1566,7 +1626,7 @@ abstract class Users implements ActiveRecordInterface
                 }
             } else {
                 $collPoctDevices = ChildPoctDeviceQuery::create(null, $criteria)
-                    ->filterByUsers($this)
+                    ->filterByUser($this)
                     ->find($con);
 
                 if (null !== $criteria) {
@@ -1609,7 +1669,7 @@ abstract class Users implements ActiveRecordInterface
      *
      * @param      Collection $poctDevices A Propel collection.
      * @param      ConnectionInterface $con Optional connection object
-     * @return $this|ChildUsers The current object (for fluent API support)
+     * @return $this|ChildUser The current object (for fluent API support)
      */
     public function setPoctDevices(Collection $poctDevices, ConnectionInterface $con = null)
     {
@@ -1620,7 +1680,7 @@ abstract class Users implements ActiveRecordInterface
         $this->poctDevicesScheduledForDeletion = $poctDevicesToDelete;
 
         foreach ($poctDevicesToDelete as $poctDeviceRemoved) {
-            $poctDeviceRemoved->setUsers(null);
+            $poctDeviceRemoved->setUser(null);
         }
 
         $this->collPoctDevices = null;
@@ -1661,7 +1721,7 @@ abstract class Users implements ActiveRecordInterface
             }
 
             return $query
-                ->filterByUsers($this)
+                ->filterByUser($this)
                 ->count($con);
         }
 
@@ -1673,7 +1733,7 @@ abstract class Users implements ActiveRecordInterface
      * through the ChildPoctDevice foreign key attribute.
      *
      * @param  ChildPoctDevice $l ChildPoctDevice
-     * @return $this|\Propel\Users The current object (for fluent API support)
+     * @return $this|\Propel\User The current object (for fluent API support)
      */
     public function addPoctDevice(ChildPoctDevice $l)
     {
@@ -1699,12 +1759,12 @@ abstract class Users implements ActiveRecordInterface
     protected function doAddPoctDevice(ChildPoctDevice $poctDevice)
     {
         $this->collPoctDevices[]= $poctDevice;
-        $poctDevice->setUsers($this);
+        $poctDevice->setUser($this);
     }
 
     /**
      * @param  ChildPoctDevice $poctDevice The ChildPoctDevice object to remove.
-     * @return $this|ChildUsers The current object (for fluent API support)
+     * @return $this|ChildUser The current object (for fluent API support)
      */
     public function removePoctDevice(ChildPoctDevice $poctDevice)
     {
@@ -1716,7 +1776,7 @@ abstract class Users implements ActiveRecordInterface
                 $this->poctDevicesScheduledForDeletion->clear();
             }
             $this->poctDevicesScheduledForDeletion[]= clone $poctDevice;
-            $poctDevice->setUsers(null);
+            $poctDevice->setUser(null);
         }
 
         return $this;
@@ -1774,7 +1834,7 @@ abstract class Users implements ActiveRecordInterface
      * If the $criteria is not null, it is used to always fetch the results from the database.
      * Otherwise the results are fetched from the database the first time, then cached.
      * Next time the same method is called without $criteria, the cached collection is returned.
-     * If this ChildUsers is new, it will return
+     * If this ChildUser is new, it will return
      * an empty collection or the current collection; the criteria is ignored on a new object.
      *
      * @param      Criteria $criteria optional Criteria object to narrow the query
@@ -1801,7 +1861,7 @@ abstract class Users implements ActiveRecordInterface
                 }
             } else {
                 $collPoctDeviceAditionalInfos = ChildPoctDeviceAditionalInfoQuery::create(null, $criteria)
-                    ->filterByUsers($this)
+                    ->filterByUser($this)
                     ->find($con);
 
                 if (null !== $criteria) {
@@ -1844,7 +1904,7 @@ abstract class Users implements ActiveRecordInterface
      *
      * @param      Collection $poctDeviceAditionalInfos A Propel collection.
      * @param      ConnectionInterface $con Optional connection object
-     * @return $this|ChildUsers The current object (for fluent API support)
+     * @return $this|ChildUser The current object (for fluent API support)
      */
     public function setPoctDeviceAditionalInfos(Collection $poctDeviceAditionalInfos, ConnectionInterface $con = null)
     {
@@ -1855,7 +1915,7 @@ abstract class Users implements ActiveRecordInterface
         $this->poctDeviceAditionalInfosScheduledForDeletion = $poctDeviceAditionalInfosToDelete;
 
         foreach ($poctDeviceAditionalInfosToDelete as $poctDeviceAditionalInfoRemoved) {
-            $poctDeviceAditionalInfoRemoved->setUsers(null);
+            $poctDeviceAditionalInfoRemoved->setUser(null);
         }
 
         $this->collPoctDeviceAditionalInfos = null;
@@ -1896,7 +1956,7 @@ abstract class Users implements ActiveRecordInterface
             }
 
             return $query
-                ->filterByUsers($this)
+                ->filterByUser($this)
                 ->count($con);
         }
 
@@ -1908,7 +1968,7 @@ abstract class Users implements ActiveRecordInterface
      * through the ChildPoctDeviceAditionalInfo foreign key attribute.
      *
      * @param  ChildPoctDeviceAditionalInfo $l ChildPoctDeviceAditionalInfo
-     * @return $this|\Propel\Users The current object (for fluent API support)
+     * @return $this|\Propel\User The current object (for fluent API support)
      */
     public function addPoctDeviceAditionalInfo(ChildPoctDeviceAditionalInfo $l)
     {
@@ -1934,12 +1994,12 @@ abstract class Users implements ActiveRecordInterface
     protected function doAddPoctDeviceAditionalInfo(ChildPoctDeviceAditionalInfo $poctDeviceAditionalInfo)
     {
         $this->collPoctDeviceAditionalInfos[]= $poctDeviceAditionalInfo;
-        $poctDeviceAditionalInfo->setUsers($this);
+        $poctDeviceAditionalInfo->setUser($this);
     }
 
     /**
      * @param  ChildPoctDeviceAditionalInfo $poctDeviceAditionalInfo The ChildPoctDeviceAditionalInfo object to remove.
-     * @return $this|ChildUsers The current object (for fluent API support)
+     * @return $this|ChildUser The current object (for fluent API support)
      */
     public function removePoctDeviceAditionalInfo(ChildPoctDeviceAditionalInfo $poctDeviceAditionalInfo)
     {
@@ -1951,7 +2011,7 @@ abstract class Users implements ActiveRecordInterface
                 $this->poctDeviceAditionalInfosScheduledForDeletion->clear();
             }
             $this->poctDeviceAditionalInfosScheduledForDeletion[]= clone $poctDeviceAditionalInfo;
-            $poctDeviceAditionalInfo->setUsers(null);
+            $poctDeviceAditionalInfo->setUser(null);
         }
 
         return $this;
@@ -1961,13 +2021,13 @@ abstract class Users implements ActiveRecordInterface
     /**
      * If this collection has already been initialized with
      * an identical criteria, it returns the collection.
-     * Otherwise if this Users is new, it will return
-     * an empty collection; or if this Users has previously
+     * Otherwise if this User is new, it will return
+     * an empty collection; or if this User has previously
      * been saved, it will retrieve related PoctDeviceAditionalInfos from storage.
      *
      * This method is protected by default in order to keep the public
      * api reasonable.  You can provide public methods for those you
-     * actually need in Users.
+     * actually need in User.
      *
      * @param      Criteria $criteria optional Criteria object to narrow the query
      * @param      ConnectionInterface $con optional connection object
@@ -2035,7 +2095,7 @@ abstract class Users implements ActiveRecordInterface
      * If the $criteria is not null, it is used to always fetch the results from the database.
      * Otherwise the results are fetched from the database the first time, then cached.
      * Next time the same method is called without $criteria, the cached collection is returned.
-     * If this ChildUsers is new, it will return
+     * If this ChildUser is new, it will return
      * an empty collection or the current collection; the criteria is ignored on a new object.
      *
      * @param      Criteria $criteria optional Criteria object to narrow the query
@@ -2062,7 +2122,7 @@ abstract class Users implements ActiveRecordInterface
                 }
             } else {
                 $collPoctDeviceDetailsTimestampss = ChildPoctDeviceDetailsTimestampsQuery::create(null, $criteria)
-                    ->filterByUsers($this)
+                    ->filterByUser($this)
                     ->find($con);
 
                 if (null !== $criteria) {
@@ -2105,7 +2165,7 @@ abstract class Users implements ActiveRecordInterface
      *
      * @param      Collection $poctDeviceDetailsTimestampss A Propel collection.
      * @param      ConnectionInterface $con Optional connection object
-     * @return $this|ChildUsers The current object (for fluent API support)
+     * @return $this|ChildUser The current object (for fluent API support)
      */
     public function setPoctDeviceDetailsTimestampss(Collection $poctDeviceDetailsTimestampss, ConnectionInterface $con = null)
     {
@@ -2116,7 +2176,7 @@ abstract class Users implements ActiveRecordInterface
         $this->poctDeviceDetailsTimestampssScheduledForDeletion = $poctDeviceDetailsTimestampssToDelete;
 
         foreach ($poctDeviceDetailsTimestampssToDelete as $poctDeviceDetailsTimestampsRemoved) {
-            $poctDeviceDetailsTimestampsRemoved->setUsers(null);
+            $poctDeviceDetailsTimestampsRemoved->setUser(null);
         }
 
         $this->collPoctDeviceDetailsTimestampss = null;
@@ -2157,7 +2217,7 @@ abstract class Users implements ActiveRecordInterface
             }
 
             return $query
-                ->filterByUsers($this)
+                ->filterByUser($this)
                 ->count($con);
         }
 
@@ -2169,7 +2229,7 @@ abstract class Users implements ActiveRecordInterface
      * through the ChildPoctDeviceDetailsTimestamps foreign key attribute.
      *
      * @param  ChildPoctDeviceDetailsTimestamps $l ChildPoctDeviceDetailsTimestamps
-     * @return $this|\Propel\Users The current object (for fluent API support)
+     * @return $this|\Propel\User The current object (for fluent API support)
      */
     public function addPoctDeviceDetailsTimestamps(ChildPoctDeviceDetailsTimestamps $l)
     {
@@ -2195,12 +2255,12 @@ abstract class Users implements ActiveRecordInterface
     protected function doAddPoctDeviceDetailsTimestamps(ChildPoctDeviceDetailsTimestamps $poctDeviceDetailsTimestamps)
     {
         $this->collPoctDeviceDetailsTimestampss[]= $poctDeviceDetailsTimestamps;
-        $poctDeviceDetailsTimestamps->setUsers($this);
+        $poctDeviceDetailsTimestamps->setUser($this);
     }
 
     /**
      * @param  ChildPoctDeviceDetailsTimestamps $poctDeviceDetailsTimestamps The ChildPoctDeviceDetailsTimestamps object to remove.
-     * @return $this|ChildUsers The current object (for fluent API support)
+     * @return $this|ChildUser The current object (for fluent API support)
      */
     public function removePoctDeviceDetailsTimestamps(ChildPoctDeviceDetailsTimestamps $poctDeviceDetailsTimestamps)
     {
@@ -2212,7 +2272,7 @@ abstract class Users implements ActiveRecordInterface
                 $this->poctDeviceDetailsTimestampssScheduledForDeletion->clear();
             }
             $this->poctDeviceDetailsTimestampssScheduledForDeletion[]= clone $poctDeviceDetailsTimestamps;
-            $poctDeviceDetailsTimestamps->setUsers(null);
+            $poctDeviceDetailsTimestamps->setUser(null);
         }
 
         return $this;
@@ -2222,13 +2282,13 @@ abstract class Users implements ActiveRecordInterface
     /**
      * If this collection has already been initialized with
      * an identical criteria, it returns the collection.
-     * Otherwise if this Users is new, it will return
-     * an empty collection; or if this Users has previously
+     * Otherwise if this User is new, it will return
+     * an empty collection; or if this User has previously
      * been saved, it will retrieve related PoctDeviceDetailsTimestampss from storage.
      *
      * This method is protected by default in order to keep the public
      * api reasonable.  You can provide public methods for those you
-     * actually need in Users.
+     * actually need in User.
      *
      * @param      Criteria $criteria optional Criteria object to narrow the query
      * @param      ConnectionInterface $con optional connection object
@@ -2258,6 +2318,7 @@ abstract class Users implements ActiveRecordInterface
         $this->user_type = null;
         $this->user_username = null;
         $this->user_password = null;
+        $this->user_company = null;
         $this->alreadyInSave = false;
         $this->clearAllReferences();
         $this->resetModified();
@@ -2305,7 +2366,7 @@ abstract class Users implements ActiveRecordInterface
      */
     public function __toString()
     {
-        return (string) $this->exportTo(UsersTableMap::DEFAULT_STRING_FORMAT);
+        return (string) $this->exportTo(UserTableMap::DEFAULT_STRING_FORMAT);
     }
 
     /**

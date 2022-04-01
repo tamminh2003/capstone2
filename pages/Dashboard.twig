@@ -2,10 +2,24 @@
 
 {% block content %}
 
-	<h1 style="text-align:center">Dashboard</h1>
+	{% set userType = session.user_type %}
+
+	{% switch userType %}
+		{% case "DOCTOR" %}
+			<h1 style="text-align:center">Doctor Dashboard</h1>
+		{% case "RESEARCHER" %}
+			<h1 style="text-align:center">Researcher Dashboard</h1>
+		{% case "MANUFACTURER" %}
+			<h1 style="text-align:center">Manufacturer Dashboard</h1>
+		{% default %}
+			<h1 style="text-align:center">Not logged in</h1>
+	{% endswitch %}
+
 	<div class="container-sm">
 		<div class="row">
+
 			<div class="col"></div>
+
 			<div class="col" style="text-align:center">
 				<h3>Search for devices</h3>
 				<h3>Advanced Search</h3>
@@ -16,13 +30,17 @@
 				{% endif %}
 
 				{% if userType == 'MANUFACTURER' %}
-					<h3>Add device</h3>
-					<h3>Update Device</h3>
-					<h3>Remove device</h3>
+					<a href="/pages/Manufacturer/DeviceList.php">
+						<h3>List Device</h3>
+					</a>
+					<a href="/pages/Manufacturer/DeviceAdd.php">
+						<h3>Add Device</h3>
+					</a>
 				{% endif %}
 			</div>
+
 			<div class="col"></div>
+
 		</div>
 	</div>
-
 {% endblock %}

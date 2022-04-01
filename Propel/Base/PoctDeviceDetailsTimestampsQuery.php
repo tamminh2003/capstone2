@@ -52,17 +52,17 @@ use Propel\Runtime\Exception\PropelException;
  * @method     ChildPoctDeviceDetailsTimestampsQuery rightJoinWithPoctDevice() Adds a RIGHT JOIN clause and with to the query using the PoctDevice relation
  * @method     ChildPoctDeviceDetailsTimestampsQuery innerJoinWithPoctDevice() Adds a INNER JOIN clause and with to the query using the PoctDevice relation
  *
- * @method     ChildPoctDeviceDetailsTimestampsQuery leftJoinUsers($relationAlias = null) Adds a LEFT JOIN clause to the query using the Users relation
- * @method     ChildPoctDeviceDetailsTimestampsQuery rightJoinUsers($relationAlias = null) Adds a RIGHT JOIN clause to the query using the Users relation
- * @method     ChildPoctDeviceDetailsTimestampsQuery innerJoinUsers($relationAlias = null) Adds a INNER JOIN clause to the query using the Users relation
+ * @method     ChildPoctDeviceDetailsTimestampsQuery leftJoinUser($relationAlias = null) Adds a LEFT JOIN clause to the query using the User relation
+ * @method     ChildPoctDeviceDetailsTimestampsQuery rightJoinUser($relationAlias = null) Adds a RIGHT JOIN clause to the query using the User relation
+ * @method     ChildPoctDeviceDetailsTimestampsQuery innerJoinUser($relationAlias = null) Adds a INNER JOIN clause to the query using the User relation
  *
- * @method     ChildPoctDeviceDetailsTimestampsQuery joinWithUsers($joinType = Criteria::INNER_JOIN) Adds a join clause and with to the query using the Users relation
+ * @method     ChildPoctDeviceDetailsTimestampsQuery joinWithUser($joinType = Criteria::INNER_JOIN) Adds a join clause and with to the query using the User relation
  *
- * @method     ChildPoctDeviceDetailsTimestampsQuery leftJoinWithUsers() Adds a LEFT JOIN clause and with to the query using the Users relation
- * @method     ChildPoctDeviceDetailsTimestampsQuery rightJoinWithUsers() Adds a RIGHT JOIN clause and with to the query using the Users relation
- * @method     ChildPoctDeviceDetailsTimestampsQuery innerJoinWithUsers() Adds a INNER JOIN clause and with to the query using the Users relation
+ * @method     ChildPoctDeviceDetailsTimestampsQuery leftJoinWithUser() Adds a LEFT JOIN clause and with to the query using the User relation
+ * @method     ChildPoctDeviceDetailsTimestampsQuery rightJoinWithUser() Adds a RIGHT JOIN clause and with to the query using the User relation
+ * @method     ChildPoctDeviceDetailsTimestampsQuery innerJoinWithUser() Adds a INNER JOIN clause and with to the query using the User relation
  *
- * @method     \Propel\PoctDeviceQuery|\Propel\UsersQuery endUse() Finalizes a secondary criteria and merges it with its primary Criteria
+ * @method     \Propel\PoctDeviceQuery|\Propel\UserQuery endUse() Finalizes a secondary criteria and merges it with its primary Criteria
  *
  * @method     ChildPoctDeviceDetailsTimestamps|null findOne(ConnectionInterface $con = null) Return the first ChildPoctDeviceDetailsTimestamps matching the query
  * @method     ChildPoctDeviceDetailsTimestamps findOneOrCreate(ConnectionInterface $con = null) Return the first ChildPoctDeviceDetailsTimestamps matching the query, or a new ChildPoctDeviceDetailsTimestamps object populated from the query conditions when no match is found
@@ -381,7 +381,7 @@ abstract class PoctDeviceDetailsTimestampsQuery extends ModelCriteria
      * $query->filterByUserUserId(array('min' => 12)); // WHERE user_user_id > 12
      * </code>
      *
-     * @see       filterByUsers()
+     * @see       filterByUser()
      *
      * @param     mixed $userUserId The value to use as filter.
      *              Use scalar values for equality.
@@ -659,44 +659,44 @@ abstract class PoctDeviceDetailsTimestampsQuery extends ModelCriteria
         return $this->useExistsQuery('PoctDevice', $modelAlias, $queryClass, 'NOT EXISTS');
     }
     /**
-     * Filter the query by a related \Propel\Users object
+     * Filter the query by a related \Propel\User object
      *
-     * @param \Propel\Users|ObjectCollection $users The related object(s) to use as filter
+     * @param \Propel\User|ObjectCollection $user The related object(s) to use as filter
      * @param string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
      *
      * @throws \Propel\Runtime\Exception\PropelException
      *
      * @return ChildPoctDeviceDetailsTimestampsQuery The current query, for fluid interface
      */
-    public function filterByUsers($users, $comparison = null)
+    public function filterByUser($user, $comparison = null)
     {
-        if ($users instanceof \Propel\Users) {
+        if ($user instanceof \Propel\User) {
             return $this
-                ->addUsingAlias(PoctDeviceDetailsTimestampsTableMap::COL_USER_USER_ID, $users->getUserId(), $comparison);
-        } elseif ($users instanceof ObjectCollection) {
+                ->addUsingAlias(PoctDeviceDetailsTimestampsTableMap::COL_USER_USER_ID, $user->getUserId(), $comparison);
+        } elseif ($user instanceof ObjectCollection) {
             if (null === $comparison) {
                 $comparison = Criteria::IN;
             }
 
             return $this
-                ->addUsingAlias(PoctDeviceDetailsTimestampsTableMap::COL_USER_USER_ID, $users->toKeyValue('PrimaryKey', 'UserId'), $comparison);
+                ->addUsingAlias(PoctDeviceDetailsTimestampsTableMap::COL_USER_USER_ID, $user->toKeyValue('PrimaryKey', 'UserId'), $comparison);
         } else {
-            throw new PropelException('filterByUsers() only accepts arguments of type \Propel\Users or Collection');
+            throw new PropelException('filterByUser() only accepts arguments of type \Propel\User or Collection');
         }
     }
 
     /**
-     * Adds a JOIN clause to the query using the Users relation
+     * Adds a JOIN clause to the query using the User relation
      *
      * @param     string $relationAlias optional alias for the relation
      * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
      *
      * @return $this|ChildPoctDeviceDetailsTimestampsQuery The current query, for fluid interface
      */
-    public function joinUsers($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    public function joinUser($relationAlias = null, $joinType = Criteria::INNER_JOIN)
     {
         $tableMap = $this->getTableMap();
-        $relationMap = $tableMap->getRelation('Users');
+        $relationMap = $tableMap->getRelation('User');
 
         // create a ModelJoin object for this join
         $join = new ModelJoin();
@@ -711,14 +711,14 @@ abstract class PoctDeviceDetailsTimestampsQuery extends ModelCriteria
             $this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
             $this->addJoinObject($join, $relationAlias);
         } else {
-            $this->addJoinObject($join, 'Users');
+            $this->addJoinObject($join, 'User');
         }
 
         return $this;
     }
 
     /**
-     * Use the Users relation Users object
+     * Use the User relation User object
      *
      * @see useQuery()
      *
@@ -726,19 +726,19 @@ abstract class PoctDeviceDetailsTimestampsQuery extends ModelCriteria
      *                                   to be used as main alias in the secondary query
      * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
      *
-     * @return \Propel\UsersQuery A secondary query class using the current class as primary query
+     * @return \Propel\UserQuery A secondary query class using the current class as primary query
      */
-    public function useUsersQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    public function useUserQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
     {
         return $this
-            ->joinUsers($relationAlias, $joinType)
-            ->useQuery($relationAlias ? $relationAlias : 'Users', '\Propel\UsersQuery');
+            ->joinUser($relationAlias, $joinType)
+            ->useQuery($relationAlias ? $relationAlias : 'User', '\Propel\UserQuery');
     }
 
     /**
-     * Use the Users relation Users object
+     * Use the User relation User object
      *
-     * @param callable(\Propel\UsersQuery):\Propel\UsersQuery $callable A function working on the related query
+     * @param callable(\Propel\UserQuery):\Propel\UserQuery $callable A function working on the related query
      *
      * @param string|null $relationAlias optional alias for the relation
      *
@@ -746,12 +746,12 @@ abstract class PoctDeviceDetailsTimestampsQuery extends ModelCriteria
      *
      * @return $this
      */
-    public function withUsersQuery(
+    public function withUserQuery(
         callable $callable,
         string $relationAlias = null,
         ?string $joinType = Criteria::INNER_JOIN
     ) {
-        $relatedQuery = $this->useUsersQuery(
+        $relatedQuery = $this->useUserQuery(
             $relationAlias,
             $joinType
         );
@@ -761,7 +761,7 @@ abstract class PoctDeviceDetailsTimestampsQuery extends ModelCriteria
         return $this;
     }
     /**
-     * Use the relation to Users table for an EXISTS query.
+     * Use the relation to User table for an EXISTS query.
      *
      * @see \Propel\Runtime\ActiveQuery\ModelCriteria::useExistsQuery()
      *
@@ -769,26 +769,26 @@ abstract class PoctDeviceDetailsTimestampsQuery extends ModelCriteria
      * @param string|null $modelAlias sets an alias for the nested query
      * @param string $typeOfExists Either ExistsCriterion::TYPE_EXISTS or ExistsCriterion::TYPE_NOT_EXISTS
      *
-     * @return \Propel\UsersQuery The inner query object of the EXISTS statement
+     * @return \Propel\UserQuery The inner query object of the EXISTS statement
      */
-    public function useUsersExistsQuery($modelAlias = null, $queryClass = null, $typeOfExists = 'EXISTS')
+    public function useUserExistsQuery($modelAlias = null, $queryClass = null, $typeOfExists = 'EXISTS')
     {
-        return $this->useExistsQuery('Users', $modelAlias, $queryClass, $typeOfExists);
+        return $this->useExistsQuery('User', $modelAlias, $queryClass, $typeOfExists);
     }
 
     /**
-     * Use the relation to Users table for a NOT EXISTS query.
+     * Use the relation to User table for a NOT EXISTS query.
      *
-     * @see useUsersExistsQuery()
+     * @see useUserExistsQuery()
      *
      * @param string|null $modelAlias sets an alias for the nested query
      * @param string|null $queryClass Allows to use a custom query class for the exists query, like ExtendedBookQuery::class
      *
-     * @return \Propel\UsersQuery The inner query object of the NOT EXISTS statement
+     * @return \Propel\UserQuery The inner query object of the NOT EXISTS statement
      */
-    public function useUsersNotExistsQuery($modelAlias = null, $queryClass = null)
+    public function useUserNotExistsQuery($modelAlias = null, $queryClass = null)
     {
-        return $this->useExistsQuery('Users', $modelAlias, $queryClass, 'NOT EXISTS');
+        return $this->useExistsQuery('User', $modelAlias, $queryClass, 'NOT EXISTS');
     }
     /**
      * Exclude object from result

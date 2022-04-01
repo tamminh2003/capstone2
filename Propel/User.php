@@ -2,10 +2,10 @@
 
 namespace Propel;
 
-use Propel\Base\UsersQuery as BaseUsersQuery;
+use Propel\Base\User as BaseUser;
 
 /**
- * Skeleton subclass for performing query and update operations on the 'users' table.
+ * Skeleton subclass for representing a row from the 'user' table.
  *
  *
  *
@@ -13,7 +13,7 @@ use Propel\Base\UsersQuery as BaseUsersQuery;
  * application requirements.  This class will only be generated as
  * long as it does not already exist in the output directory.
  */
-class UsersQuery extends BaseUsersQuery
+class User extends BaseUser
 {
 
 }

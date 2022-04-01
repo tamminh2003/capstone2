@@ -8,8 +8,8 @@ use \PDO;
 use Propel\PoctDevice as ChildPoctDevice;
 use Propel\PoctDeviceDetailsTimestampsQuery as ChildPoctDeviceDetailsTimestampsQuery;
 use Propel\PoctDeviceQuery as ChildPoctDeviceQuery;
-use Propel\Users as ChildUsers;
-use Propel\UsersQuery as ChildUsersQuery;
+use Propel\User as ChildUser;
+use Propel\UserQuery as ChildUserQuery;
 use Propel\Map\PoctDeviceDetailsTimestampsTableMap;
 use Propel\Runtime\Propel;
 use Propel\Runtime\ActiveQuery\Criteria;
@@ -114,9 +114,9 @@ abstract class PoctDeviceDetailsTimestamps implements ActiveRecordInterface
     protected $aPoctDevice;
 
     /**
-     * @var        ChildUsers
+     * @var        ChildUser
      */
-    protected $aUsers;
+    protected $aUser;
 
     /**
      * Flag to prevent endless save loop, if this object is referenced
@@ -507,8 +507,8 @@ abstract class PoctDeviceDetailsTimestamps implements ActiveRecordInterface
             $this->modifiedColumns[PoctDeviceDetailsTimestampsTableMap::COL_USER_USER_ID] = true;
         }
 
-        if ($this->aUsers !== null && $this->aUsers->getUserId() !== $v) {
-            $this->aUsers = null;
+        if ($this->aUser !== null && $this->aUser->getUserId() !== $v) {
+            $this->aUser = null;
         }
 
         return $this;
@@ -666,8 +666,8 @@ abstract class PoctDeviceDetailsTimestamps implements ActiveRecordInterface
         if ($this->aPoctDevice !== null && $this->poct_device_poct_device_id !== $this->aPoctDevice->getPoctDeviceId()) {
             $this->aPoctDevice = null;
         }
-        if ($this->aUsers !== null && $this->user_user_id !== $this->aUsers->getUserId()) {
-            $this->aUsers = null;
+        if ($this->aUser !== null && $this->user_user_id !== $this->aUser->getUserId()) {
+            $this->aUser = null;
         }
     } // ensureConsistency
 
@@ -709,7 +709,7 @@ abstract class PoctDeviceDetailsTimestamps implements ActiveRecordInterface
         if ($deep) {  // also de-associate any related objects?
 
             $this->aPoctDevice = null;
-            $this->aUsers = null;
+            $this->aUser = null;
         } // if (deep)
     }
 
@@ -825,11 +825,11 @@ abstract class PoctDeviceDetailsTimestamps implements ActiveRecordInterface
                 $this->setPoctDevice($this->aPoctDevice);
             }
 
-            if ($this->aUsers !== null) {
-                if ($this->aUsers->isModified() || $this->aUsers->isNew()) {
-                    $affectedRows += $this->aUsers->save($con);
+            if ($this->aUser !== null) {
+                if ($this->aUser->isModified() || $this->aUser->isNew()) {
+                    $affectedRows += $this->aUser->save($con);
                 }
-                $this->setUsers($this->aUsers);
+                $this->setUser($this->aUser);
             }
 
             if ($this->isNew() || $this->isModified()) {
@@ -1062,20 +1062,20 @@ abstract class PoctDeviceDetailsTimestamps implements ActiveRecordInterface
 
                 $result[$key] = $this->aPoctDevice->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
             }
-            if (null !== $this->aUsers) {
+            if (null !== $this->aUser) {
 
                 switch ($keyType) {
                     case TableMap::TYPE_CAMELNAME:
-                        $key = 'users';
+                        $key = 'user';
                         break;
                     case TableMap::TYPE_FIELDNAME:
-                        $key = 'users';
+                        $key = 'user';
                         break;
                     default:
-                        $key = 'Users';
+                        $key = 'User';
                 }
 
-                $result[$key] = $this->aUsers->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
+                $result[$key] = $this->aUser->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
             }
         }
 
@@ -1405,13 +1405,13 @@ abstract class PoctDeviceDetailsTimestamps implements ActiveRecordInterface
     }
 
     /**
-     * Declares an association between this object and a ChildUsers object.
+     * Declares an association between this object and a ChildUser object.
      *
-     * @param  ChildUsers $v
+     * @param  ChildUser $v
      * @return $this|\Propel\PoctDeviceDetailsTimestamps The current object (for fluent API support)
      * @throws PropelException
      */
-    public function setUsers(ChildUsers $v = null)
+    public function setUser(ChildUser $v = null)
     {
         if ($v === null) {
             $this->setUserUserId(NULL);
@@ -1419,10 +1419,10 @@ abstract class PoctDeviceDetailsTimestamps implements ActiveRecordInterface
             $this->setUserUserId($v->getUserId());
         }
 
-        $this->aUsers = $v;
+        $this->aUser = $v;
 
         // Add binding for other direction of this n:n relationship.
-        // If this object has already been added to the ChildUsers object, it will not be re-added.
+        // If this object has already been added to the ChildUser object, it will not be re-added.
         if ($v !== null) {
             $v->addPoctDeviceDetailsTimestamps($this);
         }
@@ -1433,26 +1433,26 @@ abstract class PoctDeviceDetailsTimestamps implements ActiveRecordInterface
 
 
     /**
-     * Get the associated ChildUsers object
+     * Get the associated ChildUser object
      *
      * @param  ConnectionInterface $con Optional Connection object.
-     * @return ChildUsers The associated ChildUsers object.
+     * @return ChildUser The associated ChildUser object.
      * @throws PropelException
      */
-    public function getUsers(ConnectionInterface $con = null)
+    public function getUser(ConnectionInterface $con = null)
     {
-        if ($this->aUsers === null && ($this->user_user_id != 0)) {
-            $this->aUsers = ChildUsersQuery::create()->findPk($this->user_user_id, $con);
+        if ($this->aUser === null && ($this->user_user_id != 0)) {
+            $this->aUser = ChildUserQuery::create()->findPk($this->user_user_id, $con);
             /* The following can be used additionally to
                 guarantee the related object contains a reference
                 to this object.  This level of coupling may, however, be
                 undesirable since it could result in an only partially populated collection
                 in the referenced object.
-                $this->aUsers->addPoctDeviceDetailsTimestampss($this);
+                $this->aUser->addPoctDeviceDetailsTimestampss($this);
              */
         }
 
-        return $this->aUsers;
+        return $this->aUser;
     }
 
     /**
@@ -1465,8 +1465,8 @@ abstract class PoctDeviceDetailsTimestamps implements ActiveRecordInterface
         if (null !== $this->aPoctDevice) {
             $this->aPoctDevice->removePoctDeviceDetailsTimestamps($this);
         }
-        if (null !== $this->aUsers) {
-            $this->aUsers->removePoctDeviceDetailsTimestamps($this);
+        if (null !== $this->aUser) {
+            $this->aUser->removePoctDeviceDetailsTimestamps($this);
         }
         $this->poct_device_details_timestamps_id = null;
         $this->poct_device_poct_device_id = null;
@@ -1496,7 +1496,7 @@ abstract class PoctDeviceDetailsTimestamps implements ActiveRecordInterface
         } // if ($deep)
 
         $this->aPoctDevice = null;
-        $this->aUsers = null;
+        $this->aUser = null;
     }
 
     /**

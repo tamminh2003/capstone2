@@ -17,7 +17,8 @@
     <column name="device_model" phpName="DeviceModel" type="VARCHAR" size="255"/>
     <column name="device_image_url" phpName="DeviceImageUrl" type="VARCHAR" size="255"/>
     <column name="device_type" phpName="DeviceType" type="VARCHAR" size="255"/>
-    <foreign-key foreignTable="users" name="fk_poct_device_user1">
+    <column name="device_descripition" phpName="DeviceDescripition" type="VARCHAR" size="255"/>
+    <foreign-key foreignTable="user" name="fk_poct_device_user1" onDelete="NO ACTION" onUpdate="NO ACTION">
       <reference local="user_user_id" foreign="user_id"/>
     </foreign-key>
     <index name="fk_poct_device_user1_idx">
@@ -34,10 +35,10 @@
     <column name="poct_device_aditional_info_label" phpName="PoctDeviceAditionalInfoLabel" type="VARCHAR" size="100"/>
     <column name="poct_device_aditional_info_type" phpName="PoctDeviceAditionalInfoType" type="VARCHAR" size="100"/>
     <column name="poct_device_aditional_info_details" phpName="PoctDeviceAditionalInfoDetails" type="VARCHAR" size="100"/>
-    <foreign-key foreignTable="poct_device" name="fk_poct_device_aditional_info_poct_device1">
+    <foreign-key foreignTable="poct_device" name="fk_poct_device_aditional_info_poct_device1" onDelete="NO ACTION" onUpdate="NO ACTION">
       <reference local="idpoct_device" foreign="poct_device_id"/>
     </foreign-key>
-    <foreign-key foreignTable="users" name="fk_poct_device_aditional_info_user1">
+    <foreign-key foreignTable="user" name="fk_poct_device_aditional_info_user1" onDelete="NO ACTION" onUpdate="NO ACTION">
       <reference local="user_user_id" foreign="user_id"/>
     </foreign-key>
     <index name="fk_poct_device_aditional_info_poct_device1_idx">
@@ -57,10 +58,10 @@
     <column name="create_time" phpName="CreateTime" type="TIMESTAMP" defaultExpr="CURRENT_TIMESTAMP"/>
     <column name="update_time" phpName="UpdateTime" type="TIMESTAMP"/>
     <column name="comment" phpName="Comment" type="VARCHAR" size="255"/>
-    <foreign-key foreignTable="poct_device" name="fk_poct_device_timestamps_poct_device1">
+    <foreign-key foreignTable="poct_device" name="fk_poct_device_timestamps_poct_device1" onDelete="NO ACTION" onUpdate="NO ACTION">
       <reference local="poct_device_poct_device_id" foreign="poct_device_id"/>
     </foreign-key>
-    <foreign-key foreignTable="users" name="fk_poct_device_timestamps_user1">
+    <foreign-key foreignTable="user" name="fk_poct_device_timestamps_user1" onDelete="NO ACTION" onUpdate="NO ACTION">
       <reference local="user_user_id" foreign="user_id"/>
     </foreign-key>
     <index name="fk_poct_device_timestamps_poct_device1_idx">
@@ -77,10 +78,10 @@
     <column name="poct_device_has_disease_id" phpName="PoctDeviceHasDiseaseId" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
     <column name="poct_device_id" phpName="PoctDeviceId" type="INTEGER" required="true"/>
     <column name="disease_id" phpName="DiseaseId" type="INTEGER" required="true"/>
-    <foreign-key foreignTable="disease" name="fk_poct_device_has_disease_disease1">
+    <foreign-key foreignTable="disease" name="fk_poct_device_has_disease_disease1" onDelete="NO ACTION" onUpdate="NO ACTION">
       <reference local="disease_id" foreign="disease_id"/>
     </foreign-key>
-    <foreign-key foreignTable="poct_device" name="fk_poct_device_has_disease_poct_device1">
+    <foreign-key foreignTable="poct_device" name="fk_poct_device_has_disease_poct_device1" onDelete="NO ACTION" onUpdate="NO ACTION">
       <reference local="poct_device_id" foreign="poct_device_id"/>
     </foreign-key>
     <index name="fk_poct_device_has_disease_disease1_idx">
@@ -93,7 +94,7 @@
       <parameter name="Engine" value="InnoDB"/>
     </vendor>
   </table>
-  <table name="users" idMethod="native" phpName="Users">
+  <table name="user" idMethod="native" phpName="User">
     <column name="user_id" phpName="UserId" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
     <column name="user_firstname" phpName="UserFirstname" type="VARCHAR" size="100"/>
     <column name="user_lastname" phpName="UserLastname" type="VARCHAR" size="100"/>
@@ -101,6 +102,7 @@
     <column name="user_type" phpName="UserType" type="VARCHAR" size="100"/>
     <column name="user_username" phpName="UserUsername" type="VARCHAR" size="100"/>
     <column name="user_password" phpName="UserPassword" type="VARCHAR" size="100"/>
+    <column name="user_company" phpName="UserCompany" type="VARCHAR" size="255"/>
     <vendor type="mysql">
       <parameter name="Engine" value="InnoDB"/>
     </vendor>

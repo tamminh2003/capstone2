@@ -12,6 +12,6 @@ $twig = new Twig\Environment($twigLoader);
 
 $twig->addExtension(new PhpFunctionExtension(['str_contains']));
 
-$template = $twig->load("UserRegister.twig");
+$template = $twig->load("Register.twig");
 
 echo $template->render(["uri" => $_SERVER["REQUEST_URI"]]);
