@@ -13,11 +13,11 @@ require $_SERVER["DOCUMENT_ROOT"] . "/controller/search.php";
 
 
 
-if (isset($_GET['free_text_search'])) {
+if (isset($_GET['advanced_text_search'])) {
 
-   $free_text_search = $_GET['free_text_search'];
+   $advanced_text_search = $_GET['advanced_text_search'];
 
-   $devices = freeTextSearch($free_text_search);
+   $devices = advancedSearch($advanced_text_search);
 
 
    $pathToPages = $_SERVER["DOCUMENT_ROOT"] . "/pages/";
@@ -29,7 +29,7 @@ if (isset($_GET['free_text_search'])) {
    $twig->addExtension(new PhpFunctionExtension(["str_contains"]));
    $twig->addExtension(new SwitchTwigExtension());
 
-   $template = $twig->load("Search.twig");
+   $template = $twig->load("AdvancedSearch.twig");
 
    echo $template->render(["uri" => $_SERVER["REQUEST_URI"], "session" => $_SESSION, "devices" => $devices]);
 } else {
@@ -43,7 +43,7 @@ if (isset($_GET['free_text_search'])) {
    $twig->addExtension(new PhpFunctionExtension(["str_contains"]));
    $twig->addExtension(new SwitchTwigExtension());
 
-   $template = $twig->load("Search.twig");
+   $template = $twig->load("AdvancedSearch.twig");
 
    echo $template->render(["uri" => $_SERVER["REQUEST_URI"], "session" => $_SESSION]);
 }

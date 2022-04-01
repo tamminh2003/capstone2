@@ -8,7 +8,10 @@ require $_SERVER["DOCUMENT_ROOT"] . "/generated-conf/config.php";
 function deviceList()
 {
   $deviceQuery = new PoctDeviceQuery();
-  $result = $deviceQuery->findByUserUserId($_SESSION['user_id']);
+  //$result = $deviceQuery->findByUserUserId($_SESSION['user_id']);
+
+      $result = $deviceQuery->findByUserUserId('4');
+
 
   $devices = [];
 
