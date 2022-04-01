@@ -20,6 +20,11 @@ function Register_userRegister() {
         return userCheck.test(username);
     }
 
+    function userCompanyCharCheck(company) {
+        const userCompanyCheck = /^[a-zA-Z0-9_]+$/;
+        return userCompanyCheck.test(company);
+    }
+
     if (!document.querySelector("#FirstName").value) {
         alert("First name is empty")
         return;
@@ -41,12 +46,12 @@ function Register_userRegister() {
         return;
     }
 
-    if(!document.querySelector("#Company").value){
+    if (!document.querySelector("#Company").value) {
         alert("Company field is empty")
         return;
     }
     let userRegisterCheck_Company = document.querySelector("#Company").value;
-    if(!userCompanyCharCheck(userRegisterCheck_Company)){
+    if (!userCompanyCharCheck(userRegisterCheck_Company)) {
         alert("Company name has forbidden characters")
         return;
     }
