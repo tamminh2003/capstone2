@@ -259,3 +259,15 @@ function DeviceUpdate_handleSubmit(event) {
             }
         });
 }
+function Document_View(element){
+    location.assign(`/pages/Document.php?docId=${element.dataset.id}`);
+}
+function Home_Redirect(){
+    location.assign("/pages/Dashboard.php");
+}
+function DocList_Redirect(){
+    location.assign("/pages/Manufacturer/DocumentList.php");
+}
+function DocumentUpload_handleSubmit(event){
+/**work on with Minh**/
+}
