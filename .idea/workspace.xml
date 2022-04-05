@@ -4,7 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3165c479-28ee-4cb8-8ef1-1b01cdf35308" name="Changes" comment="" />
+    <list default="true" id="3165c479-28ee-4cb8-8ef1-1b01cdf35308" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/branch_info.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/controller/documentList.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/Document.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/Document.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/Manufacturer/DocumentAdd.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/Manufacturer/DocumentAdd.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/Manufacturer/DocumentList.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/Manufacturer/DocumentList.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/deviceList.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/deviceList.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/utility.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/utility.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/script/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/script/script.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -15,7 +28,63 @@
     <execution />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="GeigerMark2" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="PhpServers">
+    <servers>
+      <server host="localhost" id="006c1bda-ba78-4c18-97c6-77e0dc2ab858" name="localhost" port="8000" />
+    </servers>
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration">
+    <include_path>
+      <path value="$PROJECT_DIR$/vendor/twig/twig" />
+      <path value="$PROJECT_DIR$/vendor/psr/log" />
+      <path value="$PROJECT_DIR$/vendor/sabre/http" />
+      <path value="$PROJECT_DIR$/vendor/sabre/event" />
+      <path value="$PROJECT_DIR$/vendor/google/apiclient" />
+      <path value="$PROJECT_DIR$/vendor/sabre/uri" />
+      <path value="$PROJECT_DIR$/vendor/google/auth" />
+      <path value="$PROJECT_DIR$/vendor/google/apiclient-services" />
+      <path value="$PROJECT_DIR$/vendor/monolog/monolog" />
+      <path value="$PROJECT_DIR$/vendor/propel/propel" />
+      <path value="$PROJECT_DIR$/vendor/symfony/console" />
+      <path value="$PROJECT_DIR$/vendor/symfony/config" />
+      <path value="$PROJECT_DIR$/vendor/symfony/filesystem" />
+      <path value="$PROJECT_DIR$/vendor/symfony/deprecation-contracts" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-ctype" />
+      <path value="$PROJECT_DIR$/vendor/symfony/finder" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-normalizer" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-grapheme" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php81" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-mbstring" />
+      <path value="$PROJECT_DIR$/vendor/symfony/string" />
+      <path value="$PROJECT_DIR$/vendor/symfony/service-contracts" />
+      <path value="$PROJECT_DIR$/vendor/symfony/translation-contracts" />
+      <path value="$PROJECT_DIR$/vendor/symfony/translation" />
+      <path value="$PROJECT_DIR$/vendor/symfony/yaml" />
+      <path value="$PROJECT_DIR$/vendor/symfony/validator" />
+      <path value="$PROJECT_DIR$/vendor/tamminh/twig-php-function" />
+      <path value="$PROJECT_DIR$/vendor/firebase/php-jwt" />
+      <path value="$PROJECT_DIR$/vendor/composer" />
+      <path value="$PROJECT_DIR$/vendor/paragonie/random_compat" />
+      <path value="$PROJECT_DIR$/vendor/paragonie/constant_time_encoding" />
+      <path value="$PROJECT_DIR$/vendor/ralouphie/getallheaders" />
+      <path value="$PROJECT_DIR$/vendor/phpseclib/phpseclib" />
+      <path value="$PROJECT_DIR$/vendor/guzzlehttp/promises" />
+      <path value="$PROJECT_DIR$/vendor/guzzlehttp/guzzle" />
+      <path value="$PROJECT_DIR$/vendor/buzzingpixel/twig-switch" />
+      <path value="$PROJECT_DIR$/vendor/guzzlehttp/psr7" />
+      <path value="$PROJECT_DIR$/vendor/psr/cache" />
+      <path value="$PROJECT_DIR$/vendor/psr/http-client" />
+      <path value="$PROJECT_DIR$/vendor/psr/container" />
+      <path value="$PROJECT_DIR$/vendor/psr/http-message" />
+      <path value="$PROJECT_DIR$/vendor/psr/http-factory" />
+    </include_path>
   </component>
   <component name="ProjectId" id="25oEiRVWjqZ230aS6unPuL1ZrwU" />
   <component name="ProjectViewState">
@@ -31,6 +100,7 @@
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
@@ -54,6 +124,9 @@
       <workItem from="1646192238353" duration="30000" />
       <workItem from="1646192354490" duration="615000" />
       <workItem from="1646194284229" duration="16000" />
+      <workItem from="1648792524548" duration="15763000" />
+      <workItem from="1648867249006" duration="27058000" />
+      <workItem from="1648965801606" duration="5062000" />
     </task>
     <servers />
   </component>
