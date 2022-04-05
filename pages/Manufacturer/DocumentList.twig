@@ -1,0 +1,51 @@
+{% extends "layout.twig" %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-2"></div>
+
+            <div class="col card bg-light bg-gradient mt-5">
+
+                <div class="card-title mt-3">
+                    <h1 class="text-center text-primary py-2 mb-3">Document List</h1>
+                </div>
+                <div>
+                    <button type="button" class="btn btn-warning" data-id=/**/ onclick="/**/">Upload new document</button>
+                </div>
+
+                <div>
+                    <table class="table">
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Device ID</th>
+                            <th scope="col">Device Name</th>
+                            <th scope="col">Label</th>
+                            <th scope="col">WebContentLink</th>
+                        </tr>
+                        {% for document in documents %}
+                            <tr>
+                                <td>{{document.AdditionalInfoID}}</td>
+                                <td>{{document.DeviceID}}</td>
+                                <td>{{document.DeviceName}}</td>
+                                <td>{{document.Label}}</td>
+                                <td>{{document.WebContentLink }}</td>
+                                <td>
+                                    <button type="button" class="btn btn-warning" data-id={{document.AdditionalInfoID}} onclick="Document_View(this)">view</button>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-danger" data-id={{document.AdditionalInfoID}} onclick="/**/">Delete</button>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+
+            </div>
+            <div class="col-2">
+                <button type="button" class="btn btn-success mb-5" onclick="Home_Redirect()">Back to Dashboard</button>
+            </div>
+        </div>
+    </div>
+{% endblock %}

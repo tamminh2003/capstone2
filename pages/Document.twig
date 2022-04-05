@@ -1,0 +1,46 @@
+{% extends "layout.twig" %}
+
+{% block content %}
+
+    <div class="container-sm">
+        <div class="row">
+
+            <div class="col-3"></div>
+
+            <div class="col card bg-light bg-gradient mt-5">
+
+                <div class="card-title mt-3">
+                    <h3 class="text-center text-primary py-2 mb-3 h3">{{document.Label}}</h3>
+                    <p class="text-center text-muted">{{document.InfoType}}</p>
+                </div>
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <div height="300px" width="300px">Document Thumbnail here</div>{# {{document.thumbnail}} #}
+                        </div>
+                        <div class="col">
+                            <p>Document made for Device:</p>
+                            <p>Device ID:{{document.DeviceId}}<br>Device Model:{{document.DeviceModelCode}}
+                                <br>Device Generic Name:{{document.DeviceGeneric}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <p>Document Download URL:</p>
+                            <p><a href="">{{document.WebContentLink}}</a></p>
+                        </div>
+                    </div>
+                    <div>
+                        <button type="button" class="btn btn-success mb-5" onclick="DocList_Redirect()">Back to Document List</button>
+{#                        <button type="button" class="btn btn-success mb-5" onclick="Home_Redirect()">Back to Dashboard</button>#}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-3"></div>
+
+        </div>
+    </div>
+
+{% endblock %}
