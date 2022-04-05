@@ -9,10 +9,6 @@ function deviceList()
 {
   $deviceQuery = new PoctDeviceQuery();
   $result = $deviceQuery->findByUserUserId($_SESSION['user_id']);
-
-//      $result = $deviceQuery->findByUserUserId('4');
-
-
   $devices = [];
 
   foreach ($result as $device) {
