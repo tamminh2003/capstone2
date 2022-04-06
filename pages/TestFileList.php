@@ -11,13 +11,19 @@ $service = new Google\Service\Drive($client);
 // Print the names and IDs for up to 10 files.
 $optParams = array(
   'pageSize' => 10,
-  'fields' => 'nextPageToken, files(id, name, webContentLink)'
+  'fields' => 'nextPageToken, files(id, name, webContentLink, webViewLink)'
 );
 $results = $service->files->listFiles($optParams);
 
 $files = [];
 foreach ($results->files as $eachFile) {
-  array_push($files, array("name" => $eachFile->name, "id" => $eachFile->id, "download" => $eachFile->getWebContentLink()));
+  array_push($files, 
+  array(
+    "name" => $eachFile->name, 
+    "id" => $eachFile->id, 
+    "download" => $eachFile->getWebContentLink(),
+    "view" =>$eachFile->getWebViewLink()
+  ));
 }
 
 /**
