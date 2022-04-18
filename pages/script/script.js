@@ -219,6 +219,10 @@ function DeviceList_handleUpdate(element) {
     location.assign(`/pages/Manufacturer/DeviceUpdate.php?device_id=${element.dataset.id}`);
 }
 
+function DeviceList_handleDetails(element) {
+    location.assign(`/pages/Manufacturer/Device.php?device_id=${element.dataset.id}`)
+}
+
 function DeviceList_handleDelete(element) {
     confirm("Please confirm you want to delete this device:");
     let id = element.dataset.id;
@@ -256,8 +260,7 @@ function DeviceUpdate_handleSubmit(event) {
         .then(data => {
             if (typeof data === 'object') {
                 console.log("Device successfully updated");
-                console.log(data.deviceId);
-                window.location.reload();
+                window.location = `/pages/Manufacturer/Device.php?device_id=${data.deviceId}`
             }
             else {
                 console.log(data);

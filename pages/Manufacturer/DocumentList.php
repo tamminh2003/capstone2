@@ -5,12 +5,12 @@ use buzzingpixel\twigswitch\SwitchTwigExtension;
 use Umpirsky\Twig\Extension\PhpFunctionExtension;
 
 require $_SERVER["DOCUMENT_ROOT"] . "/vendor/autoload.php";
-//require $_SERVER["DOCUMENT_ROOT"] . "/controller/utility.php";
+// require $_SERVER["DOCUMENT_ROOT"] . "/controller/utility.php";
 require $_SERVER["DOCUMENT_ROOT"] . "/controller/documentList.php";
 
 const AUTHORIZED_USER = ['MANUFACTURER'];
 
-//Utility\userAuthorization();
+// Utility\userAuthorization();
 
 $documents = documentList();
 

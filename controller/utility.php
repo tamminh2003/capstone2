@@ -43,6 +43,7 @@ function getDeviceById($deviceId)
 
   return $device;
 }
+
 function getDocumentById($docId){
     /**fill with code for getting document by id**/
     $docQuery = PoctDeviceAditionalInfoQuery::create()
