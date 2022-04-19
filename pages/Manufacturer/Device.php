@@ -8,12 +8,18 @@ require $_SERVER["DOCUMENT_ROOT"] . "/vendor/autoload.php";
 require $_SERVER["DOCUMENT_ROOT"] . "/controller/utility.php";
 require $_SERVER["DOCUMENT_ROOT"] . "/controller/documentList.php";
 
-
 const AUTHORIZED_USER = ['MANUFACTURER'];
 
 Utility\userAuthorization();
-
-$device = Utility\getDeviceById($_GET["device_id"]);
+/**
+ * Check whether the device is belonged to this manufacturer
+ */
+$device_id = $_GET["device_id"];
+$device = Utility\getDeviceById($device_id);
+if ($device["user_user_id"] != $_SESSION["user_id"]) {
+  echo "You don't have access to this device";
+  exit();
+}
 
 $documents = documentList();
 

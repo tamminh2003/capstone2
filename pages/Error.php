@@ -7,11 +7,7 @@ use Umpirsky\Twig\Extension\PhpFunctionExtension;
 require $_SERVER["DOCUMENT_ROOT"] . "/vendor/autoload.php";
 require $_SERVER["DOCUMENT_ROOT"] . "/controller/utility.php";
 
-const AUTHORIZED_USER = ['MANUFACTURER'];
-
-Utility\userAuthorization();
-
-$device = Utility\getDeviceById($_GET["device_id"]);
+$error_message = $_POST["error_message"];
 
 $pathToPages = $_SERVER["DOCUMENT_ROOT"] . "/pages/";
 
@@ -22,6 +18,6 @@ $twig = new Twig\Environment($twigLoader);
 $twig->addExtension(new PhpFunctionExtension(["str_contains"]));
 $twig->addExtension(new SwitchTwigExtension());
 
-$template = $twig->load("./Manufacturer/DocumentAdd.twig");
+$template = $twig->load("./Error.twig");
 
-echo $template->render(["uri" => $_SERVER["REQUEST_URI"], "session" => $_SESSION, "device" => $device]);
+echo $template->render(["uri" => $_SERVER["REQUEST_URI"], "session" => $_SESSION, "error_message" => $error_message]);
