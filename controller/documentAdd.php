@@ -12,12 +12,13 @@ $drive = new Google\Service\Drive($client);
 /**
  * Create new file on google drive
  */
-$target_file = $_FILES["upload"]["tmp_name"];
+$target_file = $_FILES["file"]["tmp_name"];
+$filename = $_POST["filename"];
 
 $file = new Google\Service\Drive\DriveFile();
-$file->setName("placholder_test.jpeg");
+$file->setName($filename);
 
-$result = $service->files->create(
+$fileId = $service->files->create(
   $file,
   array(
     'data' => file_get_contents($target_file),
@@ -32,8 +33,6 @@ $result = $service->files->create(
 $permission = new Google\Service\Drive\Permission();
 $permission->setType("anyone");
 $permission->setRole("reader");
-
-$fileId = "14R4OzcmH82FT41XZPGStTsrVCkfHsRmK";
 
 $result = $service->permissions->create($fileId, $permission);
 

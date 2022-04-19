@@ -267,15 +267,21 @@ function DeviceUpdate_handleSubmit(event) {
             }
         });
 }
-function Document_View(element){
+function Document_View(element) {
     location.assign(`/pages/Document.php?docId=${element.dataset.id}`);
 }
-function Home_Redirect(){
+function Home_Redirect() {
     location.assign("/pages/Dashboard.php");
 }
-function DocList_Redirect(){
+function DocList_Redirect() {
     location.assign("/pages/Manufacturer/DocumentList.php");
 }
-function DocumentUpload_handleSubmit(event){
-/**work on with Minh**/
+function DocumentUpload_handleSubmit(event) {
+    event.preventDefault();
+    const form = event.target;
+    let formData = new FormData(form);
+
+    fetch("/controller/documentAdd.php", { "method": "POST", "body": formData })
+        .then(response => { console.log(response) });
+
 }
