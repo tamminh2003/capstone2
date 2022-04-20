@@ -1,4 +1,5 @@
 <?php
+
 if (!isset($_SESSION)) session_start();
 defined("AUTHORIZED_USER") or define("AUTHORIZED_USER", array("MANUFACTURER"));
 

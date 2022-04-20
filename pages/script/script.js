@@ -191,7 +191,7 @@ function DeviceAdd_handleSubmit(e) {
     const form = e.target;
     let formData = new FormData(form);
 
-    fetch("/controller/deviceAdd.php", {
+    fetch("/controller/manufacturer/deviceAdd.php", {
         method: "POST",
         body: formData
     })
@@ -227,9 +227,10 @@ function DeviceList_handleDelete(element) {
     confirm("Please confirm you want to delete this device:");
     let id = element.dataset.id;
     let form = new FormData();
-
     form.append("id", id);
-    fetch('/controller/deviceDelete.php', {
+    document.querySelector(".loader-container").style.visibility = "visible";
+
+    fetch('/controller/manufacturer/deviceDelete.php', {
         method: "POST",
         body: form
     })
@@ -244,8 +245,9 @@ function DeviceUpdate_handleSubmit(event) {
     event.preventDefault();
     const form = event.target;
     let formData = new FormData(form);
+    document.querySelector(".loader-container").style.visibility = "visible";
 
-    fetch("/controller/deviceUpdate.php", {
+    fetch("/controller/manufacturer/deviceUpdate.php", {
         method: "POST",
         body: formData
     })
@@ -285,7 +287,7 @@ function DocumentUpload_handleSubmit(event) {
     form.querySelectorAll("input").forEach(e => { e.disabled = true });
     document.querySelector(".loader-container").style.visibility = "visible";
 
-    fetch("/controller/documentAdd.php", { "method": "POST", "body": formData })
+    fetch("/controller/manufacturer/documentAdd.php", { "method": "POST", "body": formData })
         .then(response => response.text())
         .then(text => { if (text == "success") location.assign(`/pages/Manufacturer/Device.php?device_id=${deviceId}`) });
 

@@ -12,7 +12,7 @@ require $_SERVER["DOCUMENT_ROOT"] . "/generated-conf/config.php";
 /**
  * @param $userType String Current user type from session
  * @param $authUser String Authorised user
- * @param @page Boolean Flag to see if this function is access from page or controller
+ * @param @page Boolean Flag to see if this function is access as page or controller
  */
 function userAuthorization($userType, $authUser, $page)
 {
@@ -87,6 +87,9 @@ function getDocumentById($docId)
   return $document;
 }
 
+/**
+ * Utility function to setup google api client
+ */
 function getGoogleClient()
 {
 

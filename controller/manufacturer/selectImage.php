@@ -13,7 +13,6 @@ defined("AUTHORIZED_USER") or define("AUTHORIZED_USER", array("MANUFACTURER"));
 
 use Propel\PoctDeviceAditionalInfoQuery as ImageQuery;
 use Propel\PoctDeviceQuery as DeviceQuery;
-use Propel\Runtime\ActiveQuery\Criteria;
 
 require_once $_SERVER["DOCUMENT_ROOT"] . "/vendor/autoload.php";
 require_once $_SERVER["DOCUMENT_ROOT"] . "/generated-conf/config.php";
