@@ -5,9 +5,9 @@
 		<div class="row">
 			<div class="col-3"></div>
 
-			<div class="col card bg-light bg-gradient mt-5">
+			<div class="main-container col card bg-light bg-gradient mt-5">
 
-				<div class="card bg-light bg-gradient mt-3 mb-3">
+				<div class="device-details card bg-light bg-gradient mt-3 mb-3">
 
 					<div class="card-title">
 						<h3 class="text-center text-primary py-2 mb-3 h3">{{ device.poct_device_manufacture_name }}</h3>
@@ -39,24 +39,39 @@
 
 				</div>
 
-				<div class="card bg-light bg-gradient mt-3 mb-3">
-
+				<div class="document-list card bg-light bg-gradient mt-3 mb-3">
 					<div class="card-title">
 						<h3 class="text-center text-primary py-2 mb-3 h3">Device Documents</h3>
 					</div>
-
 					<div class="container">
+						<div class="row">
+							<table class="table">
+								<tr>
+									<th scope="col">Document Name</th>
+									<th scope="col">Download</th>
+								</tr>
+								{% for document in documents %}
+									<tr>
+										<td>{{document.label}}</td>
+										<td>{{document.}}
+									</tr>
+								{% endfor %}
+							</table>
+						</div>
 						<div class="row">
 							<a href={{"/pages/Manufacturer/DocumentAdd.php?device_id=" ~ device.device_id}} class="btn btn-primary mb-3">Add Document</a>
 						</div>
 					</div>
-
 				</div>
 
+				<div class="button-list card bg-light bg-gradient mt-3 mb-3">
+					<a href="/pages/Manufacturer/DeviceList.php" class="btn btn-danger">Back</a>
+				</div>
 
 			</div>
 
 			<div class="col-3"></div>
+
 		</div>
 	</div>
 {% endblock %}

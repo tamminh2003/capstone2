@@ -2,8 +2,8 @@
 
 use Propel\PoctDeviceQuery;
 
-require $_SERVER["DOCUMENT_ROOT"] . "/vendor/autoload.php";
-require $_SERVER["DOCUMENT_ROOT"] . "/generated-conf/config.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/vendor/autoload.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/generated-conf/config.php";
 
 function deviceList()
 {

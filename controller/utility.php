@@ -4,18 +4,30 @@ namespace Utility;
 
 use Propel\PoctDeviceQuery;
 use Propel\PoctDeviceAditionalInfoQuery;
+use Sabre\HTTP\Response;
 
 require $_SERVER["DOCUMENT_ROOT"] . "/vendor/autoload.php";
 require $_SERVER["DOCUMENT_ROOT"] . "/generated-conf/config.php";
 
-function userAuthorization()
+/**
+ * @param $userType String Current user type from session
+ * @param $authUser String Authorised user
+ * @param @page Boolean Flag to see if this function is access from page or controller
+ */
+function userAuthorization($userType, $authUser, $page)
 {
-  if (!in_array($_SESSION['user_type'], AUTHORIZED_USER, false)) {
-    $url = '/pages/Dashboard.php';
-    header("Location:" . $url);
+  if (!in_array($userType, $authUser, false)) {
+    if (!$page) {
+      $res = new Response();
+      $res->setStatus(401);
+      $res->setBody('Error: Unauthorised access');
+      \Sabre\HTTP\Sapi::sendResponse($res);
+    } else {
+      $url = '/pages/Dashboard.php';
+      header("Location:" . $url);
+    }
     exit();
   }
-  return null;
 }
 
 function log($string)
@@ -79,7 +91,7 @@ function getGoogleClient()
   /**
    * Set up client
    */
-  $config = "./service_account_credentials.json";
+  $config = $_SERVER["DOCUMENT_ROOT"] . "/controller/service_account_credentials.json";
 
   $client = new \Google\Client();
   $client->setApplicationName('Capstone2');

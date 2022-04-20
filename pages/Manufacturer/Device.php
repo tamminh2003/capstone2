@@ -1,27 +1,26 @@
 <?php
 session_start();
+const AUTHORIZED_USER = ['MANUFACTURER'];
 
 use buzzingpixel\twigswitch\SwitchTwigExtension;
 use Umpirsky\Twig\Extension\PhpFunctionExtension;
 
-require $_SERVER["DOCUMENT_ROOT"] . "/vendor/autoload.php";
-require $_SERVER["DOCUMENT_ROOT"] . "/controller/utility.php";
-require $_SERVER["DOCUMENT_ROOT"] . "/controller/documentList.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/vendor/autoload.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/controller/utility.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/controller/documentList.php";
 
-const AUTHORIZED_USER = ['MANUFACTURER'];
+Utility\userAuthorization($_SESSION["user_type"], AUTHORIZED_USER, true);
 
-Utility\userAuthorization();
 /**
  * Check whether the device is belonged to this manufacturer
  */
-$device_id = $_GET["device_id"];
-$device = Utility\getDeviceById($device_id);
+$device = Utility\getDeviceById($_GET["device_id"]);
 if ($device["user_user_id"] != $_SESSION["user_id"]) {
   echo "You don't have access to this device";
   exit();
 }
 
-$documents = documentList();
+$documents = documentList($_GET["device_id"]);
 
 $pathToPages = $_SERVER["DOCUMENT_ROOT"] . "/pages/";
 
