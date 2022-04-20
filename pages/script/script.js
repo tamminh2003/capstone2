@@ -276,12 +276,58 @@ function Home_Redirect() {
 function DocList_Redirect() {
     location.assign("/pages/Manufacturer/DocumentList.php");
 }
+
 function DocumentUpload_handleSubmit(event) {
     event.preventDefault();
     const form = event.target;
+    let deviceId = (new URLSearchParams(location.search)).get("device_id");
     let formData = new FormData(form);
+    form.querySelectorAll("input").forEach(e => { e.disabled = true });
+    document.querySelector(".loader-container").style.visibility = "visible";
 
     fetch("/controller/documentAdd.php", { "method": "POST", "body": formData })
-        .then(response => { console.log(response) });
+        .then(response => response.text())
+        .then(text => { if (text == "success") location.assign(`/pages/Manufacturer/Device.php?device_id=${deviceId}`) });
 
+}
+
+function manuDev_handleDocDel(element) {
+    confirm("Please confirm you want to delete this document:");
+    let id = element.dataset.id;
+    let form = new FormData();
+
+    form.append("id", id);
+    document.querySelector(".loader-container").style.visibility = "visible";
+    fetch('/controller/manufacturer/documentDelete.php', {
+        method: "POST",
+        body: form
+    })
+        .then(reponse => reponse.text())
+        .then(text => {
+            if (text == 'success') location.reload();
+            else if (text == 'fail') alert('Something went wrong, cannot delete record');
+        });
+}
+
+function manuDev_handleImgSelect(element) {
+    confirm("Please confirm you want to select this image as thumbnail:");
+
+    let imageId = element.dataset.id;
+    let deviceId = (new URLSearchParams(location.search)).get("device_id");
+
+    let form = new FormData();
+    form.append("imageId", imageId);
+    form.append("deviceId", deviceId);
+
+    document.querySelector(".loader-container").style.visibility = "visible";
+
+    fetch('/controller/manufacturer/selectImage.php', {
+        method: "POST",
+        body: form
+    })
+        .then(reponse => reponse.text())
+        .then(text => {
+            if (text == 'success') location.reload();
+            else if (text == 'fail') alert('Something went wrong, cannot delete record');
+        });
 }

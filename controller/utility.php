@@ -28,6 +28,7 @@ function userAuthorization($userType, $authUser, $page)
     }
     exit();
   }
+  return true;
 }
 
 function log($string)
@@ -52,6 +53,7 @@ function getDeviceById($deviceId)
   $device["device_model"] = $query->getDeviceModel();
   $device["device_type"] = $query->getDeviceType();
   $device["device_descripition"] = $query->getDeviceDescripition();
+  $device["thumbnail"] = $query->getDeviceImageUrl();
 
   return $device;
 }

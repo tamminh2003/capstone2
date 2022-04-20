@@ -1,17 +1,17 @@
 <?php
 session_start();
+const AUTHORIZED_USER = ['MANUFACTURER'];
 
 use Propel\PoctDeviceAditionalInfo;
 
-require_once $_SERVER["DOCUMENT_ROOT"] ."/vendor/autoload.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/vendor/autoload.php";
 require_once $_SERVER["DOCUMENT_ROOT"] . "/controller/utility.php";
 require_once $_SERVER["DOCUMENT_ROOT"] . "/generated-conf/config.php";
 
 /**
  * Authorisation for MANUFACTURER
  */
-const AUTHORIZED_USER = ['MANUFACTURER'];
-Utility\userAuthorization();
+Utility\userAuthorization($_SESSION["user_type"], AUTHORIZED_USER, false);
 
 /**
  * Set up google api client and drive api
@@ -51,11 +51,12 @@ $result = $service->files->get($file->id, $optParams);
 /**
  * Add file to database
  */
+$filetype = isset($_POST["addImage"]) ? "image" : "document";
 $document = new PoctDeviceAditionalInfo();
 $document->setIdpoctDevice($_POST["device_id"]);
 $document->setUserUserId($_POST["user_id"]);
 $document->setPoctDeviceAditionalInfoLabel($_POST["filename"]);
-$document->setPoctDeviceAditionalInfoType("Document");
+$document->setPoctDeviceAditionalInfoType($filetype);
 $document->setPoctDeviceAditionalInfoDetails($file->id);
 $saved = $document->save();
 
@@ -63,5 +64,4 @@ $saved = $document->save();
  * Return success or failure and redirect back to confirmation page.
  */
 
-$redirect_uri = "http://localhost:8000/pages/Manufacturer/DeviceList.php" . //device_id;
-header('Location: ' . filter_var($redirect_uri, FILTER_SANITIZE_URL));
+echo ("success");
