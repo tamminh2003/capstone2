@@ -9,8 +9,8 @@ defined("AUTHORIZED_USER") or define("AUTHORIZED_USER", array("MANUFACTURER"));
 require_once $_SERVER["DOCUMENT_ROOT"] . "/controller/utility.php";
 Utility\userAuthorization($_SESSION["user_type"], AUTHORIZED_USER, true);
 
-require $_SERVER["DOCUMENT_ROOT"] . "/vendor/autoload.php";
-require $_SERVER["DOCUMENT_ROOT"] . "/controller/documentList.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/vendor/autoload.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/controller/documentList.php";
 
 // Utility\userAuthorization();
 

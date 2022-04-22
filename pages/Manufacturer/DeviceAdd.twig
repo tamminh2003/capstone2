@@ -13,6 +13,8 @@
 
 				<form method="post" accept-charset="UTF-8" id="CreateAdd" onsubmit="DeviceAdd_handleSubmit(event)">
 					<input type="hidden" id="user_id" name="user_id" value={{ session.user_id }}>
+					<input id="deviceImgUrl" type="hidden" name="deviceImgUrl" value="/images/placeholder-image.png" class="form-control" required/>
+
 					<div class="mb-3">
 						<label for="manufactureName" class="form-label">Device Manufacture Name</label>
 						<input id="manufactureName" type="text" name="manufactureName" class="form-control" required/>
@@ -24,10 +26,6 @@
 					<div class="mb-3">
 						<label for="deviceModel" class="form-label">Device Model</label>
 						<input id="deviceModel" type="text" name="deviceModel" class="form-control" required/>
-					</div>
-					<div class="mb-3">
-						<label for="deviceImgUrl" class="form-label">Device Photo</label>
-						<input id="deviceImgUrl" type="text" name="deviceImgUrl" value="placeholder" class="form-control" required/>
 					</div>
 					<div class="mb-3">
 						<label for="deviceType" class="form-label">Device Type</label>

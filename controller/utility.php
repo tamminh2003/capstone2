@@ -6,8 +6,8 @@ use Propel\PoctDeviceQuery;
 use Propel\PoctDeviceAditionalInfoQuery;
 use Sabre\HTTP\Response;
 
-require $_SERVER["DOCUMENT_ROOT"] . "/vendor/autoload.php";
-require $_SERVER["DOCUMENT_ROOT"] . "/generated-conf/config.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/vendor/autoload.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/generated-conf/config.php";
 
 /**
  * @param $userType String Current user type from session

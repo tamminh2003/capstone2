@@ -4,7 +4,7 @@ if (!isset($_SESSION)) session_start();
 use buzzingpixel\twigswitch\SwitchTwigExtension;
 use Umpirsky\Twig\Extension\PhpFunctionExtension;
 
-require $_SERVER["DOCUMENT_ROOT"] . "/vendor/autoload.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/vendor/autoload.php";
 
 if (!isset($_SESSION['user_type'])) {
   $url = '/pages/Login.php';
