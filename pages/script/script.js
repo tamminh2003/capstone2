@@ -333,3 +333,39 @@ function manuDev_handleImgSelect(element) {
             else if (text == 'fail') alert('Something went wrong, cannot delete record');
         });
 }
+
+function ReseacherDocumentUpload_handleSubmit(event) {
+    event.preventDefault();
+    const form = event.target;
+    let formData = new FormData(form);
+    form.querySelectorAll("input").forEach(e => { e.disabled = true });
+
+    document.querySelector(".loader-container").style.visibility = "visible";
+
+    fetch("/controller/researcher/documentAdd.php", { "method": "POST", "body": formData })
+        .then(response => response.text())
+        .then(text => { if (text == "success") location.assign(`/pages/Researcher/DeviceList.php`) });
+
+}
+
+function ResearcherDeviceList_handleDetails(element) {
+    location.assign(`/pages/Researcher/Device.php?device_id=${element.dataset.id}`)
+}
+
+function researchDev_handleDocDel(element) {
+    confirm("Please confirm you want to delete this pt:");
+    let id = element.dataset.id;
+    let form = new FormData();
+
+    form.append("id", id);
+    document.querySelector(".loader-container").style.visibility = "visible";
+    fetch('/controller/researcher/documentDelete.php', {
+        method: "POST",
+        body: form
+    })
+        .then(reponse => reponse.text())
+        .then(text => {
+            if (text == 'success') location.reload();
+            else if (text == 'fail') alert('Something went wrong, cannot delete record');
+        });
+}
