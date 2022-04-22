@@ -2,13 +2,11 @@
 
 use Propel\PoctDeviceQuery;
 use Propel\Map\PoctDeviceTableMap;
-use Propel\PoctDevice;
 
 use Propel\Runtime\Propel;
-use Propel\Runtime\Formatter\ObjectFormatter;
 
-require $_SERVER["DOCUMENT_ROOT"] . "/vendor/autoload.php";
-require $_SERVER["DOCUMENT_ROOT"] . "/generated-conf/config.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/vendor/autoload.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/generated-conf/config.php";
 
 function search()
 {

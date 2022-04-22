@@ -4,18 +4,31 @@ namespace Utility;
 
 use Propel\PoctDeviceQuery;
 use Propel\PoctDeviceAditionalInfoQuery;
+use Sabre\HTTP\Response;
 
-require $_SERVER["DOCUMENT_ROOT"] . "/vendor/autoload.php";
-require $_SERVER["DOCUMENT_ROOT"] . "/generated-conf/config.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/vendor/autoload.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/generated-conf/config.php";
 
-function userAuthorization()
+/**
+ * @param $userType String Current user type from session
+ * @param $authUser String Authorised user
+ * @param @page Boolean Flag to see if this function is access as page or controller
+ */
+function userAuthorization($userType, $authUser, $page)
 {
-  if (!in_array($_SESSION['user_type'], AUTHORIZED_USER, false)) {
-    $url = '/pages/Dashboard.php';
-    header("Location:" . $url);
+  if (!in_array($userType, $authUser, false)) {
+    if (!$page) {
+      $res = new Response();
+      $res->setStatus(401);
+      $res->setBody('Error: Unauthorised access');
+      \Sabre\HTTP\Sapi::sendResponse($res);
+    } else {
+      $url = '/pages/Dashboard.php';
+      header("Location:" . $url);
+    }
     exit();
   }
-  return null;
+  return true;
 }
 
 function log($string)
@@ -40,33 +53,55 @@ function getDeviceById($deviceId)
   $device["device_model"] = $query->getDeviceModel();
   $device["device_type"] = $query->getDeviceType();
   $device["device_descripition"] = $query->getDeviceDescripition();
+  $device["thumbnail"] = $query->getDeviceImageUrl();
 
   return $device;
 }
-function getDocumentById($docId){
-    /**fill with code for getting document by id**/
-    $docQuery = PoctDeviceAditionalInfoQuery::create()
-        ->join('PoctDeviceAditionalInfo.PoctDevice')
-        ->withColumn('PoctDevice.PoctDeviceGenericName', 'Generic')
-        ->withColumn('PoctDevice.DeviceModel', 'ModelCode')
-        ->where('PoctDeviceAditionalInfo.UserUserId = ?' , $_SESSION["user_id"])
-        ->filterByUserUserId($_SESSION["user_id"])
-        ->filterByPoctDeviceAditionalInfoType('USER_MANUAL')
-        ->findOneByPoctDeviceAditionalInfoId($docId);
-    if (!$docQuery || $docQuery == null) {
-        log("Document not found.");
-        exit();
-    }
 
-    $document = [];
-    $document["AdditionalInfoId"] = $docQuery->getPoctDeviceAditionalInfoId();
-    $document["DeviceId"] = $docQuery->getIdpoctDevice();
-    $document["DeviceModelCode"] = $docQuery->getModelCode();
-    $document["DeviceGeneric"] = $docQuery->getGeneric();
-    $document["Label"] = $docQuery->getPoctDeviceAditionalInfoLabel();
-    $document["InfoType"] = $docQuery->getPoctDeviceAditionalInfoType();
-    $document["WebContentLink"] = $docQuery->getPoctDeviceAditionalInfoDetails();
-//    $document[""] = $docQuery->;
+function getDocumentById($docId)
+{
+  /**fill with code for getting document by id**/
+  $docQuery = PoctDeviceAditionalInfoQuery::create()
+    ->join('PoctDeviceAditionalInfo.PoctDevice')
+    ->withColumn('PoctDevice.PoctDeviceGenericName', 'Generic')
+    ->withColumn('PoctDevice.DeviceModel', 'ModelCode')
+    ->where('PoctDeviceAditionalInfo.UserUserId = ?', $_SESSION["user_id"])
+    ->filterByUserUserId($_SESSION["user_id"])
+    ->filterByPoctDeviceAditionalInfoType('USER_MANUAL')
+    ->findOneByPoctDeviceAditionalInfoId($docId);
+  if (!$docQuery || $docQuery == null) {
+    log("Document not found.");
+    exit();
+  }
 
-    return $document;
+  $document = [];
+  $document["AdditionalInfoId"] = $docQuery->getPoctDeviceAditionalInfoId();
+  $document["DeviceId"] = $docQuery->getIdpoctDevice();
+  $document["DeviceModelCode"] = $docQuery->getModelCode();
+  $document["DeviceGeneric"] = $docQuery->getGeneric();
+  $document["Label"] = $docQuery->getPoctDeviceAditionalInfoLabel();
+  $document["InfoType"] = $docQuery->getPoctDeviceAditionalInfoType();
+  $document["WebContentLink"] = $docQuery->getPoctDeviceAditionalInfoDetails();
+  //    $document[""] = $docQuery->;
+
+  return $document;
+}
+
+/**
+ * Utility function to setup google api client
+ */
+function getGoogleClient()
+{
+
+  /**
+   * Set up client
+   */
+  $config = $_SERVER["DOCUMENT_ROOT"] . "/controller/service_account_credentials.json";
+
+  $client = new \Google\Client();
+  $client->setApplicationName('Capstone2');
+  $client->setAuthConfig($config);
+  $client->addScope("https://www.googleapis.com/auth/drive");
+
+  return $client;
 }

@@ -8,8 +8,8 @@ use Propel\PoctDeviceQuery;
 use Umpirsky\Twig\Extension\PhpFunctionExtension;
 use Utility\Utility;
 
-require $_SERVER["DOCUMENT_ROOT"] . "/vendor/autoload.php";
-require $_SERVER["DOCUMENT_ROOT"] . "/controller/search.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/vendor/autoload.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/controller/search.php";
 
 
 

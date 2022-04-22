@@ -38,13 +38,19 @@
 						<a class={{isRegister ? "\"nav-link active\"" : "nav-link"}} href={{ isRegister ? "#" : registerUri}}>Register</a>
 					</li>
 				{% endif %}
-				
+
 				<li class="nav-item">
 					<a class={{isSearch ? "\"nav-link active\"" : "nav-link"}} aria-current="page" href={{ isSearch ? "#" : searchUri}}>Search</a>
 				</li>
 				<li class="nav-item">
 					<a class={{isAdvancedSearch ? "\"nav-link active\"" : "nav-link"}} aria-current="page" href={{ isAdvancedSearch ? "#" : advancedSearchUri}}>Advanced Search</a>
 				</li>
+
+				{% if session.firstname and session.lastname %}
+					<li class="nav-item">
+						<span class="nav-link">Welcome, {{session.firstname ~ ' ' ~ session.lastname}}</span>
+					</li>
+				{% endif %}
 
 			</ul>
 

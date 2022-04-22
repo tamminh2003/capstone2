@@ -13,32 +13,29 @@
 
 				<form method="post" accept-charset="UTF-8" id="CreateAdd" onsubmit="DeviceUpdate_handleSubmit(event)">
 					<input type="hidden" id="device_id" name="device_id" value={{device.device_id}}>
-					<input type="hidden" id="user_id" name="user_id" value={{ device.user_user_id }}>
+					<input type="hidden" id="user_id" name="user_id" value={{device.user_user_id }}>
 					<div class="mb-3">
 						<label for="manufactureName" class="form-label">Device Manufacture Name</label>
-						<input id="manufactureName" type="text" name="manufactureName" class="form-control" value={{device.poct_device_manufacture_name}} required/>
+						<input id="manufactureName" type="text" name="manufactureName" class="form-control" value="{{device.poct_device_manufacture_name}}" required/>
 					</div>
 					<div class="mb-3">
 						<label for="deviceName" class="form-label">Device Generic Name</label>
-						<input id="deviceName" type="text" name="deviceName" class="form-control" value={{device.poct_device_generic_name}} required/>
+						<input id="deviceName" type="text" name="deviceName" class="form-control" value="{{device.poct_device_generic_name}}" required/>
 					</div>
 					<div class="mb-3">
 						<label for="deviceModel" class="form-label">Device Model</label>
-						<input id="deviceModel" type="text" name="deviceModel" class="form-control" value={{device.device_model}} required/>
-					</div>
-					<div class="mb-3">
-						<label for="deviceImgUrl" class="form-label">Device Photo</label>
-						<input id="deviceImgUrl" type="text" name="deviceImgUrl" value="placeholder" class="form-control" required/>
+						<input id="deviceModel" type="text" name="deviceModel" class="form-control" value="{{device.device_model}}" required/>
 					</div>
 					<div class="mb-3">
 						<label for="deviceType" class="form-label">Device Type</label>
-						<input id="deviceType" type="text" name="deviceType" class="form-control" value={{device.device_type}} required/>
+						<input id="deviceType" type="text" name="deviceType" class="form-control" value="{{device.device_type}}" required/>
 					</div>
 					<div class="mb-3">
 						<label for="deviceDescription" class="form-label">Device Description</label>
 						<textarea id="deviceDescription" rows="4" cols="50" name="deviceDescription" class="form-control">{{device.device_descripition}}</textarea>
 					</div>
-					<button type="submit" class="btn btn-success mb-5">Update Device</button>
+					<button type="submit" class="btn btn-success mb-3">Update Device</button>
+					<a href={{"/pages/Manufacturer/Device.php?device_id="~device.device_id}} class="btn btn-danger mb-3">Cancel</a>
 				</form>
 
 			</div>

@@ -2,16 +2,10 @@
 session_start();
 
 use buzzingpixel\twigswitch\SwitchTwigExtension;
-use Google\Service\Adsense\Alert;
-use Propel\PoctDevice;
-use Propel\PoctDeviceQuery;
 use Umpirsky\Twig\Extension\PhpFunctionExtension;
-use Utility\Utility;
 
-require $_SERVER["DOCUMENT_ROOT"] . "/vendor/autoload.php";
-require $_SERVER["DOCUMENT_ROOT"] . "/controller/search.php";
-
-
+require_once $_SERVER["DOCUMENT_ROOT"] . "/vendor/autoload.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/controller/search.php";
 
 if (isset($_GET['advanced_text_search'])) {
 

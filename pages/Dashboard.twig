@@ -21,22 +21,19 @@
 			<div class="col"></div>
 
 			<div class="col" style="text-align:center">
-				<h3>Search for devices</h3>
-				<h3>Advanced Search</h3>
 
 				{% if userType == 'RESEARCHER' %}
-					<h3>Add research paper</h3>
-					<h3>Update research paper</h3>
+					<a href="#" class="btn btn-primary">
+						<h3>Manage documents</h3>
+					</a>
 				{% endif %}
 
 				{% if userType == 'MANUFACTURER' %}
-					<a href="/pages/Manufacturer/DeviceList.php">
-						<h3>List Device</h3>
-					</a>
-					<a href="/pages/Manufacturer/DeviceAdd.php">
-						<h3>Add Device</h3>
+					<a href="/pages/Manufacturer/DeviceList.php" class="btn btn-primary">
+						<h3>Manage Device</h3>
 					</a>
 				{% endif %}
+
 			</div>
 
 			<div class="col"></div>

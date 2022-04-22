@@ -191,7 +191,7 @@ function DeviceAdd_handleSubmit(e) {
     const form = e.target;
     let formData = new FormData(form);
 
-    fetch("/controller/deviceAdd.php", {
+    fetch("/controller/manufacturer/deviceAdd.php", {
         method: "POST",
         body: formData
     })
@@ -219,13 +219,18 @@ function DeviceList_handleUpdate(element) {
     location.assign(`/pages/Manufacturer/DeviceUpdate.php?device_id=${element.dataset.id}`);
 }
 
+function DeviceList_handleDetails(element) {
+    location.assign(`/pages/Manufacturer/Device.php?device_id=${element.dataset.id}`)
+}
+
 function DeviceList_handleDelete(element) {
     confirm("Please confirm you want to delete this device:");
     let id = element.dataset.id;
     let form = new FormData();
-
     form.append("id", id);
-    fetch('/controller/deviceDelete.php', {
+    document.querySelector(".loader-container").style.visibility = "visible";
+
+    fetch('/controller/manufacturer/deviceDelete.php', {
         method: "POST",
         body: form
     })
@@ -240,8 +245,9 @@ function DeviceUpdate_handleSubmit(event) {
     event.preventDefault();
     const form = event.target;
     let formData = new FormData(form);
+    document.querySelector(".loader-container").style.visibility = "visible";
 
-    fetch("/controller/deviceUpdate.php", {
+    fetch("/controller/manufacturer/deviceUpdate.php", {
         method: "POST",
         body: formData
     })
@@ -256,23 +262,74 @@ function DeviceUpdate_handleSubmit(event) {
         .then(data => {
             if (typeof data === 'object') {
                 console.log("Device successfully updated");
-                console.log(data.deviceId);
-                window.location.reload();
+                window.location = `/pages/Manufacturer/Device.php?device_id=${data.deviceId}`
             }
             else {
                 console.log(data);
             }
         });
 }
-function Document_View(element){
+function Document_View(element) {
     location.assign(`/pages/Document.php?docId=${element.dataset.id}`);
 }
-function Home_Redirect(){
+function Home_Redirect() {
     location.assign("/pages/Dashboard.php");
 }
-function DocList_Redirect(){
+function DocList_Redirect() {
     location.assign("/pages/Manufacturer/DocumentList.php");
 }
-function DocumentUpload_handleSubmit(event){
-/**work on with Minh**/
+
+function DocumentUpload_handleSubmit(event) {
+    event.preventDefault();
+    const form = event.target;
+    let deviceId = (new URLSearchParams(location.search)).get("device_id");
+    let formData = new FormData(form);
+    form.querySelectorAll("input").forEach(e => { e.disabled = true });
+    document.querySelector(".loader-container").style.visibility = "visible";
+
+    fetch("/controller/manufacturer/documentAdd.php", { "method": "POST", "body": formData })
+        .then(response => response.text())
+        .then(text => { if (text == "success") location.assign(`/pages/Manufacturer/Device.php?device_id=${deviceId}`) });
+
+}
+
+function manuDev_handleDocDel(element) {
+    confirm("Please confirm you want to delete this document:");
+    let id = element.dataset.id;
+    let form = new FormData();
+
+    form.append("id", id);
+    document.querySelector(".loader-container").style.visibility = "visible";
+    fetch('/controller/manufacturer/documentDelete.php', {
+        method: "POST",
+        body: form
+    })
+        .then(reponse => reponse.text())
+        .then(text => {
+            if (text == 'success') location.reload();
+            else if (text == 'fail') alert('Something went wrong, cannot delete record');
+        });
+}
+
+function manuDev_handleImgSelect(element) {
+    confirm("Please confirm you want to select this image as thumbnail:");
+
+    let imageId = element.dataset.id;
+    let deviceId = (new URLSearchParams(location.search)).get("device_id");
+
+    let form = new FormData();
+    form.append("imageId", imageId);
+    form.append("deviceId", deviceId);
+
+    document.querySelector(".loader-container").style.visibility = "visible";
+
+    fetch('/controller/manufacturer/selectImage.php', {
+        method: "POST",
+        body: form
+    })
+        .then(reponse => reponse.text())
+        .then(text => {
+            if (text == 'success') location.reload();
+            else if (text == 'fail') alert('Something went wrong, cannot delete record');
+        });
 }
