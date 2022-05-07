@@ -18,6 +18,8 @@
     <column name="device_image_url" phpName="DeviceImageUrl" type="VARCHAR" size="255"/>
     <column name="device_type" phpName="DeviceType" type="VARCHAR" size="255"/>
     <column name="device_descripition" phpName="DeviceDescripition" type="VARCHAR" size="255"/>
+    <column name="poct_device_energy_type" phpName="DeviceEnergyType" type="VARCHAR" size="45" />
+    <column name="poct_device_connection_type" phpName="DeviceConnectionType" type="VARCHAR" size="45" />
     <foreign-key foreignTable="user" name="fk_poct_device_user1" onDelete="NO ACTION" onUpdate="NO ACTION">
       <reference local="user_user_id" foreign="user_id"/>
     </foreign-key>
@@ -35,6 +37,7 @@
     <column name="poct_device_aditional_info_label" phpName="PoctDeviceAditionalInfoLabel" type="VARCHAR" size="100"/>
     <column name="poct_device_aditional_info_type" phpName="PoctDeviceAditionalInfoType" type="VARCHAR" size="100"/>
     <column name="poct_device_aditional_info_details" phpName="PoctDeviceAditionalInfoDetails" type="VARCHAR" size="100"/>
+    <column name="poct_device_aditional_info_timestamp" phpName="PoctDeviceAditionalInfoTimestamp" type="VARCHAR" size="255"/>
     <foreign-key foreignTable="poct_device" name="fk_poct_device_aditional_info_poct_device1" onDelete="NO ACTION" onUpdate="NO ACTION">
       <reference local="idpoct_device" foreign="poct_device_id"/>
     </foreign-key>

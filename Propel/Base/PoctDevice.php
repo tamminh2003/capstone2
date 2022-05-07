@@ -129,6 +129,20 @@ abstract class PoctDevice implements ActiveRecordInterface
     protected $device_descripition;
 
     /**
+     * The value for the poct_device_energy_type field.
+     *
+     * @var        string|null
+     */
+    protected $poct_device_energy_type;
+
+    /**
+     * The value for the poct_device_connection_type field.
+     *
+     * @var        string|null
+     */
+    protected $poct_device_connection_type;
+
+    /**
      * @var        ChildUser
      */
     protected $aUser;
@@ -488,6 +502,26 @@ abstract class PoctDevice implements ActiveRecordInterface
     }
 
     /**
+     * Get the [poct_device_energy_type] column value.
+     *
+     * @return string|null
+     */
+    public function getDeviceEnergyType()
+    {
+        return $this->poct_device_energy_type;
+    }
+
+    /**
+     * Get the [poct_device_connection_type] column value.
+     *
+     * @return string|null
+     */
+    public function getDeviceConnectionType()
+    {
+        return $this->poct_device_connection_type;
+    }
+
+    /**
      * Set the value of [poct_device_id] column.
      *
      * @param int $v New value
@@ -652,6 +686,46 @@ abstract class PoctDevice implements ActiveRecordInterface
     } // setDeviceDescripition()
 
     /**
+     * Set the value of [poct_device_energy_type] column.
+     *
+     * @param string|null $v New value
+     * @return $this|\Propel\PoctDevice The current object (for fluent API support)
+     */
+    public function setDeviceEnergyType($v)
+    {
+        if ($v !== null) {
+            $v = (string) $v;
+        }
+
+        if ($this->poct_device_energy_type !== $v) {
+            $this->poct_device_energy_type = $v;
+            $this->modifiedColumns[PoctDeviceTableMap::COL_POCT_DEVICE_ENERGY_TYPE] = true;
+        }
+
+        return $this;
+    } // setDeviceEnergyType()
+
+    /**
+     * Set the value of [poct_device_connection_type] column.
+     *
+     * @param string|null $v New value
+     * @return $this|\Propel\PoctDevice The current object (for fluent API support)
+     */
+    public function setDeviceConnectionType($v)
+    {
+        if ($v !== null) {
+            $v = (string) $v;
+        }
+
+        if ($this->poct_device_connection_type !== $v) {
+            $this->poct_device_connection_type = $v;
+            $this->modifiedColumns[PoctDeviceTableMap::COL_POCT_DEVICE_CONNECTION_TYPE] = true;
+        }
+
+        return $this;
+    } // setDeviceConnectionType()
+
+    /**
      * Indicates whether the columns in this object are only set to default values.
      *
      * This method can be used in conjunction with isModified() to indicate whether an object is both
@@ -710,6 +784,12 @@ abstract class PoctDevice implements ActiveRecordInterface
 
             $col = $row[TableMap::TYPE_NUM == $indexType ? 7 + $startcol : PoctDeviceTableMap::translateFieldName('DeviceDescripition', TableMap::TYPE_PHPNAME, $indexType)];
             $this->device_descripition = (null !== $col) ? (string) $col : null;
+
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 8 + $startcol : PoctDeviceTableMap::translateFieldName('DeviceEnergyType', TableMap::TYPE_PHPNAME, $indexType)];
+            $this->poct_device_energy_type = (null !== $col) ? (string) $col : null;
+
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 9 + $startcol : PoctDeviceTableMap::translateFieldName('DeviceConnectionType', TableMap::TYPE_PHPNAME, $indexType)];
+            $this->poct_device_connection_type = (null !== $col) ? (string) $col : null;
             $this->resetModified();
 
             $this->setNew(false);
@@ -718,7 +798,7 @@ abstract class PoctDevice implements ActiveRecordInterface
                 $this->ensureConsistency();
             }
 
-            return $startcol + 8; // 8 = PoctDeviceTableMap::NUM_HYDRATE_COLUMNS.
+            return $startcol + 10; // 10 = PoctDeviceTableMap::NUM_HYDRATE_COLUMNS.
 
         } catch (Exception $e) {
             throw new PropelException(sprintf('Error populating %s object', '\\Propel\\PoctDevice'), 0, $e);
@@ -1016,6 +1096,12 @@ abstract class PoctDevice implements ActiveRecordInterface
         if ($this->isColumnModified(PoctDeviceTableMap::COL_DEVICE_DESCRIPITION)) {
             $modifiedColumns[':p' . $index++]  = 'device_descripition';
         }
+        if ($this->isColumnModified(PoctDeviceTableMap::COL_POCT_DEVICE_ENERGY_TYPE)) {
+            $modifiedColumns[':p' . $index++]  = 'poct_device_energy_type';
+        }
+        if ($this->isColumnModified(PoctDeviceTableMap::COL_POCT_DEVICE_CONNECTION_TYPE)) {
+            $modifiedColumns[':p' . $index++]  = 'poct_device_connection_type';
+        }
 
         $sql = sprintf(
             'INSERT INTO poct_device (%s) VALUES (%s)',
@@ -1050,6 +1136,12 @@ abstract class PoctDevice implements ActiveRecordInterface
                         break;
                     case 'device_descripition':
                         $stmt->bindValue($identifier, $this->device_descripition, PDO::PARAM_STR);
+                        break;
+                    case 'poct_device_energy_type':
+                        $stmt->bindValue($identifier, $this->poct_device_energy_type, PDO::PARAM_STR);
+                        break;
+                    case 'poct_device_connection_type':
+                        $stmt->bindValue($identifier, $this->poct_device_connection_type, PDO::PARAM_STR);
                         break;
                 }
             }
@@ -1137,6 +1229,12 @@ abstract class PoctDevice implements ActiveRecordInterface
             case 7:
                 return $this->getDeviceDescripition();
                 break;
+            case 8:
+                return $this->getDeviceEnergyType();
+                break;
+            case 9:
+                return $this->getDeviceConnectionType();
+                break;
             default:
                 return null;
                 break;
@@ -1175,6 +1273,8 @@ abstract class PoctDevice implements ActiveRecordInterface
             $keys[5] => $this->getDeviceImageUrl(),
             $keys[6] => $this->getDeviceType(),
             $keys[7] => $this->getDeviceDescripition(),
+            $keys[8] => $this->getDeviceEnergyType(),
+            $keys[9] => $this->getDeviceConnectionType(),
         );
         $virtualColumns = $this->virtualColumns;
         foreach ($virtualColumns as $key => $virtualColumn) {
@@ -1300,6 +1400,12 @@ abstract class PoctDevice implements ActiveRecordInterface
             case 7:
                 $this->setDeviceDescripition($value);
                 break;
+            case 8:
+                $this->setDeviceEnergyType($value);
+                break;
+            case 9:
+                $this->setDeviceConnectionType($value);
+                break;
         } // switch()
 
         return $this;
@@ -1349,6 +1455,12 @@ abstract class PoctDevice implements ActiveRecordInterface
         }
         if (array_key_exists($keys[7], $arr)) {
             $this->setDeviceDescripition($arr[$keys[7]]);
+        }
+        if (array_key_exists($keys[8], $arr)) {
+            $this->setDeviceEnergyType($arr[$keys[8]]);
+        }
+        if (array_key_exists($keys[9], $arr)) {
+            $this->setDeviceConnectionType($arr[$keys[9]]);
         }
 
         return $this;
@@ -1416,6 +1528,12 @@ abstract class PoctDevice implements ActiveRecordInterface
         }
         if ($this->isColumnModified(PoctDeviceTableMap::COL_DEVICE_DESCRIPITION)) {
             $criteria->add(PoctDeviceTableMap::COL_DEVICE_DESCRIPITION, $this->device_descripition);
+        }
+        if ($this->isColumnModified(PoctDeviceTableMap::COL_POCT_DEVICE_ENERGY_TYPE)) {
+            $criteria->add(PoctDeviceTableMap::COL_POCT_DEVICE_ENERGY_TYPE, $this->poct_device_energy_type);
+        }
+        if ($this->isColumnModified(PoctDeviceTableMap::COL_POCT_DEVICE_CONNECTION_TYPE)) {
+            $criteria->add(PoctDeviceTableMap::COL_POCT_DEVICE_CONNECTION_TYPE, $this->poct_device_connection_type);
         }
 
         return $criteria;
@@ -1510,6 +1628,8 @@ abstract class PoctDevice implements ActiveRecordInterface
         $copyObj->setDeviceImageUrl($this->getDeviceImageUrl());
         $copyObj->setDeviceType($this->getDeviceType());
         $copyObj->setDeviceDescripition($this->getDeviceDescripition());
+        $copyObj->setDeviceEnergyType($this->getDeviceEnergyType());
+        $copyObj->setDeviceConnectionType($this->getDeviceConnectionType());
 
         if ($deepCopy) {
             // important: temporarily setNew(false) because this affects the behavior of
@@ -2441,6 +2561,8 @@ abstract class PoctDevice implements ActiveRecordInterface
         $this->device_image_url = null;
         $this->device_type = null;
         $this->device_descripition = null;
+        $this->poct_device_energy_type = null;
+        $this->poct_device_connection_type = null;
         $this->alreadyInSave = false;
         $this->clearAllReferences();
         $this->resetModified();
