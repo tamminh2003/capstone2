@@ -26,6 +26,7 @@ use Propel\Runtime\Exception\PropelException;
  * @method     ChildPoctDeviceAditionalInfoQuery orderByPoctDeviceAditionalInfoLabel($order = Criteria::ASC) Order by the poct_device_aditional_info_label column
  * @method     ChildPoctDeviceAditionalInfoQuery orderByPoctDeviceAditionalInfoType($order = Criteria::ASC) Order by the poct_device_aditional_info_type column
  * @method     ChildPoctDeviceAditionalInfoQuery orderByPoctDeviceAditionalInfoDetails($order = Criteria::ASC) Order by the poct_device_aditional_info_details column
+ * @method     ChildPoctDeviceAditionalInfoQuery orderByPoctDeviceAditionalInfoTimestamp($order = Criteria::ASC) Order by the poct_device_aditional_info_timestamp column
  *
  * @method     ChildPoctDeviceAditionalInfoQuery groupByPoctDeviceAditionalInfoId() Group by the poct_device_aditional_info_id column
  * @method     ChildPoctDeviceAditionalInfoQuery groupByIdpoctDevice() Group by the idpoct_device column
@@ -33,6 +34,7 @@ use Propel\Runtime\Exception\PropelException;
  * @method     ChildPoctDeviceAditionalInfoQuery groupByPoctDeviceAditionalInfoLabel() Group by the poct_device_aditional_info_label column
  * @method     ChildPoctDeviceAditionalInfoQuery groupByPoctDeviceAditionalInfoType() Group by the poct_device_aditional_info_type column
  * @method     ChildPoctDeviceAditionalInfoQuery groupByPoctDeviceAditionalInfoDetails() Group by the poct_device_aditional_info_details column
+ * @method     ChildPoctDeviceAditionalInfoQuery groupByPoctDeviceAditionalInfoTimestamp() Group by the poct_device_aditional_info_timestamp column
  *
  * @method     ChildPoctDeviceAditionalInfoQuery leftJoin($relation) Adds a LEFT JOIN clause to the query
  * @method     ChildPoctDeviceAditionalInfoQuery rightJoin($relation) Adds a RIGHT JOIN clause to the query
@@ -72,7 +74,8 @@ use Propel\Runtime\Exception\PropelException;
  * @method     ChildPoctDeviceAditionalInfo|null findOneByUserUserId(int $user_user_id) Return the first ChildPoctDeviceAditionalInfo filtered by the user_user_id column
  * @method     ChildPoctDeviceAditionalInfo|null findOneByPoctDeviceAditionalInfoLabel(string $poct_device_aditional_info_label) Return the first ChildPoctDeviceAditionalInfo filtered by the poct_device_aditional_info_label column
  * @method     ChildPoctDeviceAditionalInfo|null findOneByPoctDeviceAditionalInfoType(string $poct_device_aditional_info_type) Return the first ChildPoctDeviceAditionalInfo filtered by the poct_device_aditional_info_type column
- * @method     ChildPoctDeviceAditionalInfo|null findOneByPoctDeviceAditionalInfoDetails(string $poct_device_aditional_info_details) Return the first ChildPoctDeviceAditionalInfo filtered by the poct_device_aditional_info_details column *
+ * @method     ChildPoctDeviceAditionalInfo|null findOneByPoctDeviceAditionalInfoDetails(string $poct_device_aditional_info_details) Return the first ChildPoctDeviceAditionalInfo filtered by the poct_device_aditional_info_details column
+ * @method     ChildPoctDeviceAditionalInfo|null findOneByPoctDeviceAditionalInfoTimestamp(string $poct_device_aditional_info_timestamp) Return the first ChildPoctDeviceAditionalInfo filtered by the poct_device_aditional_info_timestamp column *
 
  * @method     ChildPoctDeviceAditionalInfo requirePk($key, ConnectionInterface $con = null) Return the ChildPoctDeviceAditionalInfo by primary key and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildPoctDeviceAditionalInfo requireOne(ConnectionInterface $con = null) Return the first ChildPoctDeviceAditionalInfo matching the query and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
@@ -83,6 +86,7 @@ use Propel\Runtime\Exception\PropelException;
  * @method     ChildPoctDeviceAditionalInfo requireOneByPoctDeviceAditionalInfoLabel(string $poct_device_aditional_info_label) Return the first ChildPoctDeviceAditionalInfo filtered by the poct_device_aditional_info_label column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildPoctDeviceAditionalInfo requireOneByPoctDeviceAditionalInfoType(string $poct_device_aditional_info_type) Return the first ChildPoctDeviceAditionalInfo filtered by the poct_device_aditional_info_type column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildPoctDeviceAditionalInfo requireOneByPoctDeviceAditionalInfoDetails(string $poct_device_aditional_info_details) Return the first ChildPoctDeviceAditionalInfo filtered by the poct_device_aditional_info_details column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
+ * @method     ChildPoctDeviceAditionalInfo requireOneByPoctDeviceAditionalInfoTimestamp(string $poct_device_aditional_info_timestamp) Return the first ChildPoctDeviceAditionalInfo filtered by the poct_device_aditional_info_timestamp column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  *
  * @method     ChildPoctDeviceAditionalInfo[]|ObjectCollection find(ConnectionInterface $con = null) Return ChildPoctDeviceAditionalInfo objects based on current ModelCriteria
  * @psalm-method ObjectCollection&\Traversable<ChildPoctDeviceAditionalInfo> find(ConnectionInterface $con = null) Return ChildPoctDeviceAditionalInfo objects based on current ModelCriteria
@@ -98,6 +102,8 @@ use Propel\Runtime\Exception\PropelException;
  * @psalm-method ObjectCollection&\Traversable<ChildPoctDeviceAditionalInfo> findByPoctDeviceAditionalInfoType(string $poct_device_aditional_info_type) Return ChildPoctDeviceAditionalInfo objects filtered by the poct_device_aditional_info_type column
  * @method     ChildPoctDeviceAditionalInfo[]|ObjectCollection findByPoctDeviceAditionalInfoDetails(string $poct_device_aditional_info_details) Return ChildPoctDeviceAditionalInfo objects filtered by the poct_device_aditional_info_details column
  * @psalm-method ObjectCollection&\Traversable<ChildPoctDeviceAditionalInfo> findByPoctDeviceAditionalInfoDetails(string $poct_device_aditional_info_details) Return ChildPoctDeviceAditionalInfo objects filtered by the poct_device_aditional_info_details column
+ * @method     ChildPoctDeviceAditionalInfo[]|ObjectCollection findByPoctDeviceAditionalInfoTimestamp(string $poct_device_aditional_info_timestamp) Return ChildPoctDeviceAditionalInfo objects filtered by the poct_device_aditional_info_timestamp column
+ * @psalm-method ObjectCollection&\Traversable<ChildPoctDeviceAditionalInfo> findByPoctDeviceAditionalInfoTimestamp(string $poct_device_aditional_info_timestamp) Return ChildPoctDeviceAditionalInfo objects filtered by the poct_device_aditional_info_timestamp column
  * @method     ChildPoctDeviceAditionalInfo[]|\Propel\Runtime\Util\PropelModelPager paginate($page = 1, $maxPerPage = 10, ConnectionInterface $con = null) Issue a SELECT query based on the current ModelCriteria and uses a page and a maximum number of results per page to compute an offset and a limit
  * @psalm-method \Propel\Runtime\Util\PropelModelPager&\Traversable<ChildPoctDeviceAditionalInfo> paginate($page = 1, $maxPerPage = 10, ConnectionInterface $con = null) Issue a SELECT query based on the current ModelCriteria and uses a page and a maximum number of results per page to compute an offset and a limit
  *
@@ -197,7 +203,7 @@ abstract class PoctDeviceAditionalInfoQuery extends ModelCriteria
      */
     protected function findPkSimple($key, ConnectionInterface $con)
     {
-        $sql = 'SELECT poct_device_aditional_info_id, idpoct_device, user_user_id, poct_device_aditional_info_label, poct_device_aditional_info_type, poct_device_aditional_info_details FROM poct_device_aditional_info WHERE poct_device_aditional_info_id = :p0';
+        $sql = 'SELECT poct_device_aditional_info_id, idpoct_device, user_user_id, poct_device_aditional_info_label, poct_device_aditional_info_type, poct_device_aditional_info_details, poct_device_aditional_info_timestamp FROM poct_device_aditional_info WHERE poct_device_aditional_info_id = :p0';
         try {
             $stmt = $con->prepare($sql);
             $stmt->bindValue(':p0', $key, PDO::PARAM_INT);
@@ -490,6 +496,32 @@ abstract class PoctDeviceAditionalInfoQuery extends ModelCriteria
         }
 
         return $this->addUsingAlias(PoctDeviceAditionalInfoTableMap::COL_POCT_DEVICE_ADITIONAL_INFO_DETAILS, $poctDeviceAditionalInfoDetails, $comparison);
+    }
+
+    /**
+     * Filter the query on the poct_device_aditional_info_timestamp column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByPoctDeviceAditionalInfoTimestamp('fooValue');   // WHERE poct_device_aditional_info_timestamp = 'fooValue'
+     * $query->filterByPoctDeviceAditionalInfoTimestamp('%fooValue%', Criteria::LIKE); // WHERE poct_device_aditional_info_timestamp LIKE '%fooValue%'
+     * $query->filterByPoctDeviceAditionalInfoTimestamp(['foo', 'bar']); // WHERE poct_device_aditional_info_timestamp IN ('foo', 'bar')
+     * </code>
+     *
+     * @param     string|string[] $poctDeviceAditionalInfoTimestamp The value to use as filter.
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return $this|ChildPoctDeviceAditionalInfoQuery The current query, for fluid interface
+     */
+    public function filterByPoctDeviceAditionalInfoTimestamp($poctDeviceAditionalInfoTimestamp = null, $comparison = null)
+    {
+        if (null === $comparison) {
+            if (is_array($poctDeviceAditionalInfoTimestamp)) {
+                $comparison = Criteria::IN;
+            }
+        }
+
+        return $this->addUsingAlias(PoctDeviceAditionalInfoTableMap::COL_POCT_DEVICE_ADITIONAL_INFO_TIMESTAMP, $poctDeviceAditionalInfoTimestamp, $comparison);
     }
 
     /**

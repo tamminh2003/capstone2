@@ -28,6 +28,8 @@ use Propel\Runtime\Exception\PropelException;
  * @method     ChildPoctDeviceQuery orderByDeviceImageUrl($order = Criteria::ASC) Order by the device_image_url column
  * @method     ChildPoctDeviceQuery orderByDeviceType($order = Criteria::ASC) Order by the device_type column
  * @method     ChildPoctDeviceQuery orderByDeviceDescripition($order = Criteria::ASC) Order by the device_descripition column
+ * @method     ChildPoctDeviceQuery orderByDeviceEnergyType($order = Criteria::ASC) Order by the poct_device_energy_type column
+ * @method     ChildPoctDeviceQuery orderByDeviceConnectionType($order = Criteria::ASC) Order by the poct_device_connection_type column
  *
  * @method     ChildPoctDeviceQuery groupByPoctDeviceId() Group by the poct_device_id column
  * @method     ChildPoctDeviceQuery groupByUserUserId() Group by the user_user_id column
@@ -37,6 +39,8 @@ use Propel\Runtime\Exception\PropelException;
  * @method     ChildPoctDeviceQuery groupByDeviceImageUrl() Group by the device_image_url column
  * @method     ChildPoctDeviceQuery groupByDeviceType() Group by the device_type column
  * @method     ChildPoctDeviceQuery groupByDeviceDescripition() Group by the device_descripition column
+ * @method     ChildPoctDeviceQuery groupByDeviceEnergyType() Group by the poct_device_energy_type column
+ * @method     ChildPoctDeviceQuery groupByDeviceConnectionType() Group by the poct_device_connection_type column
  *
  * @method     ChildPoctDeviceQuery leftJoin($relation) Adds a LEFT JOIN clause to the query
  * @method     ChildPoctDeviceQuery rightJoin($relation) Adds a RIGHT JOIN clause to the query
@@ -98,7 +102,9 @@ use Propel\Runtime\Exception\PropelException;
  * @method     ChildPoctDevice|null findOneByDeviceModel(string $device_model) Return the first ChildPoctDevice filtered by the device_model column
  * @method     ChildPoctDevice|null findOneByDeviceImageUrl(string $device_image_url) Return the first ChildPoctDevice filtered by the device_image_url column
  * @method     ChildPoctDevice|null findOneByDeviceType(string $device_type) Return the first ChildPoctDevice filtered by the device_type column
- * @method     ChildPoctDevice|null findOneByDeviceDescripition(string $device_descripition) Return the first ChildPoctDevice filtered by the device_descripition column *
+ * @method     ChildPoctDevice|null findOneByDeviceDescripition(string $device_descripition) Return the first ChildPoctDevice filtered by the device_descripition column
+ * @method     ChildPoctDevice|null findOneByDeviceEnergyType(string $poct_device_energy_type) Return the first ChildPoctDevice filtered by the poct_device_energy_type column
+ * @method     ChildPoctDevice|null findOneByDeviceConnectionType(string $poct_device_connection_type) Return the first ChildPoctDevice filtered by the poct_device_connection_type column *
 
  * @method     ChildPoctDevice requirePk($key, ConnectionInterface $con = null) Return the ChildPoctDevice by primary key and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildPoctDevice requireOne(ConnectionInterface $con = null) Return the first ChildPoctDevice matching the query and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
@@ -111,6 +117,8 @@ use Propel\Runtime\Exception\PropelException;
  * @method     ChildPoctDevice requireOneByDeviceImageUrl(string $device_image_url) Return the first ChildPoctDevice filtered by the device_image_url column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildPoctDevice requireOneByDeviceType(string $device_type) Return the first ChildPoctDevice filtered by the device_type column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildPoctDevice requireOneByDeviceDescripition(string $device_descripition) Return the first ChildPoctDevice filtered by the device_descripition column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
+ * @method     ChildPoctDevice requireOneByDeviceEnergyType(string $poct_device_energy_type) Return the first ChildPoctDevice filtered by the poct_device_energy_type column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
+ * @method     ChildPoctDevice requireOneByDeviceConnectionType(string $poct_device_connection_type) Return the first ChildPoctDevice filtered by the poct_device_connection_type column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  *
  * @method     ChildPoctDevice[]|ObjectCollection find(ConnectionInterface $con = null) Return ChildPoctDevice objects based on current ModelCriteria
  * @psalm-method ObjectCollection&\Traversable<ChildPoctDevice> find(ConnectionInterface $con = null) Return ChildPoctDevice objects based on current ModelCriteria
@@ -130,6 +138,10 @@ use Propel\Runtime\Exception\PropelException;
  * @psalm-method ObjectCollection&\Traversable<ChildPoctDevice> findByDeviceType(string $device_type) Return ChildPoctDevice objects filtered by the device_type column
  * @method     ChildPoctDevice[]|ObjectCollection findByDeviceDescripition(string $device_descripition) Return ChildPoctDevice objects filtered by the device_descripition column
  * @psalm-method ObjectCollection&\Traversable<ChildPoctDevice> findByDeviceDescripition(string $device_descripition) Return ChildPoctDevice objects filtered by the device_descripition column
+ * @method     ChildPoctDevice[]|ObjectCollection findByDeviceEnergyType(string $poct_device_energy_type) Return ChildPoctDevice objects filtered by the poct_device_energy_type column
+ * @psalm-method ObjectCollection&\Traversable<ChildPoctDevice> findByDeviceEnergyType(string $poct_device_energy_type) Return ChildPoctDevice objects filtered by the poct_device_energy_type column
+ * @method     ChildPoctDevice[]|ObjectCollection findByDeviceConnectionType(string $poct_device_connection_type) Return ChildPoctDevice objects filtered by the poct_device_connection_type column
+ * @psalm-method ObjectCollection&\Traversable<ChildPoctDevice> findByDeviceConnectionType(string $poct_device_connection_type) Return ChildPoctDevice objects filtered by the poct_device_connection_type column
  * @method     ChildPoctDevice[]|\Propel\Runtime\Util\PropelModelPager paginate($page = 1, $maxPerPage = 10, ConnectionInterface $con = null) Issue a SELECT query based on the current ModelCriteria and uses a page and a maximum number of results per page to compute an offset and a limit
  * @psalm-method \Propel\Runtime\Util\PropelModelPager&\Traversable<ChildPoctDevice> paginate($page = 1, $maxPerPage = 10, ConnectionInterface $con = null) Issue a SELECT query based on the current ModelCriteria and uses a page and a maximum number of results per page to compute an offset and a limit
  *
@@ -229,7 +241,7 @@ abstract class PoctDeviceQuery extends ModelCriteria
      */
     protected function findPkSimple($key, ConnectionInterface $con)
     {
-        $sql = 'SELECT poct_device_id, user_user_id, poct_device_manufacture_name, poct_device_generic_name, device_model, device_image_url, device_type, device_descripition FROM poct_device WHERE poct_device_id = :p0';
+        $sql = 'SELECT poct_device_id, user_user_id, poct_device_manufacture_name, poct_device_generic_name, device_model, device_image_url, device_type, device_descripition, poct_device_energy_type, poct_device_connection_type FROM poct_device WHERE poct_device_id = :p0';
         try {
             $stmt = $con->prepare($sql);
             $stmt->bindValue(':p0', $key, PDO::PARAM_INT);
@@ -557,6 +569,58 @@ abstract class PoctDeviceQuery extends ModelCriteria
         }
 
         return $this->addUsingAlias(PoctDeviceTableMap::COL_DEVICE_DESCRIPITION, $deviceDescripition, $comparison);
+    }
+
+    /**
+     * Filter the query on the poct_device_energy_type column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByDeviceEnergyType('fooValue');   // WHERE poct_device_energy_type = 'fooValue'
+     * $query->filterByDeviceEnergyType('%fooValue%', Criteria::LIKE); // WHERE poct_device_energy_type LIKE '%fooValue%'
+     * $query->filterByDeviceEnergyType(['foo', 'bar']); // WHERE poct_device_energy_type IN ('foo', 'bar')
+     * </code>
+     *
+     * @param     string|string[] $deviceEnergyType The value to use as filter.
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return $this|ChildPoctDeviceQuery The current query, for fluid interface
+     */
+    public function filterByDeviceEnergyType($deviceEnergyType = null, $comparison = null)
+    {
+        if (null === $comparison) {
+            if (is_array($deviceEnergyType)) {
+                $comparison = Criteria::IN;
+            }
+        }
+
+        return $this->addUsingAlias(PoctDeviceTableMap::COL_POCT_DEVICE_ENERGY_TYPE, $deviceEnergyType, $comparison);
+    }
+
+    /**
+     * Filter the query on the poct_device_connection_type column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByDeviceConnectionType('fooValue');   // WHERE poct_device_connection_type = 'fooValue'
+     * $query->filterByDeviceConnectionType('%fooValue%', Criteria::LIKE); // WHERE poct_device_connection_type LIKE '%fooValue%'
+     * $query->filterByDeviceConnectionType(['foo', 'bar']); // WHERE poct_device_connection_type IN ('foo', 'bar')
+     * </code>
+     *
+     * @param     string|string[] $deviceConnectionType The value to use as filter.
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return $this|ChildPoctDeviceQuery The current query, for fluid interface
+     */
+    public function filterByDeviceConnectionType($deviceConnectionType = null, $comparison = null)
+    {
+        if (null === $comparison) {
+            if (is_array($deviceConnectionType)) {
+                $comparison = Criteria::IN;
+            }
+        }
+
+        return $this->addUsingAlias(PoctDeviceTableMap::COL_POCT_DEVICE_CONNECTION_TYPE, $deviceConnectionType, $comparison);
     }
 
     /**
