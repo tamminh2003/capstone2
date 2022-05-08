@@ -9,7 +9,6 @@
  * Exit conditions to check if the controller is not accessed by php page
  */
 if (!isset($_SESSION)) session_start();
-defined("AUTHORIZED_USER") or define("AUTHORIZED_USER", array("RESEARCHER"));
 
 
 use Propel\PoctDeviceAditionalInfoQuery as DocumentQuery;
@@ -22,34 +21,32 @@ require_once $_SERVER["DOCUMENT_ROOT"] . "/controller/utility.php";
 /**
  * Manufacturer authorization
  */
-if (Utility\userAuthorization($_SESSION["user_type"], AUTHORIZED_USER, false)) {;
-    function documentList($deviceId)
+
+    function rDocumentList($deviceId)
     {
 
         $client = Utility\getGoogleClient();
         $service = new Google\Service\Drive($client);
 
-        $documentQuery = DocumentQuery::create()
-            ->filterByUserUserId($_SESSION["user_id"])
+        $RDocumentQuery = DocumentQuery::create()
             ->filterByIdpoctDevice($deviceId)
             ->filterByPoctDeviceAditionalInfoType("research")
             ->orderByPoctDeviceAditionalInfoId(Criteria::ASC)
             ->find();
 
-        $documents = [];
+        $RDocuments = [];
 
-        foreach ($documentQuery as $document) {
+        foreach ($RDocumentQuery as $RDocument) {
             $temp = [];
-            $temp["user_user_id"] = $document->getUserUserId();
-            $temp["id"] = $document->getPoctDeviceAditionalInfoId();
-            $temp["fileId"] = $document->getPoctDeviceAditionalInfoDetails();
-            $temp["label"] = $document->getPoctDeviceAditionalInfoLabel();
+            $temp["user_user_id"] = $RDocument->getUserUserId();
+            $temp["id"] = $RDocument->getPoctDeviceAditionalInfoId();
+            $temp["fileId"] = $RDocument->getPoctDeviceAditionalInfoDetails();
+            $temp["label"] = $RDocument->getPoctDeviceAditionalInfoLabel();
             $optParams = array("fields" => "webContentLink");
             $file = $service->files->get($temp["fileId"], $optParams);
             $temp["link"] = $file->getWebContentLink(); // Performance issue as this call is within a loop
-            $documents[] = $temp;
+            $RDocuments[] = $temp;
         }
 
-        return $documents;
+        return $RDocuments;
     }
-}
