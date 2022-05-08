@@ -220,7 +220,7 @@ function DeviceList_handleUpdate(element) {
 }
 
 function DeviceList_handleDetails(element) {
-    location.assign(`/pages/Manufacturer/Device.php?device_id=${element.dataset.id}`)
+    location.assign(`/pages/Device.php?device_id=${element.dataset.id}`)
 }
 
 function DeviceList_handleDelete(element) {
@@ -289,7 +289,7 @@ function DocumentUpload_handleSubmit(event) {
 
     fetch("/controller/manufacturer/documentAdd.php", { "method": "POST", "body": formData })
         .then(response => response.text())
-        .then(text => { if (text == "success") location.assign(`/pages/Manufacturer/Device.php?device_id=${deviceId}`) });
+        .then(text => { if (text == "success") location.assign(`/pages/Device.php?device_id=${deviceId}`) });
 
 }
 

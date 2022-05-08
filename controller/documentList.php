@@ -9,8 +9,6 @@
  * Exit conditions to check if the controller is not accessed by php page
  */
 if (!isset($_SESSION)) session_start();
-defined("AUTHORIZED_USER") or define("AUTHORIZED_USER", array("RESEARCHER"));
-
 
 use Propel\PoctDeviceAditionalInfoQuery as DocumentQuery;
 use Propel\Runtime\ActiveQuery\Criteria;
@@ -19,10 +17,6 @@ require_once $_SERVER["DOCUMENT_ROOT"] . "/vendor/autoload.php";
 require_once $_SERVER["DOCUMENT_ROOT"] . "/generated-conf/config.php";
 require_once $_SERVER["DOCUMENT_ROOT"] . "/controller/utility.php";
 
-/**
- * Manufacturer authorization
- */
-if (Utility\userAuthorization($_SESSION["user_type"], AUTHORIZED_USER, false)) {;
     function documentList($deviceId)
     {
 
@@ -30,9 +24,8 @@ if (Utility\userAuthorization($_SESSION["user_type"], AUTHORIZED_USER, false)) {
         $service = new Google\Service\Drive($client);
 
         $documentQuery = DocumentQuery::create()
-            ->filterByUserUserId($_SESSION["user_id"])
             ->filterByIdpoctDevice($deviceId)
-            ->filterByPoctDeviceAditionalInfoType("research")
+            ->filterByPoctDeviceAditionalInfoType("document")
             ->orderByPoctDeviceAditionalInfoId(Criteria::ASC)
             ->find();
 
@@ -40,7 +33,6 @@ if (Utility\userAuthorization($_SESSION["user_type"], AUTHORIZED_USER, false)) {
 
         foreach ($documentQuery as $document) {
             $temp = [];
-            $temp["user_user_id"] = $document->getUserUserId();
             $temp["id"] = $document->getPoctDeviceAditionalInfoId();
             $temp["fileId"] = $document->getPoctDeviceAditionalInfoDetails();
             $temp["label"] = $document->getPoctDeviceAditionalInfoLabel();
@@ -52,4 +44,3 @@ if (Utility\userAuthorization($_SESSION["user_type"], AUTHORIZED_USER, false)) {
 
         return $documents;
     }
-}
