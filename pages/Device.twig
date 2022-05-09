@@ -32,7 +32,9 @@
 							</div>
 						</div>
 						<div class="row">
+							{% if session.user_id == device.user_user_id %}
 							<a href={{"/pages/Manufacturer/DeviceUpdate.php?device_id=" ~ device.device_id}} class="btn btn-primary mb-3">Edit</a>
+							{% endif %}
 						</div>
 					</div>
 				</div>
@@ -54,16 +56,20 @@
 										<td>
 											<a href={{image.link}} class="btn btn-warning">Download</a>
 											<a href={{image.view}} class="btn btn-info">View</a>
+											{% if session.user_id == image.user_user_id %}
 											<button class="btn btn-success" data-id={{image.id}} onclick="manuDev_handleImgSelect(this)">Select</button>
 											<button class="btn btn-danger" data-id={{image.id}} onclick="manuDev_handleDocDel(this)">Delete</button>
+											{% endif %}
 										</td>
 									</tr>
 								{% endfor %}
 							</table>
 						</div>
+						{% if session.user_id == device.user_user_id %}
 						<div class="row">
 							<a href={{"/pages/Manufacturer/DocumentAdd.php?addImage&device_id=" ~ device.device_id}} class="btn btn-primary mb-3">Add Image</a>
 						</div>
+						{% endif %}
 					</div>
 				</div>
 
@@ -83,15 +89,19 @@
 										<td>{{document.label}}</td>
 										<td>
 											<a href={{document.link}} class="btn btn-warning">Download</a>
+											{% if session.user_id == document.user_user_id %}
 											<button class="btn btn-danger" data-id={{document.id}} onclick="manuDev_handleDocDel(this)">Delete</button>
+											{% endif %}
 										</td>
 									</tr>
 								{% endfor %}
 							</table>
 						</div>
+						{% if session.user_id == device.user_user_id %}
 						<div class="row">
 							<a href={{"/pages/Manufacturer/DocumentAdd.php?device_id=" ~ device.device_id}} class="btn btn-primary mb-3">Add Document</a>
 						</div>
+						{% endif %}
 					</div>
 				</div>
 				<div class="document-list card bg-light bg-gradient mt-3 mb-3">
@@ -110,21 +120,35 @@
 										<td>{{RDocument.label}}</td>
 										<td>
 											<a href={{RDocument.link}} class="btn btn-warning">Download</a>
+											{% if session.user_id == RDocument.user_user_id %}
 											<button class="btn btn-danger" data-id={{RDocument.id}} onclick="researchDev_handleDocDel(this)">Delete</button>
+											{% endif %}
 										</td>
 									</tr>
 								{% endfor %}
 							</table>
 						</div>
+						{% if session.user_type == "RESEARCHER" %}
 						<div class="row">
 							<a href={{"/pages/Researcher/DocumentAdd.php?device_id=" ~ device.device_id}} class="btn btn-primary mb-3">Add Research Document</a>
 						</div>
+						{% endif %}
 					</div>
 				</div>
 
+				{% if session.user_type == "RESEARCHER" or session.user_type == "MANUFACTURER" %}
 				<div class="button-list card bg-light bg-gradient mt-3 mb-3">
-					<a href="/pages/Manufacturer/DeviceList.php" class="btn btn-danger">Back</a>
+					<a {% if session.user_type == "MANUFACTURER" %} href="/pages/Manufacturer/DeviceList.php"
+					{% elseif session.user_type == "RESEARCHER"%} href="/pages/Researcher/DeviceList.php"
+					{% endif %}  class="btn btn-danger">Back to Device Management</a>
 				</div>
+				{% endif %}
+
+				<div class="button-list card bg-light bg-gradient mt-3 mb-3">
+					<a href="/pages/Homepage.php" {# change to something else later #} class="btn btn-danger">Back to Homepage</a>
+				</div>
+
+
 
 			</div>
 

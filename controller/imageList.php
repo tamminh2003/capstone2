@@ -38,6 +38,7 @@ require_once $_SERVER["DOCUMENT_ROOT"] . "/controller/utility.php";
 
         foreach ($imageQuery as $image) {
             $temp = [];
+            $temp["user_user_id"] = $image->getUserUserId();
             $temp["id"] = $image->getPoctDeviceAditionalInfoId();
             $temp["fileId"] = $image->getPoctDeviceAditionalInfoDetails();
             $temp["label"] = $image->getPoctDeviceAditionalInfoLabel();
