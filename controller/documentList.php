@@ -33,6 +33,7 @@ require_once $_SERVER["DOCUMENT_ROOT"] . "/controller/utility.php";
 
         foreach ($documentQuery as $document) {
             $temp = [];
+            $temp["user_user_id"] = $document->getUserUserId();
             $temp["id"] = $document->getPoctDeviceAditionalInfoId();
             $temp["fileId"] = $document->getPoctDeviceAditionalInfoDetails();
             $temp["label"] = $document->getPoctDeviceAditionalInfoLabel();

@@ -337,6 +337,7 @@ function manuDev_handleImgSelect(element) {
 function ReseacherDocumentUpload_handleSubmit(event) {
     event.preventDefault();
     const form = event.target;
+    let deviceId = (new URLSearchParams(location.search)).get("device_id");
     let formData = new FormData(form);
     form.querySelectorAll("input").forEach(e => { e.disabled = true });
 
@@ -344,12 +345,12 @@ function ReseacherDocumentUpload_handleSubmit(event) {
 
     fetch("/controller/researcher/documentAdd.php", { "method": "POST", "body": formData })
         .then(response => response.text())
-        .then(text => { if (text == "success") location.assign(`/pages/Researcher/DeviceList.php`) });
+        .then(text => { if (text == "success") location.assign(`/pages/Device.php?device_id=${deviceId}`) });
 
 }
 
 function ResearcherDeviceList_handleDetails(element) {
-    location.assign(`/pages/Researcher/Device.php?device_id=${element.dataset.id}`)
+    location.assign(`/pages/Device.php?device_id=${element.dataset.id}`)
 }
 
 function researchDev_handleDocDel(element) {
