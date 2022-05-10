@@ -5,11 +5,13 @@
 		"twig/twig": "^3.3",
 		"sabre/http": "^5.1",
 		"tamminh/twig-php-function": "*",
-		"buzzingpixel/twig-switch": "^1.0"
+		"buzzingpixel/twig-switch": "^1.0",
+		"google/apiclient": "^2.12"
 	},
 	"autoload": {
 		"psr-4": {
-			"Propel\\": "./Propel/"
+			"Propel\\": "./Propel/",
+			"Utility\\": "./Utility/"
 		}
 	},
 	"repositories": [
@@ -17,5 +19,10 @@
 			"type": "vcs",
 			"url": "git@github.com:tamminh2003/twig-php-function.git"
 		}
-	]
+	],
+	"extra": {
+		"google/apiclient-services": [
+			"Drive"
+		]
+	}
 }

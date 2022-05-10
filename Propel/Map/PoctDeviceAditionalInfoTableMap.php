@@ -58,7 +58,7 @@ class PoctDeviceAditionalInfoTableMap extends TableMap
     /**
      * The total number of columns
      */
-    const NUM_COLUMNS = 6;
+    const NUM_COLUMNS = 7;
 
     /**
      * The number of lazy-loaded columns
@@ -68,7 +68,7 @@ class PoctDeviceAditionalInfoTableMap extends TableMap
     /**
      * The number of columns to hydrate (NUM_COLUMNS - NUM_LAZY_LOAD_COLUMNS)
      */
-    const NUM_HYDRATE_COLUMNS = 6;
+    const NUM_HYDRATE_COLUMNS = 7;
 
     /**
      * the column name for the poct_device_aditional_info_id field
@@ -101,6 +101,11 @@ class PoctDeviceAditionalInfoTableMap extends TableMap
     const COL_POCT_DEVICE_ADITIONAL_INFO_DETAILS = 'poct_device_aditional_info.poct_device_aditional_info_details';
 
     /**
+     * the column name for the poct_device_aditional_info_timestamp field
+     */
+    const COL_POCT_DEVICE_ADITIONAL_INFO_TIMESTAMP = 'poct_device_aditional_info.poct_device_aditional_info_timestamp';
+
+    /**
      * The default string format for model objects of the related table
      */
     const DEFAULT_STRING_FORMAT = 'YAML';
@@ -112,11 +117,11 @@ class PoctDeviceAditionalInfoTableMap extends TableMap
      * e.g. self::$fieldNames[self::TYPE_PHPNAME][0] = 'Id'
      */
     protected static $fieldNames = array (
-        self::TYPE_PHPNAME       => array('PoctDeviceAditionalInfoId', 'IdpoctDevice', 'UserUserId', 'PoctDeviceAditionalInfoLabel', 'PoctDeviceAditionalInfoType', 'PoctDeviceAditionalInfoDetails', ),
-        self::TYPE_CAMELNAME     => array('poctDeviceAditionalInfoId', 'idpoctDevice', 'userUserId', 'poctDeviceAditionalInfoLabel', 'poctDeviceAditionalInfoType', 'poctDeviceAditionalInfoDetails', ),
-        self::TYPE_COLNAME       => array(PoctDeviceAditionalInfoTableMap::COL_POCT_DEVICE_ADITIONAL_INFO_ID, PoctDeviceAditionalInfoTableMap::COL_IDPOCT_DEVICE, PoctDeviceAditionalInfoTableMap::COL_USER_USER_ID, PoctDeviceAditionalInfoTableMap::COL_POCT_DEVICE_ADITIONAL_INFO_LABEL, PoctDeviceAditionalInfoTableMap::COL_POCT_DEVICE_ADITIONAL_INFO_TYPE, PoctDeviceAditionalInfoTableMap::COL_POCT_DEVICE_ADITIONAL_INFO_DETAILS, ),
-        self::TYPE_FIELDNAME     => array('poct_device_aditional_info_id', 'idpoct_device', 'user_user_id', 'poct_device_aditional_info_label', 'poct_device_aditional_info_type', 'poct_device_aditional_info_details', ),
-        self::TYPE_NUM           => array(0, 1, 2, 3, 4, 5, )
+        self::TYPE_PHPNAME       => array('PoctDeviceAditionalInfoId', 'IdpoctDevice', 'UserUserId', 'PoctDeviceAditionalInfoLabel', 'PoctDeviceAditionalInfoType', 'PoctDeviceAditionalInfoDetails', 'PoctDeviceAditionalInfoTimestamp', ),
+        self::TYPE_CAMELNAME     => array('poctDeviceAditionalInfoId', 'idpoctDevice', 'userUserId', 'poctDeviceAditionalInfoLabel', 'poctDeviceAditionalInfoType', 'poctDeviceAditionalInfoDetails', 'poctDeviceAditionalInfoTimestamp', ),
+        self::TYPE_COLNAME       => array(PoctDeviceAditionalInfoTableMap::COL_POCT_DEVICE_ADITIONAL_INFO_ID, PoctDeviceAditionalInfoTableMap::COL_IDPOCT_DEVICE, PoctDeviceAditionalInfoTableMap::COL_USER_USER_ID, PoctDeviceAditionalInfoTableMap::COL_POCT_DEVICE_ADITIONAL_INFO_LABEL, PoctDeviceAditionalInfoTableMap::COL_POCT_DEVICE_ADITIONAL_INFO_TYPE, PoctDeviceAditionalInfoTableMap::COL_POCT_DEVICE_ADITIONAL_INFO_DETAILS, PoctDeviceAditionalInfoTableMap::COL_POCT_DEVICE_ADITIONAL_INFO_TIMESTAMP, ),
+        self::TYPE_FIELDNAME     => array('poct_device_aditional_info_id', 'idpoct_device', 'user_user_id', 'poct_device_aditional_info_label', 'poct_device_aditional_info_type', 'poct_device_aditional_info_details', 'poct_device_aditional_info_timestamp', ),
+        self::TYPE_NUM           => array(0, 1, 2, 3, 4, 5, 6, )
     );
 
     /**
@@ -126,11 +131,11 @@ class PoctDeviceAditionalInfoTableMap extends TableMap
      * e.g. self::$fieldKeys[self::TYPE_PHPNAME]['Id'] = 0
      */
     protected static $fieldKeys = array (
-        self::TYPE_PHPNAME       => array('PoctDeviceAditionalInfoId' => 0, 'IdpoctDevice' => 1, 'UserUserId' => 2, 'PoctDeviceAditionalInfoLabel' => 3, 'PoctDeviceAditionalInfoType' => 4, 'PoctDeviceAditionalInfoDetails' => 5, ),
-        self::TYPE_CAMELNAME     => array('poctDeviceAditionalInfoId' => 0, 'idpoctDevice' => 1, 'userUserId' => 2, 'poctDeviceAditionalInfoLabel' => 3, 'poctDeviceAditionalInfoType' => 4, 'poctDeviceAditionalInfoDetails' => 5, ),
-        self::TYPE_COLNAME       => array(PoctDeviceAditionalInfoTableMap::COL_POCT_DEVICE_ADITIONAL_INFO_ID => 0, PoctDeviceAditionalInfoTableMap::COL_IDPOCT_DEVICE => 1, PoctDeviceAditionalInfoTableMap::COL_USER_USER_ID => 2, PoctDeviceAditionalInfoTableMap::COL_POCT_DEVICE_ADITIONAL_INFO_LABEL => 3, PoctDeviceAditionalInfoTableMap::COL_POCT_DEVICE_ADITIONAL_INFO_TYPE => 4, PoctDeviceAditionalInfoTableMap::COL_POCT_DEVICE_ADITIONAL_INFO_DETAILS => 5, ),
-        self::TYPE_FIELDNAME     => array('poct_device_aditional_info_id' => 0, 'idpoct_device' => 1, 'user_user_id' => 2, 'poct_device_aditional_info_label' => 3, 'poct_device_aditional_info_type' => 4, 'poct_device_aditional_info_details' => 5, ),
-        self::TYPE_NUM           => array(0, 1, 2, 3, 4, 5, )
+        self::TYPE_PHPNAME       => array('PoctDeviceAditionalInfoId' => 0, 'IdpoctDevice' => 1, 'UserUserId' => 2, 'PoctDeviceAditionalInfoLabel' => 3, 'PoctDeviceAditionalInfoType' => 4, 'PoctDeviceAditionalInfoDetails' => 5, 'PoctDeviceAditionalInfoTimestamp' => 6, ),
+        self::TYPE_CAMELNAME     => array('poctDeviceAditionalInfoId' => 0, 'idpoctDevice' => 1, 'userUserId' => 2, 'poctDeviceAditionalInfoLabel' => 3, 'poctDeviceAditionalInfoType' => 4, 'poctDeviceAditionalInfoDetails' => 5, 'poctDeviceAditionalInfoTimestamp' => 6, ),
+        self::TYPE_COLNAME       => array(PoctDeviceAditionalInfoTableMap::COL_POCT_DEVICE_ADITIONAL_INFO_ID => 0, PoctDeviceAditionalInfoTableMap::COL_IDPOCT_DEVICE => 1, PoctDeviceAditionalInfoTableMap::COL_USER_USER_ID => 2, PoctDeviceAditionalInfoTableMap::COL_POCT_DEVICE_ADITIONAL_INFO_LABEL => 3, PoctDeviceAditionalInfoTableMap::COL_POCT_DEVICE_ADITIONAL_INFO_TYPE => 4, PoctDeviceAditionalInfoTableMap::COL_POCT_DEVICE_ADITIONAL_INFO_DETAILS => 5, PoctDeviceAditionalInfoTableMap::COL_POCT_DEVICE_ADITIONAL_INFO_TIMESTAMP => 6, ),
+        self::TYPE_FIELDNAME     => array('poct_device_aditional_info_id' => 0, 'idpoct_device' => 1, 'user_user_id' => 2, 'poct_device_aditional_info_label' => 3, 'poct_device_aditional_info_type' => 4, 'poct_device_aditional_info_details' => 5, 'poct_device_aditional_info_timestamp' => 6, ),
+        self::TYPE_NUM           => array(0, 1, 2, 3, 4, 5, 6, )
     );
 
     /**
@@ -187,6 +192,14 @@ class PoctDeviceAditionalInfoTableMap extends TableMap
         'COL_POCT_DEVICE_ADITIONAL_INFO_DETAILS' => 'POCT_DEVICE_ADITIONAL_INFO_DETAILS',
         'poct_device_aditional_info_details' => 'POCT_DEVICE_ADITIONAL_INFO_DETAILS',
         'poct_device_aditional_info.poct_device_aditional_info_details' => 'POCT_DEVICE_ADITIONAL_INFO_DETAILS',
+        'PoctDeviceAditionalInfoTimestamp' => 'POCT_DEVICE_ADITIONAL_INFO_TIMESTAMP',
+        'PoctDeviceAditionalInfo.PoctDeviceAditionalInfoTimestamp' => 'POCT_DEVICE_ADITIONAL_INFO_TIMESTAMP',
+        'poctDeviceAditionalInfoTimestamp' => 'POCT_DEVICE_ADITIONAL_INFO_TIMESTAMP',
+        'poctDeviceAditionalInfo.poctDeviceAditionalInfoTimestamp' => 'POCT_DEVICE_ADITIONAL_INFO_TIMESTAMP',
+        'PoctDeviceAditionalInfoTableMap::COL_POCT_DEVICE_ADITIONAL_INFO_TIMESTAMP' => 'POCT_DEVICE_ADITIONAL_INFO_TIMESTAMP',
+        'COL_POCT_DEVICE_ADITIONAL_INFO_TIMESTAMP' => 'POCT_DEVICE_ADITIONAL_INFO_TIMESTAMP',
+        'poct_device_aditional_info_timestamp' => 'POCT_DEVICE_ADITIONAL_INFO_TIMESTAMP',
+        'poct_device_aditional_info.poct_device_aditional_info_timestamp' => 'POCT_DEVICE_ADITIONAL_INFO_TIMESTAMP',
     ];
 
     /**
@@ -212,6 +225,7 @@ class PoctDeviceAditionalInfoTableMap extends TableMap
         $this->addColumn('poct_device_aditional_info_label', 'PoctDeviceAditionalInfoLabel', 'VARCHAR', false, 100, null);
         $this->addColumn('poct_device_aditional_info_type', 'PoctDeviceAditionalInfoType', 'VARCHAR', false, 100, null);
         $this->addColumn('poct_device_aditional_info_details', 'PoctDeviceAditionalInfoDetails', 'VARCHAR', false, 100, null);
+        $this->addColumn('poct_device_aditional_info_timestamp', 'PoctDeviceAditionalInfoTimestamp', 'VARCHAR', false, 255, null);
     } // initialize()
 
     /**
@@ -384,6 +398,7 @@ class PoctDeviceAditionalInfoTableMap extends TableMap
             $criteria->addSelectColumn(PoctDeviceAditionalInfoTableMap::COL_POCT_DEVICE_ADITIONAL_INFO_LABEL);
             $criteria->addSelectColumn(PoctDeviceAditionalInfoTableMap::COL_POCT_DEVICE_ADITIONAL_INFO_TYPE);
             $criteria->addSelectColumn(PoctDeviceAditionalInfoTableMap::COL_POCT_DEVICE_ADITIONAL_INFO_DETAILS);
+            $criteria->addSelectColumn(PoctDeviceAditionalInfoTableMap::COL_POCT_DEVICE_ADITIONAL_INFO_TIMESTAMP);
         } else {
             $criteria->addSelectColumn($alias . '.poct_device_aditional_info_id');
             $criteria->addSelectColumn($alias . '.idpoct_device');
@@ -391,6 +406,7 @@ class PoctDeviceAditionalInfoTableMap extends TableMap
             $criteria->addSelectColumn($alias . '.poct_device_aditional_info_label');
             $criteria->addSelectColumn($alias . '.poct_device_aditional_info_type');
             $criteria->addSelectColumn($alias . '.poct_device_aditional_info_details');
+            $criteria->addSelectColumn($alias . '.poct_device_aditional_info_timestamp');
         }
     }
 
@@ -414,6 +430,7 @@ class PoctDeviceAditionalInfoTableMap extends TableMap
             $criteria->removeSelectColumn(PoctDeviceAditionalInfoTableMap::COL_POCT_DEVICE_ADITIONAL_INFO_LABEL);
             $criteria->removeSelectColumn(PoctDeviceAditionalInfoTableMap::COL_POCT_DEVICE_ADITIONAL_INFO_TYPE);
             $criteria->removeSelectColumn(PoctDeviceAditionalInfoTableMap::COL_POCT_DEVICE_ADITIONAL_INFO_DETAILS);
+            $criteria->removeSelectColumn(PoctDeviceAditionalInfoTableMap::COL_POCT_DEVICE_ADITIONAL_INFO_TIMESTAMP);
         } else {
             $criteria->removeSelectColumn($alias . '.poct_device_aditional_info_id');
             $criteria->removeSelectColumn($alias . '.idpoct_device');
@@ -421,6 +438,7 @@ class PoctDeviceAditionalInfoTableMap extends TableMap
             $criteria->removeSelectColumn($alias . '.poct_device_aditional_info_label');
             $criteria->removeSelectColumn($alias . '.poct_device_aditional_info_type');
             $criteria->removeSelectColumn($alias . '.poct_device_aditional_info_details');
+            $criteria->removeSelectColumn($alias . '.poct_device_aditional_info_timestamp');
         }
     }
 

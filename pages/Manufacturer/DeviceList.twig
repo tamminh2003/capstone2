@@ -1,0 +1,52 @@
+{% extends "layout.twig" %}
+
+{% block content %}
+
+	<div class="container">
+		<div class="row">
+			<div class="col-2"></div>
+
+			<div class="col card bg-light bg-gradient mt-5">
+
+				<div class="card-title mt-3">
+					<h1 class="text-center text-primary py-2 mb-3">Device List</h1>
+				</div>
+
+				<div>
+					<a href="/pages/Manufacturer/DeviceAdd.php" class="btn btn-primary">Add Device</a>
+				</div>
+
+				<div>
+					<table class="table">
+						<tr>
+							<th scope="col">ID</th>
+							<th scope="col">Manufacture Name</th>
+							<th scope="col">Generic name</th>
+							<th scope="col">Device Model</th>
+							<th scope="col">Device Type</th>
+							<th></th>
+							<th></th>
+						</tr>
+						{% for device in devices %}
+							<tr>
+								<td>{{device.PoctDeviceId}}</td>
+								<td>{{device.ManufactureName}}</td>
+								<td>{{device.GenericName}}</td>
+								<td>{{device.DeviceModel}}</td>
+								<td>{{device.DeviceType}}</td>
+								<td>
+									<button type="button" class="btn btn-warning" data-id={{device.PoctDeviceId}} onclick="DeviceList_handleDetails(this)">Details</button>
+								</td>
+								<td>
+									<button type="button" class="btn btn-danger" data-id={{device.PoctDeviceId}} onclick="DeviceList_handleDelete(this)">Delete</button>
+								</td>
+							</tr>
+						{% endfor %}
+					</table>
+				</div>
+
+			</div>
+			<div class="col-2"></div>
+		</div>
+	</div>
+{% endblock %}

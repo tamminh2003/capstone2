@@ -1,11 +1,11 @@
 <?php
-session_start();
+if (!isset($_SESSION)) session_start();
 
 use Propel\UserQuery;
 
 try {
-	require $_SERVER["DOCUMENT_ROOT"] . "/vendor/autoload.php";
-	require $_SERVER["DOCUMENT_ROOT"] . "/generated-conf/config.php";
+	require_once $_SERVER["DOCUMENT_ROOT"] . "/vendor/autoload.php";
+	require_once $_SERVER["DOCUMENT_ROOT"] . "/generated-conf/config.php";
 
 	$UserName = $_POST["processUsername"];
 	$Password = $_POST["processPassword"];

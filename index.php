@@ -1,7 +1,11 @@
 <?php
 
-require "vendor/autoload.php";
-require "generated-conf/config.php";
+require_once "vendor/autoload.php";
+require_once "generated-conf/config.php";
+require_once "controller/utility.php";
 
-$url = $_SEVER['HTTP_HOST'] . '/pages/Homepage.php';
-header("Location:".$url);
+$url = '/pages/Homepage.php';
+
+Utility\log("Redirect to " . $url);
+
+header("Location:" . $url);
