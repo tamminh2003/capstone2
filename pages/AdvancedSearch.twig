@@ -1,6 +1,24 @@
 {% extends "layout.twig" %}
 
 {% block content %}
+	<script type="text/javascript">
+		function OpenAdvancedSearchOptionsWindow(win) {
+			var freeText =  document.getElementById('advanced_text_search').value;
+var w = 1200;
+var h = 562;
+const y = win.top.outerHeight / 2 + win.top.screenY -(h / 2);
+const x = win.top.outerWidth / 2 + win.top.screenX -(w / 2);
+win.open('/pages/AdvancedSearchOptions.php?freeText='+freeText, 'AdvancedOptionWindow', `toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width=${w}, height=${h}, top=${y}, left=${x}`);
+}
+
+
+function getAdvancedFilters(deviceManufacturerID, deviceTypeID, deviceICD11Code) {
+alert('inside advanced search'+deviceManufacturerID+deviceTypeID+deviceICD11Code);
+document.getElementById('AdvancedFilters').value = 'Device Manufacturer ID : ' + deviceManufacturerID + 'Device Type ID : ' + deviceTypeID + 'Disease ICD-11 Code : ' + deviceICD11Code;
+
+
+}
+	</script>
 
 	<div class="container">
 
@@ -10,7 +28,7 @@
 			<div class="col card bg-light bg-gradient mt-5">
 
 				<div class="card-title mt-3">
-					<h1 class="text-center text-primary py-2">Advanced Search</h1>
+					<h1 class="text-center text-primary py-2"> Search</h1>
 				</div>
 
 				<div class="card-body mt-4">
@@ -19,14 +37,19 @@
 
 							<div class="row">
 
-								<div class="col-11">
-									<input type="text" class="form-control" id="advanced_text_search" name="advanced_text_search" placeholder="Search by Device ID, Device Generic/Manufacturer Name, Device Type, Device Model, Disease name and Disease ICD-11 Code"><br><br/>
+								<div class="col-9">
+									<input type="text" class="form-control" id="advanced_text_search" name="advanced_text_search" placeholder="Search by Device ID, Device Generic/Manufacturer Name, Device Type, Device Model, Disease name and ICD-11 Code"><br><br/>
 								</div>
+
 								<div class="col">
 									<button name="AdvancedSearch" class="btn btn-success mt-3,form-control" type="submit">Search</button><br><br/>
 								</div>
+								<div class="col-2">
+									<a onclick="OpenAdvancedSearchOptionsWindow(window)" class="link-secondary text-end">Advanced Filters</a>
+									<br><br/>
+								</div>
 							</div>
-
+							
 
 						</div>
 
@@ -56,7 +79,7 @@
 
 
 									{# 	<div height="300px" width="300px">{{ device.DeviceImageUrl }}</div>
-														 #}
+																																	 #}
 
 								</div>
 								<div class="col">
@@ -85,3 +108,4 @@
 	</div>
 
 {% endblock %}
+

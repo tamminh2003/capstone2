@@ -264,3 +264,28 @@ function DeviceUpdate_handleSubmit(event) {
             }
         });
 }
+
+
+/* function AdvancedFiltersSubmit(event){
+    
+    event.preventDefault();
+    const manufacturerId = document.querySelector("#manufacturerId").value;
+    const deviceType = document.querySelector("#deviceType").value;
+    const freeText = document.querySelector("#freeText").value;
+  //  location.assign(`/pages/Manufacturer/DeviceUpdate.php?device_id=${element.dataset.id}`);
+    window.opener.location.href=(`/pages/AdvancedSearch.php?manufacturerId=${manufacturerId}&deviceType=${deviceType}&freeText=${freeText}`);
+window.close();
+   /*  window.close();
+    refreshParent(manufacturerId,deviceType,freeText);
+ 
+
+
+} */
+/* function refreshParent(manufacturerId,deviceType,freeText) {
+    
+    window.opener.location.reload();
+    window.parent.manufacturerId = manufacturerId;
+    window.parent.deviceType = deviceType;
+    window.parent.freeText = freeText;
+    
+} */
