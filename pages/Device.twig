@@ -1,43 +1,159 @@
 {% extends "layout.twig" %}
-
+{#/*if session.user_id == device.user_user_id && session.user_type == "MANUFACTURER"*/#}
+{#/*if session.user_id == RDoc.user_user_id && session.user_type == "RESEARCHER"*/#}
 {% block content %}
-
-	<div class="container-sm">
+	<div class="container">
 		<div class="row">
+			<div class="col-1"></div>
 
-			<div class="col-3"></div>
+			<div class="main-container col card bg-light bg-gradient mt-5">
 
-			<div class="col card bg-light bg-gradient mt-5">
-
-				<div class="card-title mt-3">
-					<h3 class="text-center text-primary py-2 mb-3 h3">{{ device.PoctDeviceManufactureName }}</h3>
-					<p class="text-center text-muted">{{ device.PoctDeviceGenericName }}</p>
-				</div>
-
-				<div class="container">
-					<div class="row">
-						<div class="col">
-							<div height="300px" width="300px">{{ device.DeviceImageUrl }}</div>
+				<div class="device-details card bg-light bg-gradient mt-3 mb-3">
+					<div class="card-title">
+						<h3 class="text-center text-primary py-2 mb-3 h3">{{ device.poct_device_manufacture_name }}</h3>
+						<p class="text-center text-muted">{{ device.poct_device_generic_name }}</p>
+					</div>
+					<div class="container">
+						<div class="row">
+							<div class="col">
+								<div style="margin:auto;height:300px;width:300px"><img src={{device.thumbnail}} height="300px" width="300px"></div>
+							</div>
+							<div class="col">
+								<p>Device Model:
+									{{ device.device_model }}</p>
+								<p>Device Type:
+									{{ device.device_type }}</p>
+							</div>
 						</div>
-						<div class="col">
-							<p>Device Model:{{ device.DeviceModel }}</p>
-							<p>Device Type:{{ device.DeviceType }}</p>
+						<div class="row">
+							<div class="col">
+								<p>Device Description:</p>
+								<p>{{ device.device_descripition  }}</p>
+							</div>
+						</div>
+						<div class="row">
+							{% if session.user_id == device.user_user_id %}
+							<a href={{"/pages/Manufacturer/DeviceUpdate.php?device_id=" ~ device.device_id}} class="btn btn-primary mb-3">Edit</a>
+							{% endif %}
 						</div>
 					</div>
-					<div class="row">
-						<div class="col">
-							<p>Device Description:</p>
-							<p>{{ device.DeviceDescripition  }}</p>
+				</div>
+
+				<div class="image-list card bg-light bg-gradient mt-3 mb-3">
+					<div class="card-title">
+						<h3 class="text-center text-primary py-2 mb-3 h3">Device Images</h3>
+					</div>
+					<div class="container">
+						<div class="row">
+							<table class="table">
+								<tr>
+									<th scope="col">Document Name</th>
+									<th scope="col">Actions</th>
+								</tr>
+								{% for image in images %}
+									<tr>
+										<td>{{image.label}}</td>
+										<td>
+											<a href={{image.link}} class="btn btn-warning">Download</a>
+											<a href={{image.view}} class="btn btn-info">View</a>
+											{% if session.user_id == image.user_user_id %}
+											<button class="btn btn-success" data-id={{image.id}} onclick="manuDev_handleImgSelect(this)">Select</button>
+											<button class="btn btn-danger" data-id={{image.id}} onclick="manuDev_handleDocDel(this)">Delete</button>
+											{% endif %}
+										</td>
+									</tr>
+								{% endfor %}
+							</table>
 						</div>
+						{% if session.user_id == device.user_user_id %}
+						<div class="row">
+							<a href={{"/pages/Manufacturer/DocumentAdd.php?addImage&device_id=" ~ device.device_id}} class="btn btn-primary mb-3">Add Image</a>
+						</div>
+						{% endif %}
 					</div>
 				</div>
+
+				<div class="document-list card bg-light bg-gradient mt-3 mb-3">
+					<div class="card-title">
+						<h3 class="text-center text-primary py-2 mb-3 h3">Device Documents</h3>
+					</div>
+					<div class="container">
+						<div class="row">
+							<table class="table">
+								<tr>
+									<th scope="col">Document Name</th>
+									<th scope="col">Actions</th>
+								</tr>
+								{% for document in documents %}
+									<tr>
+										<td>{{document.label}}</td>
+										<td>
+											<a href={{document.link}} class="btn btn-warning">Download</a>
+											{% if session.user_id == document.user_user_id %}
+											<button class="btn btn-danger" data-id={{document.id}} onclick="manuDev_handleDocDel(this)">Delete</button>
+											{% endif %}
+										</td>
+									</tr>
+								{% endfor %}
+							</table>
+						</div>
+						{% if session.user_id == device.user_user_id %}
+						<div class="row">
+							<a href={{"/pages/Manufacturer/DocumentAdd.php?device_id=" ~ device.device_id}} class="btn btn-primary mb-3">Add Document</a>
+						</div>
+						{% endif %}
+					</div>
+				</div>
+				<div class="document-list card bg-light bg-gradient mt-3 mb-3">
+					<div class="card-title">
+						<h3 class="text-center text-primary py-2 mb-3 h3">Device Research Documents</h3>
+					</div>
+					<div class="container">
+						<div class="row">
+							<table class="table">
+								<tr>
+									<th scope="col">Document Name</th>
+									<th scope="col">Actions</th>
+								</tr>
+								{% for RDocument in RDocuments %}
+									<tr>
+										<td>{{RDocument.label}}</td>
+										<td>
+											<a href={{RDocument.link}} class="btn btn-warning">Download</a>
+											{% if session.user_id == RDocument.user_user_id %}
+											<button class="btn btn-danger" data-id={{RDocument.id}} onclick="researchDev_handleDocDel(this)">Delete</button>
+											{% endif %}
+										</td>
+									</tr>
+								{% endfor %}
+							</table>
+						</div>
+						{% if session.user_type == "RESEARCHER" %}
+						<div class="row">
+							<a href={{"/pages/Researcher/DocumentAdd.php?device_id=" ~ device.device_id}} class="btn btn-primary mb-3">Add Research Document</a>
+						</div>
+						{% endif %}
+					</div>
+				</div>
+
+				{% if session.user_type == "RESEARCHER" or session.user_type == "MANUFACTURER" %}
+				<div class="button-list card bg-light bg-gradient mt-3 mb-3">
+					<a {% if session.user_type == "MANUFACTURER" %} href="/pages/Manufacturer/DeviceList.php"
+					{% elseif session.user_type == "RESEARCHER"%} href="/pages/Researcher/DeviceList.php"
+					{% endif %}  class="btn btn-danger">Back to Device Management</a>
+				</div>
+				{% endif %}
+
+				<div class="button-list card bg-light bg-gradient mt-3 mb-3">
+					<a href="/pages/Homepage.php" {# change to something else later #} class="btn btn-danger">Back to Homepage</a>
+				</div>
+
 
 
 			</div>
 
-			<div class="col-3"></div>
+			<div class="col-1"></div>
 
 		</div>
 	</div>
-
 {% endblock %}

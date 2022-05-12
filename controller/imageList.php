@@ -1,5 +1,6 @@
 <?php
 
+
 /**
  * This is a page-access controller.
  * Other way of accessing this file will be redirect back to DeviceList.php
@@ -9,10 +10,8 @@
  * Exit conditions to check if the controller is not accessed by php page
  */
 if (!isset($_SESSION)) session_start();
-defined("AUTHORIZED_USER") or define("AUTHORIZED_USER", array("RESEARCHER"));
 
-
-use Propel\PoctDeviceAditionalInfoQuery as DocumentQuery;
+use Propel\PoctDeviceAditionalInfoQuery as ImageQuery;
 use Propel\Runtime\ActiveQuery\Criteria;
 
 require_once $_SERVER["DOCUMENT_ROOT"] . "/vendor/autoload.php";
@@ -20,36 +19,35 @@ require_once $_SERVER["DOCUMENT_ROOT"] . "/generated-conf/config.php";
 require_once $_SERVER["DOCUMENT_ROOT"] . "/controller/utility.php";
 
 /**
- * Manufacturer authorization
+ * Manufacturer Authorization
  */
-if (Utility\userAuthorization($_SESSION["user_type"], AUTHORIZED_USER, false)) {;
-    function documentList($deviceId)
+
+    function imageList($deviceId)
     {
 
         $client = Utility\getGoogleClient();
         $service = new Google\Service\Drive($client);
 
-        $documentQuery = DocumentQuery::create()
-            ->filterByUserUserId($_SESSION["user_id"])
+        $imageQuery = ImageQuery::create()
             ->filterByIdpoctDevice($deviceId)
-            ->filterByPoctDeviceAditionalInfoType("research")
+            ->filterByPoctDeviceAditionalInfoType("image")
             ->orderByPoctDeviceAditionalInfoId(Criteria::ASC)
             ->find();
 
-        $documents = [];
+        $images = [];
 
-        foreach ($documentQuery as $document) {
+        foreach ($imageQuery as $image) {
             $temp = [];
-            $temp["user_user_id"] = $document->getUserUserId();
-            $temp["id"] = $document->getPoctDeviceAditionalInfoId();
-            $temp["fileId"] = $document->getPoctDeviceAditionalInfoDetails();
-            $temp["label"] = $document->getPoctDeviceAditionalInfoLabel();
-            $optParams = array("fields" => "webContentLink");
+            $temp["user_user_id"] = $image->getUserUserId();
+            $temp["id"] = $image->getPoctDeviceAditionalInfoId();
+            $temp["fileId"] = $image->getPoctDeviceAditionalInfoDetails();
+            $temp["label"] = $image->getPoctDeviceAditionalInfoLabel();
+            $optParams = array("fields" => "webContentLink, webViewLink");
             $file = $service->files->get($temp["fileId"], $optParams);
             $temp["link"] = $file->getWebContentLink(); // Performance issue as this call is within a loop
-            $documents[] = $temp;
+            $temp["view"] = str_replace("download", "view", $temp["link"]);
+            $images[] = $temp;
         }
 
-        return $documents;
+        return $images;
     }
-}
