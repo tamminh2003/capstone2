@@ -58,7 +58,7 @@ class PoctDeviceTableMap extends TableMap
     /**
      * The total number of columns
      */
-    const NUM_COLUMNS = 8;
+    const NUM_COLUMNS = 10;
 
     /**
      * The number of lazy-loaded columns
@@ -68,7 +68,7 @@ class PoctDeviceTableMap extends TableMap
     /**
      * The number of columns to hydrate (NUM_COLUMNS - NUM_LAZY_LOAD_COLUMNS)
      */
-    const NUM_HYDRATE_COLUMNS = 8;
+    const NUM_HYDRATE_COLUMNS = 10;
 
     /**
      * the column name for the poct_device_id field
@@ -111,6 +111,16 @@ class PoctDeviceTableMap extends TableMap
     const COL_DEVICE_DESCRIPITION = 'poct_device.device_descripition';
 
     /**
+     * the column name for the poct_device_energy_type field
+     */
+    const COL_POCT_DEVICE_ENERGY_TYPE = 'poct_device.poct_device_energy_type';
+
+    /**
+     * the column name for the poct_device_connection_type field
+     */
+    const COL_POCT_DEVICE_CONNECTION_TYPE = 'poct_device.poct_device_connection_type';
+
+    /**
      * The default string format for model objects of the related table
      */
     const DEFAULT_STRING_FORMAT = 'YAML';
@@ -122,11 +132,11 @@ class PoctDeviceTableMap extends TableMap
      * e.g. self::$fieldNames[self::TYPE_PHPNAME][0] = 'Id'
      */
     protected static $fieldNames = array (
-        self::TYPE_PHPNAME       => array('PoctDeviceId', 'UserUserId', 'PoctDeviceManufactureName', 'PoctDeviceGenericName', 'DeviceModel', 'DeviceImageUrl', 'DeviceType', 'DeviceDescripition', ),
-        self::TYPE_CAMELNAME     => array('poctDeviceId', 'userUserId', 'poctDeviceManufactureName', 'poctDeviceGenericName', 'deviceModel', 'deviceImageUrl', 'deviceType', 'deviceDescripition', ),
-        self::TYPE_COLNAME       => array(PoctDeviceTableMap::COL_POCT_DEVICE_ID, PoctDeviceTableMap::COL_USER_USER_ID, PoctDeviceTableMap::COL_POCT_DEVICE_MANUFACTURE_NAME, PoctDeviceTableMap::COL_POCT_DEVICE_GENERIC_NAME, PoctDeviceTableMap::COL_DEVICE_MODEL, PoctDeviceTableMap::COL_DEVICE_IMAGE_URL, PoctDeviceTableMap::COL_DEVICE_TYPE, PoctDeviceTableMap::COL_DEVICE_DESCRIPITION, ),
-        self::TYPE_FIELDNAME     => array('poct_device_id', 'user_user_id', 'poct_device_manufacture_name', 'poct_device_generic_name', 'device_model', 'device_image_url', 'device_type', 'device_descripition', ),
-        self::TYPE_NUM           => array(0, 1, 2, 3, 4, 5, 6, 7, )
+        self::TYPE_PHPNAME       => array('PoctDeviceId', 'UserUserId', 'PoctDeviceManufactureName', 'PoctDeviceGenericName', 'DeviceModel', 'DeviceImageUrl', 'DeviceType', 'DeviceDescripition', 'DeviceEnergyType', 'DeviceConnectionType', ),
+        self::TYPE_CAMELNAME     => array('poctDeviceId', 'userUserId', 'poctDeviceManufactureName', 'poctDeviceGenericName', 'deviceModel', 'deviceImageUrl', 'deviceType', 'deviceDescripition', 'deviceEnergyType', 'deviceConnectionType', ),
+        self::TYPE_COLNAME       => array(PoctDeviceTableMap::COL_POCT_DEVICE_ID, PoctDeviceTableMap::COL_USER_USER_ID, PoctDeviceTableMap::COL_POCT_DEVICE_MANUFACTURE_NAME, PoctDeviceTableMap::COL_POCT_DEVICE_GENERIC_NAME, PoctDeviceTableMap::COL_DEVICE_MODEL, PoctDeviceTableMap::COL_DEVICE_IMAGE_URL, PoctDeviceTableMap::COL_DEVICE_TYPE, PoctDeviceTableMap::COL_DEVICE_DESCRIPITION, PoctDeviceTableMap::COL_POCT_DEVICE_ENERGY_TYPE, PoctDeviceTableMap::COL_POCT_DEVICE_CONNECTION_TYPE, ),
+        self::TYPE_FIELDNAME     => array('poct_device_id', 'user_user_id', 'poct_device_manufacture_name', 'poct_device_generic_name', 'device_model', 'device_image_url', 'device_type', 'device_descripition', 'poct_device_energy_type', 'poct_device_connection_type', ),
+        self::TYPE_NUM           => array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, )
     );
 
     /**
@@ -136,11 +146,11 @@ class PoctDeviceTableMap extends TableMap
      * e.g. self::$fieldKeys[self::TYPE_PHPNAME]['Id'] = 0
      */
     protected static $fieldKeys = array (
-        self::TYPE_PHPNAME       => array('PoctDeviceId' => 0, 'UserUserId' => 1, 'PoctDeviceManufactureName' => 2, 'PoctDeviceGenericName' => 3, 'DeviceModel' => 4, 'DeviceImageUrl' => 5, 'DeviceType' => 6, 'DeviceDescripition' => 7, ),
-        self::TYPE_CAMELNAME     => array('poctDeviceId' => 0, 'userUserId' => 1, 'poctDeviceManufactureName' => 2, 'poctDeviceGenericName' => 3, 'deviceModel' => 4, 'deviceImageUrl' => 5, 'deviceType' => 6, 'deviceDescripition' => 7, ),
-        self::TYPE_COLNAME       => array(PoctDeviceTableMap::COL_POCT_DEVICE_ID => 0, PoctDeviceTableMap::COL_USER_USER_ID => 1, PoctDeviceTableMap::COL_POCT_DEVICE_MANUFACTURE_NAME => 2, PoctDeviceTableMap::COL_POCT_DEVICE_GENERIC_NAME => 3, PoctDeviceTableMap::COL_DEVICE_MODEL => 4, PoctDeviceTableMap::COL_DEVICE_IMAGE_URL => 5, PoctDeviceTableMap::COL_DEVICE_TYPE => 6, PoctDeviceTableMap::COL_DEVICE_DESCRIPITION => 7, ),
-        self::TYPE_FIELDNAME     => array('poct_device_id' => 0, 'user_user_id' => 1, 'poct_device_manufacture_name' => 2, 'poct_device_generic_name' => 3, 'device_model' => 4, 'device_image_url' => 5, 'device_type' => 6, 'device_descripition' => 7, ),
-        self::TYPE_NUM           => array(0, 1, 2, 3, 4, 5, 6, 7, )
+        self::TYPE_PHPNAME       => array('PoctDeviceId' => 0, 'UserUserId' => 1, 'PoctDeviceManufactureName' => 2, 'PoctDeviceGenericName' => 3, 'DeviceModel' => 4, 'DeviceImageUrl' => 5, 'DeviceType' => 6, 'DeviceDescripition' => 7, 'DeviceEnergyType' => 8, 'DeviceConnectionType' => 9, ),
+        self::TYPE_CAMELNAME     => array('poctDeviceId' => 0, 'userUserId' => 1, 'poctDeviceManufactureName' => 2, 'poctDeviceGenericName' => 3, 'deviceModel' => 4, 'deviceImageUrl' => 5, 'deviceType' => 6, 'deviceDescripition' => 7, 'deviceEnergyType' => 8, 'deviceConnectionType' => 9, ),
+        self::TYPE_COLNAME       => array(PoctDeviceTableMap::COL_POCT_DEVICE_ID => 0, PoctDeviceTableMap::COL_USER_USER_ID => 1, PoctDeviceTableMap::COL_POCT_DEVICE_MANUFACTURE_NAME => 2, PoctDeviceTableMap::COL_POCT_DEVICE_GENERIC_NAME => 3, PoctDeviceTableMap::COL_DEVICE_MODEL => 4, PoctDeviceTableMap::COL_DEVICE_IMAGE_URL => 5, PoctDeviceTableMap::COL_DEVICE_TYPE => 6, PoctDeviceTableMap::COL_DEVICE_DESCRIPITION => 7, PoctDeviceTableMap::COL_POCT_DEVICE_ENERGY_TYPE => 8, PoctDeviceTableMap::COL_POCT_DEVICE_CONNECTION_TYPE => 9, ),
+        self::TYPE_FIELDNAME     => array('poct_device_id' => 0, 'user_user_id' => 1, 'poct_device_manufacture_name' => 2, 'poct_device_generic_name' => 3, 'device_model' => 4, 'device_image_url' => 5, 'device_type' => 6, 'device_descripition' => 7, 'poct_device_energy_type' => 8, 'poct_device_connection_type' => 9, ),
+        self::TYPE_NUM           => array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, )
     );
 
     /**
@@ -213,6 +223,22 @@ class PoctDeviceTableMap extends TableMap
         'COL_DEVICE_DESCRIPITION' => 'DEVICE_DESCRIPITION',
         'device_descripition' => 'DEVICE_DESCRIPITION',
         'poct_device.device_descripition' => 'DEVICE_DESCRIPITION',
+        'DeviceEnergyType' => 'POCT_DEVICE_ENERGY_TYPE',
+        'PoctDevice.DeviceEnergyType' => 'POCT_DEVICE_ENERGY_TYPE',
+        'deviceEnergyType' => 'POCT_DEVICE_ENERGY_TYPE',
+        'poctDevice.deviceEnergyType' => 'POCT_DEVICE_ENERGY_TYPE',
+        'PoctDeviceTableMap::COL_POCT_DEVICE_ENERGY_TYPE' => 'POCT_DEVICE_ENERGY_TYPE',
+        'COL_POCT_DEVICE_ENERGY_TYPE' => 'POCT_DEVICE_ENERGY_TYPE',
+        'poct_device_energy_type' => 'POCT_DEVICE_ENERGY_TYPE',
+        'poct_device.poct_device_energy_type' => 'POCT_DEVICE_ENERGY_TYPE',
+        'DeviceConnectionType' => 'POCT_DEVICE_CONNECTION_TYPE',
+        'PoctDevice.DeviceConnectionType' => 'POCT_DEVICE_CONNECTION_TYPE',
+        'deviceConnectionType' => 'POCT_DEVICE_CONNECTION_TYPE',
+        'poctDevice.deviceConnectionType' => 'POCT_DEVICE_CONNECTION_TYPE',
+        'PoctDeviceTableMap::COL_POCT_DEVICE_CONNECTION_TYPE' => 'POCT_DEVICE_CONNECTION_TYPE',
+        'COL_POCT_DEVICE_CONNECTION_TYPE' => 'POCT_DEVICE_CONNECTION_TYPE',
+        'poct_device_connection_type' => 'POCT_DEVICE_CONNECTION_TYPE',
+        'poct_device.poct_device_connection_type' => 'POCT_DEVICE_CONNECTION_TYPE',
     ];
 
     /**
@@ -240,6 +266,8 @@ class PoctDeviceTableMap extends TableMap
         $this->addColumn('device_image_url', 'DeviceImageUrl', 'VARCHAR', false, 255, null);
         $this->addColumn('device_type', 'DeviceType', 'VARCHAR', false, 255, null);
         $this->addColumn('device_descripition', 'DeviceDescripition', 'VARCHAR', false, 255, null);
+        $this->addColumn('poct_device_energy_type', 'DeviceEnergyType', 'VARCHAR', false, 45, null);
+        $this->addColumn('poct_device_connection_type', 'DeviceConnectionType', 'VARCHAR', false, 45, null);
     } // initialize()
 
     /**
@@ -428,6 +456,8 @@ class PoctDeviceTableMap extends TableMap
             $criteria->addSelectColumn(PoctDeviceTableMap::COL_DEVICE_IMAGE_URL);
             $criteria->addSelectColumn(PoctDeviceTableMap::COL_DEVICE_TYPE);
             $criteria->addSelectColumn(PoctDeviceTableMap::COL_DEVICE_DESCRIPITION);
+            $criteria->addSelectColumn(PoctDeviceTableMap::COL_POCT_DEVICE_ENERGY_TYPE);
+            $criteria->addSelectColumn(PoctDeviceTableMap::COL_POCT_DEVICE_CONNECTION_TYPE);
         } else {
             $criteria->addSelectColumn($alias . '.poct_device_id');
             $criteria->addSelectColumn($alias . '.user_user_id');
@@ -437,6 +467,8 @@ class PoctDeviceTableMap extends TableMap
             $criteria->addSelectColumn($alias . '.device_image_url');
             $criteria->addSelectColumn($alias . '.device_type');
             $criteria->addSelectColumn($alias . '.device_descripition');
+            $criteria->addSelectColumn($alias . '.poct_device_energy_type');
+            $criteria->addSelectColumn($alias . '.poct_device_connection_type');
         }
     }
 
@@ -462,6 +494,8 @@ class PoctDeviceTableMap extends TableMap
             $criteria->removeSelectColumn(PoctDeviceTableMap::COL_DEVICE_IMAGE_URL);
             $criteria->removeSelectColumn(PoctDeviceTableMap::COL_DEVICE_TYPE);
             $criteria->removeSelectColumn(PoctDeviceTableMap::COL_DEVICE_DESCRIPITION);
+            $criteria->removeSelectColumn(PoctDeviceTableMap::COL_POCT_DEVICE_ENERGY_TYPE);
+            $criteria->removeSelectColumn(PoctDeviceTableMap::COL_POCT_DEVICE_CONNECTION_TYPE);
         } else {
             $criteria->removeSelectColumn($alias . '.poct_device_id');
             $criteria->removeSelectColumn($alias . '.user_user_id');
@@ -471,6 +505,8 @@ class PoctDeviceTableMap extends TableMap
             $criteria->removeSelectColumn($alias . '.device_image_url');
             $criteria->removeSelectColumn($alias . '.device_type');
             $criteria->removeSelectColumn($alias . '.device_descripition');
+            $criteria->removeSelectColumn($alias . '.poct_device_energy_type');
+            $criteria->removeSelectColumn($alias . '.poct_device_connection_type');
         }
     }
 

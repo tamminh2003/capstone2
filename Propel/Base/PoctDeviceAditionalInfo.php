@@ -106,6 +106,13 @@ abstract class PoctDeviceAditionalInfo implements ActiveRecordInterface
     protected $poct_device_aditional_info_details;
 
     /**
+     * The value for the poct_device_aditional_info_timestamp field.
+     *
+     * @var        string|null
+     */
+    protected $poct_device_aditional_info_timestamp;
+
+    /**
      * @var        ChildPoctDevice
      */
     protected $aPoctDevice;
@@ -408,6 +415,16 @@ abstract class PoctDeviceAditionalInfo implements ActiveRecordInterface
     }
 
     /**
+     * Get the [poct_device_aditional_info_timestamp] column value.
+     *
+     * @return string|null
+     */
+    public function getPoctDeviceAditionalInfoTimestamp()
+    {
+        return $this->poct_device_aditional_info_timestamp;
+    }
+
+    /**
      * Set the value of [poct_device_aditional_info_id] column.
      *
      * @param int $v New value
@@ -536,6 +553,26 @@ abstract class PoctDeviceAditionalInfo implements ActiveRecordInterface
     } // setPoctDeviceAditionalInfoDetails()
 
     /**
+     * Set the value of [poct_device_aditional_info_timestamp] column.
+     *
+     * @param string|null $v New value
+     * @return $this|\Propel\PoctDeviceAditionalInfo The current object (for fluent API support)
+     */
+    public function setPoctDeviceAditionalInfoTimestamp($v)
+    {
+        if ($v !== null) {
+            $v = (string) $v;
+        }
+
+        if ($this->poct_device_aditional_info_timestamp !== $v) {
+            $this->poct_device_aditional_info_timestamp = $v;
+            $this->modifiedColumns[PoctDeviceAditionalInfoTableMap::COL_POCT_DEVICE_ADITIONAL_INFO_TIMESTAMP] = true;
+        }
+
+        return $this;
+    } // setPoctDeviceAditionalInfoTimestamp()
+
+    /**
      * Indicates whether the columns in this object are only set to default values.
      *
      * This method can be used in conjunction with isModified() to indicate whether an object is both
@@ -588,6 +625,9 @@ abstract class PoctDeviceAditionalInfo implements ActiveRecordInterface
 
             $col = $row[TableMap::TYPE_NUM == $indexType ? 5 + $startcol : PoctDeviceAditionalInfoTableMap::translateFieldName('PoctDeviceAditionalInfoDetails', TableMap::TYPE_PHPNAME, $indexType)];
             $this->poct_device_aditional_info_details = (null !== $col) ? (string) $col : null;
+
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 6 + $startcol : PoctDeviceAditionalInfoTableMap::translateFieldName('PoctDeviceAditionalInfoTimestamp', TableMap::TYPE_PHPNAME, $indexType)];
+            $this->poct_device_aditional_info_timestamp = (null !== $col) ? (string) $col : null;
             $this->resetModified();
 
             $this->setNew(false);
@@ -596,7 +636,7 @@ abstract class PoctDeviceAditionalInfo implements ActiveRecordInterface
                 $this->ensureConsistency();
             }
 
-            return $startcol + 6; // 6 = PoctDeviceAditionalInfoTableMap::NUM_HYDRATE_COLUMNS.
+            return $startcol + 7; // 7 = PoctDeviceAditionalInfoTableMap::NUM_HYDRATE_COLUMNS.
 
         } catch (Exception $e) {
             throw new PropelException(sprintf('Error populating %s object', '\\Propel\\PoctDeviceAditionalInfo'), 0, $e);
@@ -842,6 +882,9 @@ abstract class PoctDeviceAditionalInfo implements ActiveRecordInterface
         if ($this->isColumnModified(PoctDeviceAditionalInfoTableMap::COL_POCT_DEVICE_ADITIONAL_INFO_DETAILS)) {
             $modifiedColumns[':p' . $index++]  = 'poct_device_aditional_info_details';
         }
+        if ($this->isColumnModified(PoctDeviceAditionalInfoTableMap::COL_POCT_DEVICE_ADITIONAL_INFO_TIMESTAMP)) {
+            $modifiedColumns[':p' . $index++]  = 'poct_device_aditional_info_timestamp';
+        }
 
         $sql = sprintf(
             'INSERT INTO poct_device_aditional_info (%s) VALUES (%s)',
@@ -870,6 +913,9 @@ abstract class PoctDeviceAditionalInfo implements ActiveRecordInterface
                         break;
                     case 'poct_device_aditional_info_details':
                         $stmt->bindValue($identifier, $this->poct_device_aditional_info_details, PDO::PARAM_STR);
+                        break;
+                    case 'poct_device_aditional_info_timestamp':
+                        $stmt->bindValue($identifier, $this->poct_device_aditional_info_timestamp, PDO::PARAM_STR);
                         break;
                 }
             }
@@ -951,6 +997,9 @@ abstract class PoctDeviceAditionalInfo implements ActiveRecordInterface
             case 5:
                 return $this->getPoctDeviceAditionalInfoDetails();
                 break;
+            case 6:
+                return $this->getPoctDeviceAditionalInfoTimestamp();
+                break;
             default:
                 return null;
                 break;
@@ -987,6 +1036,7 @@ abstract class PoctDeviceAditionalInfo implements ActiveRecordInterface
             $keys[3] => $this->getPoctDeviceAditionalInfoLabel(),
             $keys[4] => $this->getPoctDeviceAditionalInfoType(),
             $keys[5] => $this->getPoctDeviceAditionalInfoDetails(),
+            $keys[6] => $this->getPoctDeviceAditionalInfoTimestamp(),
         );
         $virtualColumns = $this->virtualColumns;
         foreach ($virtualColumns as $key => $virtualColumn) {
@@ -1076,6 +1126,9 @@ abstract class PoctDeviceAditionalInfo implements ActiveRecordInterface
             case 5:
                 $this->setPoctDeviceAditionalInfoDetails($value);
                 break;
+            case 6:
+                $this->setPoctDeviceAditionalInfoTimestamp($value);
+                break;
         } // switch()
 
         return $this;
@@ -1119,6 +1172,9 @@ abstract class PoctDeviceAditionalInfo implements ActiveRecordInterface
         }
         if (array_key_exists($keys[5], $arr)) {
             $this->setPoctDeviceAditionalInfoDetails($arr[$keys[5]]);
+        }
+        if (array_key_exists($keys[6], $arr)) {
+            $this->setPoctDeviceAditionalInfoTimestamp($arr[$keys[6]]);
         }
 
         return $this;
@@ -1180,6 +1236,9 @@ abstract class PoctDeviceAditionalInfo implements ActiveRecordInterface
         }
         if ($this->isColumnModified(PoctDeviceAditionalInfoTableMap::COL_POCT_DEVICE_ADITIONAL_INFO_DETAILS)) {
             $criteria->add(PoctDeviceAditionalInfoTableMap::COL_POCT_DEVICE_ADITIONAL_INFO_DETAILS, $this->poct_device_aditional_info_details);
+        }
+        if ($this->isColumnModified(PoctDeviceAditionalInfoTableMap::COL_POCT_DEVICE_ADITIONAL_INFO_TIMESTAMP)) {
+            $criteria->add(PoctDeviceAditionalInfoTableMap::COL_POCT_DEVICE_ADITIONAL_INFO_TIMESTAMP, $this->poct_device_aditional_info_timestamp);
         }
 
         return $criteria;
@@ -1272,6 +1331,7 @@ abstract class PoctDeviceAditionalInfo implements ActiveRecordInterface
         $copyObj->setPoctDeviceAditionalInfoLabel($this->getPoctDeviceAditionalInfoLabel());
         $copyObj->setPoctDeviceAditionalInfoType($this->getPoctDeviceAditionalInfoType());
         $copyObj->setPoctDeviceAditionalInfoDetails($this->getPoctDeviceAditionalInfoDetails());
+        $copyObj->setPoctDeviceAditionalInfoTimestamp($this->getPoctDeviceAditionalInfoTimestamp());
         if ($makeNew) {
             $copyObj->setNew(true);
             $copyObj->setPoctDeviceAditionalInfoId(NULL); // this is a auto-increment column, so set to default value
@@ -1421,6 +1481,7 @@ abstract class PoctDeviceAditionalInfo implements ActiveRecordInterface
         $this->poct_device_aditional_info_label = null;
         $this->poct_device_aditional_info_type = null;
         $this->poct_device_aditional_info_details = null;
+        $this->poct_device_aditional_info_timestamp = null;
         $this->alreadyInSave = false;
         $this->clearAllReferences();
         $this->resetModified();

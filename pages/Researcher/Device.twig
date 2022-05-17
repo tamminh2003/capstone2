@@ -1,0 +1,74 @@
+{% extends "layout.twig" %}
+
+{% block content %}
+	<div class="container">
+		<div class="row">
+			<div class="col-1"></div>
+
+			<div class="main-container col card bg-light bg-gradient mt-5">
+
+				<div class="device-details card bg-light bg-gradient mt-3 mb-3">
+					<div class="card-title">
+						<h3 class="text-center text-primary py-2 mb-3 h3">{{ device.poct_device_manufacture_name }}</h3>
+						<p class="text-center text-muted">{{ device.poct_device_generic_name }}</p>
+					</div>
+					<div class="container">
+						<div class="row">
+							<div class="col">
+								<div style="margin:auto;height:300px;width:300px"><img src={{device.thumbnail}} height="300px" width="300px"></div>
+							</div>
+							<div class="col">
+								<p>Device Model:
+									{{ device.device_model }}</p>
+								<p>Device Type:
+									{{ device.device_type }}</p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col">
+								<p>Device Description:</p>
+								<p>{{ device.device_descripition  }}</p>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="document-list card bg-light bg-gradient mt-3 mb-3">
+					<div class="card-title">
+						<h3 class="text-center text-primary py-2 mb-3 h3">Device Research Documents</h3>
+					</div>
+					<div class="container">
+						<div class="row">
+							<table class="table">
+								<tr>
+									<th scope="col">Document Name</th>
+									<th scope="col">Actions</th>
+								</tr>
+								{% for document in documents %}
+									<tr>
+										<td>{{document.label}}</td>
+										<td>
+											<a href={{document.link}} class="btn btn-warning">Download</a>
+											<button class="btn btn-danger" data-id={{document.id}} onclick="researchDev_handleDocDel(this)">Delete</button>
+										</td>
+									</tr>
+								{% endfor %}
+							</table>
+						</div>
+						<div class="row">
+							<a href={{"/pages/Researcher/DocumentAdd.php?device_id=" ~ device.device_id}} class="btn btn-primary mb-3">Add Research Document</a>
+						</div>
+					</div>
+				</div>
+
+				<div class="button-list card bg-light bg-gradient mt-3 mb-3">
+					<a href="/pages/Researcher/DeviceList.php" class="btn btn-danger">Back</a>
+				</div>
+
+			</div>
+
+			<div class="col-1"></div>
+
+		</div>
+	</div>
+{% endblock %}

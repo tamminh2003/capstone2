@@ -1,41 +1,49 @@
 <?php
-session_start();
+
+if (!isset($_SESSION)) session_start();
+
+
+/**
+ * User Authorization
+ */
+require_once $_SERVER["DOCUMENT_ROOT"] . "/controller/utility.php";
+
 
 use buzzingpixel\twigswitch\SwitchTwigExtension;
-use Propel\PoctDevice;
-use Propel\PoctDeviceQuery;
 use Umpirsky\Twig\Extension\PhpFunctionExtension;
-use Utility\Utility;
 
-require $_SERVER["DOCUMENT_ROOT"] . "/vendor/autoload.php";
-require $_SERVER["DOCUMENT_ROOT"] . "/controller/search.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/vendor/autoload.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/controller/documentList.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/controller/imageList.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/controller/RDocumentList.php";
 
-if (!isset($_GET['device_id'])) {
-  Utility::log("\$_GET['device_id'] not found");
-  exit();
-}
+/**
+ * Device access authorization, other manufacturers are not authorized to see.
+ *
+ */
+$device = Utility\getDeviceById($_GET["device_id"]);
 
-$device = PoctDeviceQuery::create()->filterByPoctDeviceId($_GET['device_id'])->find()->getFirst();
 
-$passingVariable = [
-  "PoctDeviceId" => $device->getPoctDeviceId(),
-  "PoctDeviceManufactureName" => $device->getPoctDeviceManufactureName(),
-  "PoctDeviceGenericName" => $device->getPoctDeviceGenericName(),
-  "DeviceImageUrl" => $device->getDeviceImageUrl(),
-  "DeviceModel" => $device->getDeviceModel(),
-  "DeviceType" => $device->getDeviceType(),
-  "DeviceDescripition" => $device->getDeviceDescripition()
-];
+/**
+ * Load device-related images
+ */
+$images = imageList($_GET["device_id"]);
+
+/**
+ * Load device-related images
+ */
+$RDocuments = rDocumentList($_GET["device_id"]);
+
+/**
+ * Load device-related documents
+ */
+$documents = documentList($_GET["device_id"]);
 
 $pathToPages = $_SERVER["DOCUMENT_ROOT"] . "/pages/";
-
 $twigLoader = new \Twig\Loader\FilesystemLoader($pathToPages);
-
 $twig = new Twig\Environment($twigLoader);
-
 $twig->addExtension(new PhpFunctionExtension(["str_contains"]));
 $twig->addExtension(new SwitchTwigExtension());
+$template = $twig->load("./Device.twig");
 
-$template = $twig->load("Device.twig");
-
-echo $template->render(["uri" => $_SERVER["REQUEST_URI"], "session" => $_SESSION, "device" => $passingVariable]);
+echo $template->render(["uri" => $_SERVER["REQUEST_URI"], "session" => $_SESSION, "device" => $device, "documents" => $documents, "images" => $images, "RDocuments" => $RDocuments]);

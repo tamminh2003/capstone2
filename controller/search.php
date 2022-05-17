@@ -14,28 +14,28 @@ require $_SERVER["DOCUMENT_ROOT"] . "/generated-conf/config.php";
 
 function search()
 {
-  $deviceQuery = new PoctDeviceQuery();
+    $deviceQuery = new PoctDeviceQuery();
 
 
-  $result = $deviceQuery->findByPoctDeviceGenericName('Anidra');
+    $result = $deviceQuery->findByPoctDeviceGenericName('Anidra');
 
 
-  $devices = [];
+    $devices = [];
 
-  foreach ($result as $device) {
-    $temp = [];
-    $temp["PoctDeviceId"] = $device->getPoctDeviceId();
-    $temp["ManufactureName"] = $device->getPoctDeviceManufactureName();
-    $temp["GenericName"] = $device->getPoctDeviceGenericName();
-    $temp["DeviceModel"] = $device->getDeviceModel();
-    $temp["DeviceType"] = $device->getDeviceType();
-    $temp["DeviceDescription"] = $device->getDeviceDescripition();
+    foreach ($result as $device) {
+        $temp = [];
+        $temp["PoctDeviceId"] = $device->getPoctDeviceId();
+        $temp["ManufactureName"] = $device->getPoctDeviceManufactureName();
+        $temp["GenericName"] = $device->getPoctDeviceGenericName();
+        $temp["DeviceModel"] = $device->getDeviceModel();
+        $temp["DeviceType"] = $device->getDeviceType();
+        $temp["DeviceDescription"] = $device->getDeviceDescripition();
 
 
-    $devices[] = $temp;
-  }
+        $devices[] = $temp;
+    }
 
-  return $devices;
+    return $devices;
 }
 
 function freeTextSearch($free_text_search)
@@ -55,10 +55,10 @@ function freeTextSearch($free_text_search)
     . "OR device_model LIKE '%" . $free_text_search . "%'"
     . "OR user_user_id IN (SELECT user_id FROM user WHERE user_company LIKE '%" . $free_text_search . "%')";
 
-  $stmt = $con->prepare($query);
-  if ($stmt->execute()) {
-    $devicesset = $stmt->fetchAll();
-  }
+    $stmt = $con->prepare($query);
+    if ($stmt->execute()) {
+        $devicesset = $stmt->fetchAll();
+    }
 
   
   
@@ -74,10 +74,10 @@ function freeTextSearch($free_text_search)
     $temp["DeviceDescription"] = $device['device_descripition'];
 
 
-    $devices[] = $temp;
-  }
+        $devices[] = $temp;
+    }
 
-  return $devices;
+    return $devices;
 }
 
 function advancedSearch($advanced_text_search)
@@ -97,13 +97,13 @@ function advancedSearch($advanced_text_search)
     . "OR device_model LIKE '%" . $advanced_text_search . "%'"
     . "OR user_user_id IN (SELECT user_id FROM user WHERE user_company LIKE '%" . $advanced_text_search . "%')";
 
-  $stmt = $con->prepare($query);
-  if ($stmt->execute()) {
-    $devicesset = $stmt->fetchAll();
-  }
+    $stmt = $con->prepare($query);
+    if ($stmt->execute()) {
+        $devicesset = $stmt->fetchAll();
+    }
 
 
-  foreach ($devicesset as $device) {
+    foreach ($devicesset as $device) {
 
     $temp = [];
     $temp["PoctDeviceId"] = $device['poct_device_id'];
@@ -115,10 +115,10 @@ function advancedSearch($advanced_text_search)
     $temp["DeviceDescription"] = $device['device_descripition'];
 
 
-    $devices[] = $temp;
-  }
+        $devices[] = $temp;
+    }
 
-  return $devices;
+    return $devices;
 }
 
 function advancedSearch2($advanced_text_search,$manufacturerId,$deviceType,$icd11Code,$connectionType,$energyType){

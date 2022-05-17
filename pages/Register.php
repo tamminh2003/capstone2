@@ -2,7 +2,7 @@
 
 use Umpirsky\Twig\Extension\PhpFunctionExtension;
 
-require $_SERVER["DOCUMENT_ROOT"] . "/vendor/autoload.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/vendor/autoload.php";
 
 $pathToPages = $_SERVER["DOCUMENT_ROOT"] . "/pages/";
 

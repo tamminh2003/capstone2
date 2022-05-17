@@ -1,6 +1,6 @@
 <?php
-require $_SERVER["DOCUMENT_ROOT"] . "/vendor/autoload.php";
-require $_SERVER["DOCUMENT_ROOT"] . "/generated-conf/config.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/vendor/autoload.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/generated-conf/config.php";
 
 //use Propel\Runtime\Propel; // composer install?
 use Propel\User;
