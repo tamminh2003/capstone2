@@ -34,23 +34,97 @@ function populateManufacturerDropdown()
   return $manufacturers;
 }
 
+function populateDeviceConnectionTypeDropdown()
+{
+  $deviceQuery = new PoctDeviceQuery();
+
+
+  $result = $deviceQuery->find();
+  
+  $devices = [];
+
+  foreach ($result as $device) {
+    
+    $temp = [];
+    $temp["PoctDeviceId"] = $device->getPoctDeviceId();
+    $device_Type= $device->getDeviceType();
+    $temp["DeviceType"] = $device_Type;
+
+    if(in_array($device_Type, $devices,TRUE)){
+     
+    }else{
+      $devices[] = $temp;
+    }
+
+   
+  }
+
+  return $devices;
+}
+
+
+
+
+function populateDeviceEnergyTypeDropdown()
+{
+  $deviceQuery = new PoctDeviceQuery();
+
+
+  $result = $deviceQuery->find();
+  
+
+/* $result = $deviceQuery->find();
+ */
+  $devices = [];
+
+  foreach ($result as $device) {
+    
+    $temp = [];
+    $temp["PoctDeviceId"] = $device->getPoctDeviceId();
+    $device_Type= $device->getDeviceType();
+    $temp["DeviceType"] = $device_Type;
+
+    if(in_array($device_Type, $devices,TRUE)){
+     
+    }else{
+      $devices[] = $temp;
+    }
+
+   
+  }
+
+  return $devices;
+}
+
+
+
+
 function populateDeviceTypeDropdown()
 {
   $deviceQuery = new PoctDeviceQuery();
 
 
   $result = $deviceQuery->find();
+  
 
-
+/* $result = $deviceQuery->find();
+ */
   $devices = [];
 
   foreach ($result as $device) {
+    
     $temp = [];
     $temp["PoctDeviceId"] = $device->getPoctDeviceId();
-    $temp["DeviceType"] = $device->getDeviceType();
+    $device_Type= $device->getDeviceType();
+    $temp["DeviceType"] = $device_Type;
 
+    if(in_array($device_Type, $devices,TRUE)){
+     
+    }else{
+      $devices[] = $temp;
+    }
 
-    $devices[] = $temp;
+   
   }
 
   return $devices;

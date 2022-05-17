@@ -3,17 +3,12 @@
 {% block content %}
 	<script type="text/javascript">
 		function OpenAdvancedSearchOptionsWindow(win) {
-			
 			var freeText =  document.getElementById('advanced_text_search').value;
 var w = 1200;
 var h = 562;
 const y = win.top.outerHeight / 2 + win.top.screenY -(h / 2);
 const x = win.top.outerWidth / 2 + win.top.screenX -(w / 2);
 win.open('/pages/AdvancedSearchOptions.php?freeText='+freeText, 'AdvancedOptionWindow', `toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width=${w}, height=${h}, top=${y}, left=${x}`);
-
- 
-  
-
 }
 
 
@@ -24,9 +19,8 @@ document.getElementById('AdvancedFilters').value = 'Device Manufacturer ID : ' +
 
 }
 	</script>
-	
 
-	<div class="container" id="mainContainer">
+	<div class="container">
 
 		<div class="row">
 
@@ -79,16 +73,21 @@ document.getElementById('AdvancedFilters').value = 'Device Manufacturer ID : ' +
 							<div class="row">
 								<div class="col">
 
-								<img src="{{ device.DeviceImgUrl }}" alt="{{ device.DeviceImgUrl }}" width="150" height="150">
-									
+									<div height="300px" width="300px">
+										<iframe src='https://drive.google.com/file/d/1ABzNSkNTyqeqVlrtYLB7u_JjNY5sGh-3/preview' width='100' height='100' allow='autoplay'></iframe>
+									</div>
+
+
+									{# 	<div height="300px" width="300px">{{ device.DeviceImageUrl }}</div>
+																																	 #}
+
 								</div>
 								<div class="col">
-									<p>Device ID : 
+									<p>Device ID :
 										{{device.PoctDeviceId}}</p>
-									<p>Device Generic Name: {{ device.GenericName }}</p>
-									<p>Device Model: {{ device.DeviceModel }}</p>
-									<p>Device Type: {{ device.DeviceType }}</p>
-									
+									<p>Device Generic Name:{{ device.GenericName }}</p>
+									<p>Device Model:{{ device.DeviceModel }}</p>
+									<p>Device Type:{{ device.DeviceType }}</p>
 								</div>
 							</div>
 							<div class="row">

@@ -40,7 +40,7 @@ if(isset($_GET['freeText'] ) && isset ($_GET['deviceManufacturerID']) && isset($
    $twig->addExtension(new PhpFunctionExtension(["str_contains"]));
    $twig->addExtension(new SwitchTwigExtension());
 
-   $template = $twig->load("AdvancedSearch.twig");
+   $template = $twig->load("AdvancedSearch2.twig");
 
     echo $template->render(["uri" => $_SERVER["REQUEST_URI"], "session" => $_SESSION, "devices" => $devices]);
 
@@ -60,7 +60,7 @@ if(isset($_GET['freeText'] ) && isset ($_GET['deviceManufacturerID']) && isset($
    $twig->addExtension(new PhpFunctionExtension(["str_contains"]));
    $twig->addExtension(new SwitchTwigExtension());
 
-   $template = $twig->load("AdvancedSearch.twig");
+   $template = $twig->load("AdvancedSearch2.twig");
 
    echo $template->render(["uri" => $_SERVER["REQUEST_URI"], "session" => $_SESSION, "devices" => $devices]);
 } 
@@ -76,7 +76,7 @@ else {
    $twig->addExtension(new PhpFunctionExtension(["str_contains"]));
    $twig->addExtension(new SwitchTwigExtension());
 
-   $template = $twig->load("AdvancedSearch.twig");
+   $template = $twig->load("AdvancedSearch2.twig");
 
    echo $template->render(["uri" => $_SERVER["REQUEST_URI"], "session" => $_SESSION]);
 }
