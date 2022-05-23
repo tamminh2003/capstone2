@@ -17,6 +17,10 @@ require $_SERVER["DOCUMENT_ROOT"] . "/controller/advancedSearchOptions.php";
 
 $manufacturers = populateManufacturerDropdown();
 $deviceTypes = populateDeviceTypeDropdown();
+$deviceEnergyTypes = populateDeviceEnergyTypeDropdown();
+$deviceconnectionTypes = populateDeviceConnectionTypeDropdown();
+
+
 $freeText;
 if (isset($_GET['freeText'])) {
   $freeText =   $_GET['freeText'];
@@ -34,5 +38,5 @@ $twig->addExtension(new SwitchTwigExtension());
 $template = $twig->load("AdvancedSearchOptions.twig");
 
 
-echo $template->render(["uri" => $_SERVER["REQUEST_URI"], "session" => $_SESSION, "manufacturers" => $manufacturers, "deviceTypes" => $deviceTypes, "advancedText" => $freeText]);
+echo $template->render(["uri" => $_SERVER["REQUEST_URI"], "session" => $_SESSION, "manufacturers" => $manufacturers, "deviceConnectionTypes" => $deviceconnectionTypes, "deviceEnergyTypes" => $deviceEnergyTypes, "deviceTypes" => $deviceTypes, "advancedText" => $freeText]);
 

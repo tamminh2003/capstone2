@@ -39,9 +39,11 @@ var deviceManufacturerID = document.getElementById('manufacturerId').value;
 var deviceTypeID = document.getElementById('deviceType').value;
 var deviceICD11Code = document.getElementById('selectedICDCode').value;
 var freeText =  document.getElementById('freeText').value;
+var deviceConnectionType = document.getElementById('deviceConnectionType').value;;
+var devicEenergyType= document.getElementById('devicEenergyType').value;;
 
 
-    window.opener.location.href=(`/pages/AdvancedSearch.php?deviceManufacturerID=${deviceManufacturerID}&deviceTypeID=${deviceTypeID}&deviceICD11Code=${deviceICD11Code}&freeText=${freeText}`);
+    window.opener.location.href=(`/pages/AdvancedSearch.php?deviceManufacturerID=${deviceManufacturerID}&deviceTypeID=${deviceTypeID}&deviceICD11Code=${deviceICD11Code}&deviceConnectionType=${deviceConnectionType}&devicEenergyType=${devicEenergyType}&freeText=${freeText}`);
 window.close();
 
 
@@ -64,7 +66,7 @@ window.close();
                <input type="hidden" id="freeText"  class="form-control my-2" value="{{advancedText}}">
                </div>
                 <div class="row mb-3">
-                    <label for="inputEmail3" class="col-sm-2 col-form-label">Device Manufacturer</label>
+                    <label for="manufacturers" class="col-sm-2 col-form-label">Device Manufacturer</label>
                     <div class="col-sm-10">
                 <select class="form-select" id="manufacturerId">
                     <option value="" selected>Choose...</option>
@@ -94,61 +96,35 @@ window.close();
 	<div class="col-sm-8">
 		<a onclick="OpenDieseaseSearchWindow(window)" class="link-secondary text-end">Disease Select</a>
 	</br>
-</div></div>
-<div class="row mb-3">
-    <label class="col-sm-2 col-form-label">Device Connection Type</label>
-    <div class="col">
-	<div class="form-check">
-		<input class="form-check-input" type="checkbox" id="Wifi">
-		<label class="form-check-label" for="gridCheck1">
-			Wifi
-		</label>
 	</div>
 </div>
-<div class="col">
-	<div class="form-check">
-		<input class="form-check-input" type="checkbox" id="Bluetooth">
-		<label class="form-check-label" for="gridCheck1">
-			Bluetooth
-		</label>
-	</div>
-</div>
-<div class="col">
-	<div class="form-check">
-		<input class="form-check-input" type="checkbox" id="Wired">
-		<label class="form-check-label" for="gridCheck1">
-			Wired
-		</label>
-	</div>
-</div>
-</div>
-<div class="row mb-3">
-<label class="col-sm-2 col-form-label">Device Energy Type</label>
-<div class="col">
-	<div class="form-check">
-		<input class="form-check-input" type="checkbox" id="Electric">
-		<label class="form-check-label" for="gridCheck1">
-			Electric
-		</label>
-	</div>
-</div>
-<div class="col">
-	<div class="form-check">
-		<input class="form-check-input" type="checkbox" id="BatteryOperated">
-		<label class="form-check-label" for="gridCheck1">
-			Battery Operated
-		</label>
-	</div>
-</div>
-<div class="col">
-	<div class="form-check">
-		<input class="form-check-input" type="checkbox" id="SolarPowered">
-		<label class="form-check-label" for="gridCheck1">
-			Solar Powered
-		</label>
-	</div>
-</div>
-</div></br></br>
+
+  <div class="row mb-3">
+                                <label for="deviceConnctionTypes" class="col-sm-2 col-form-label">Device Connection Types</label>
+                                <div class="col-sm-10">
+                                    <select class="form-select" id="deviceConnectionType">
+                                        <option value="" selected>Choose...</option>
+                                        {% for deviceConnectionType in deviceConnectionTypes
+                                             %}
+                                        <option value="{{deviceConnectionType}}">{{deviceConnectionType }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label class="col-sm-2 col-form-label">Device Energy Types</label>
+                                <div class="col-sm-10">
+                                    <select class="form-select" id="devicEenergyType">
+                                        <option value="" selected>Choose...</option>
+                                        {% for deviceEnergyType in deviceEnergyTypes  %}
+                                        <option value="{{deviceEnergyType }}">{{deviceEnergyType}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+
+
+</br></br>
 <div class="row text-center">
     <div class="col-12">
     <button type="submit" class="btn btn-success" style="width:40%" onclick="sendAdvancedFilters()">Search</button>

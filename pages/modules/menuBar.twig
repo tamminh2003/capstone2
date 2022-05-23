@@ -3,7 +3,7 @@
 {% set loginUri = '/pages/Login.php' %}
 {% set registerUri = '/pages/Register.php' %}
 {# {% set searchUri = '/pages/Search.php' %} #}
-{% set advancedSearchUri = '/pages/AdvancedSearch.php' %}
+{% set advancedSearchUri = '/pages/AdvancedSearch2.php' %}
 {% set isHome = str_contains(uri, 'Homepage') %}
 {% set isDash = str_contains(uri, 'Dashboard') %}
 {% set isLogin = str_contains(uri, 'Login') %}
@@ -43,7 +43,7 @@
 					<a class={{isSearch ? "\"nav-link active\"" : "nav-link"}} aria-current="page" href={{ isSearch ? "#" : searchUri}}>Search</a>
 				</li> #}
 				<li class="nav-item">
-					<a class={{isAdvancedSearch ? "\"nav-link active\"" : "nav-link"}} aria-current="page" href={{ isAdvancedSearch ? "#" : advancedSearchUri}}> Search</a>
+					<a class={{isAdvancedSearch ? "\"nav-link active\"" : "nav-link"}} aria-current="page" href={{ advancedSearchUri}}> Search</a>
 				</li>
 
 				{% if session.firstname and session.lastname %}

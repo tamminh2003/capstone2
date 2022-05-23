@@ -20,12 +20,10 @@ if(isset($_GET['freeText'] ) && isset ($_GET['deviceManufacturerID']) && isset($
       $deviceType= $_GET['deviceTypeID'];
       $advancedText=$_GET['freeText'];
       $icd11Code=$_GET['deviceICD11Code'];
-      $connectionType = $_GET['deviceICD11Code'];
-      $energyType= $_GET['deviceICD11Code'];
+      $deviceConnectionType = $_GET['deviceConnectionType'];
+      $devicEenergyType= $_GET['devicEenergyType'];
 
-     // $filterSelections = 
-
-   $devices = advancedSearch2($advancedText,$manufacturerId,$deviceType,$icd11Code,$connectionType, $energyType);
+   $devices = advancedSearch2($advancedText,$manufacturerId,$deviceType,$icd11Code,$deviceConnectionType, $devicEenergyType);
 
 require_once $_SERVER["DOCUMENT_ROOT"] . "/vendor/autoload.php";
 require_once $_SERVER["DOCUMENT_ROOT"] . "/controller/search.php";
