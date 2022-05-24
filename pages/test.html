@@ -1,0 +1,56 @@
+<html>
+
+<head>
+    <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(window).load(function(){
+            $('.btnChoice').on('click', function(){
+                $('#divChoices').show()
+                thefield = $(this).prev()
+                $('.btnselect').on('click', function(){
+                    theselected = $(this).prev()
+                    thefield.val( theselected.val() )
+                    $('#divChoices').hide()
+                })
+            })
+
+            $('#divChoices').css({
+                'border':'2px solid red',
+                'position':'fixed',
+                'top':'100',
+                'left':'200',
+                'display':'none'
+            })
+        });
+    </script>
+</head>
+
+<body>
+
+<div class="divform">
+    <input type="checkbox" name="kvi1" id="kvi1" value="1">
+    <label>Field 1: </label>
+    <input size="10" type="number" id="sku1" name="sku1">
+    <button id="choice1" class="btnChoice">?</button>
+    <br>
+    <input type="checkbox" name="kvi2" id="kvi2" value="2">
+    <label>Field 2: </label>
+    <input size="10"  type="number" id="sku2" name="sku2">
+    <button id="choice2" class="btnChoice">?</button>
+</div>
+
+<div id="divChoices">
+    Select something: 
+    <br>
+    <input size="10" type="number" id="ch1" name="ch1" value="11">
+    <button id="btnsel1" class="btnselect">Select</button>
+    <label for="ch1">bla bla bla</label>
+    <br>
+    <input size="10" type="number" id="ch2" name="ch2" value="22">
+    <button id="btnsel2" class="btnselect">Select</button>
+    <label for="ch2">ble ble ble</label>
+</div>
+
+</body>
+
+</html>
