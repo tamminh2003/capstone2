@@ -1,6 +1,113 @@
 {% extends "layout.twig" %}
 
 {% block content %}
+	{# JQuery library #}
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	{# ICD-11 Script and Stylesheet #}
+	<link rel="stylesheet" href="https://icdcdn.who.int/embeddedct/icd11ect-1.4.1.css">
+	<script src="https://icdcdn.who.int/embeddedct/icd11ect-1.4.1.js"></script>
+
+	{# Multiple select jQuery plugin #}
+	<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+	<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+	{# Additional scripts and stylesheets #}
+	<script type="text/javascript">
+		$(function () {
+			$("#popupOpen").click(function () {
+			$("#mainContainer").fadeTo(200, 1);
+			document.getElementById('freeText').value = document.getElementById('advanced_text_search').value;
+		});
+
+			$("#closepopupdiv").click(function () {
+				$("#mainContainer").fadeOut(200);
+			});
+
+			$("#popupOpen2").click(function () {
+				$("#mainContainer2").fadeTo(200, 1);
+			});
+
+			$("#closepopupdiv2").click(function () {
+				$("#mainContainer2").fadeOut(200);
+				$("#mainContainer").fadeTo(200, 1);
+			});
+
+			$('#disease').select2();
+		});
+
+		function getICDCode() {
+			$("#mainContainer2").fadeOut(200);
+			$("#mainContainer").fadeTo(200, 1);
+			let diseaseCode = document.getElementById('paste-selectedEntity').value;
+			let diseaseName = document.getElementById('paste-selectedEntityName').value;
+			// document.getElementById('disease').value = document.getElementById('paste-selectedEntity').value;
+			$('#disease').append(new Option(diseaseCode, `${diseaseCode}-$-${diseaseName}`, false, true)).trigger('change');
+		}
+	
+	</script>
+
+	<script>
+		const mySettings = { apiServerUrl: "https://icd11restapi-developer-test.azurewebsites.net"};
+		const myCallbacks = {
+			selectedEntityFunction: (selectedEntity) => {
+				$('#paste-selectedEntityName').val(selectedEntity.title);
+				$('#paste-selectedEntity').val(selectedEntity.code);
+				ECT.Handler.clear("1")
+			}
+		};
+		ECT.Handler.configure(mySettings, myCallbacks);
+	</script>
+
+	<style>
+		#mainContainer {
+			position: fixed;
+			top: 0;
+			left: 0;
+			z-index: 999;
+			height: 100%;
+			width: 100%;
+			background: rgba(0, 0, 0, 0.2);
+			display: none;
+		}
+
+		#popdiv {
+			height: 70%;
+			width: 60%;
+			background-color: white;
+			position: fixed;
+			top: 50%;
+			left: 50%;
+			transform: translateX(-50%) translateY(-50%);
+		}
+
+		#mainContainer2 {
+			position: fixed;
+			top: 0;
+			left: 0;
+			z-index: 999;
+			height: 100%;
+			width: 100%;
+			background: rgba(0, 0, 0, 0.2);
+			display: none;
+			overflow-y: scroll;
+		}
+
+		#popdiv2 {
+			height: 80%;
+			width: 70%;
+			background-color: white;
+			position: fixed;
+			top: 50%;
+			left: 50%;
+			transform: translateX(-50%) translateY(-50%);
+			overflow-y: scroll;
+		}
+
+		body {
+			padding-top: 65px;
+		}
+	</style>
+
 	<div class="container">
 		<div class="row">
 			<div class="col-3"></div>
@@ -17,30 +124,88 @@
 
 					<div class="mb-3">
 						<label for="manufactureName" class="form-label">Device Manufacture Name</label>
-						<input id="manufactureName" type="text" name="manufactureName" class="form-control" required/>
+						<input id="manufactureName" type="text" name="manufactureName" class="form-control" placeholder="Main device name" required/>
 					</div>
 					<div class="mb-3">
 						<label for="deviceName" class="form-label">Device Generic Name</label>
-						<input id="deviceName" type="text" name="deviceName" class="form-control" required/>
+						<input id="deviceName" type="text" name="deviceName" class="form-control" placeholder="Sub device name" required/>
 					</div>
 					<div class="mb-3">
 						<label for="deviceModel" class="form-label">Device Model</label>
-						<input id="deviceModel" type="text" name="deviceModel" class="form-control" required/>
+						<input id="deviceModel" type="text" name="deviceModel" class="form-control" placeholder="Version of device" required/>
 					</div>
 					<div class="mb-3">
 						<label for="deviceType" class="form-label">Device Type</label>
-						<input id="deviceType" type="text" name="deviceType" class="form-control" required/>
+						<input id="deviceType" type="text" name="deviceType" class="form-control" placeholder="Type of device" required/>
 					</div>
 					<div class="mb-3">
 						<label for="deviceDescription" class="form-label">Device Description</label>
-						<textarea id="deviceDescription" rows="4" cols="50" name="deviceDescription" class="form-control">Aliquam placerat eros et velit volutpat commodo. Nulla eleifend massa enim, ac commodo libero fermentum ac. Donec varius dolor non fringilla condimentum. In porttitor pulvinar lacus dapibus lacinia. Vivamus faucibus lorem sed ante venenatis, non egestas.
-						</textarea>
+						<textarea id="deviceDescription" rows="4" cols="50" name="deviceDescription" class="form-control">Please put some description of device here.</textarea>
 					</div>
+					<div class="mb-3">
+						<label for="disease" class="form-label">Associated Diseases</label>
+						<select multiple id="disease"  name="disease[]" class="form-control" required /><!--Empty--></select>
+						<a id="popupOpen2" class="link-secondary text-end" onmouseover="" style="cursor: pointer;">Disease Select</a>
+					</div>
+
+
 					<button type="submit" class="btn btn-success mb-5">Add Device</button>
 				</form>
 
 			</div>
 			<div class="col-3"></div>
+		</div>
+	</div>
+
+	<div id="mainContainer2">
+		<div id="popdiv2">
+			<div class="row">
+				<div class="col-11"></div>
+				<div class="col-1 text-right">
+					<button id="closepopupdiv2">X</button>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col">
+					<div class="container-fluid"></br>
+						<div class="row justify-content-left">
+
+								<div class="col-4">
+									<p class="h5">Type for starting search:</p>
+								</div>
+
+								<div class="row">
+									<div class="col-12 text-center"><input type="text" class="ctw-input form-control mx-2" autocomplete="off" data-ctw-ino="1" placeholder="example: tuberculosis.."></div>
+								</div>
+								
+								<div class="row">
+									<div class="ctw-window" data-ctw-ino="1"></div>
+								</div>
+
+							<form>
+
+									<div class="col-4">
+										<p class="h5">The selected code:</p>
+									</div>
+									<div class="row">
+										<div class="col-12 text-center" style="padding-right: 35px"><input type="text" class="form-control mx-2" id="paste-selectedEntityName" value=""></div>
+										<div class="col-12 text-center" style="padding-right: 35px"><input type="text" class="form-control mx-2" id="paste-selectedEntity" value=""></div>
+									</div>
+
+								<br>
+
+								<div class="row text-center">
+									<div class="col-12">
+										<button type="button" class="btn btn-success" style="width:40%" onclick="getICDCode()">Use Disease Code</button>
+									</div>
+								</div>
+								
+							</form>
+
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 {% endblock %}
