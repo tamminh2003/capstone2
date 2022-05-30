@@ -37,7 +37,9 @@ require_once $_SERVER["DOCUMENT_ROOT"] . "/generated-conf/config.php";
 	"deviceType" => $deviceType,
 	"deviceDescription" => $deviceDescription,
 	"user_id" => $userId,
-	"disease" => $diseaseDetails
+	"disease" => $diseaseDetails,
+	"connectionType" => $connectionType,
+	"energyType" => $energyType
 ] = $_POST;
 
 // Add device to device table
@@ -49,6 +51,8 @@ $device->setDeviceImageUrl($deviceImgUrl);
 $device->setDeviceType($deviceType);
 $device->setDeviceDescripition($deviceDescription);
 $device->setUserUserId($userId);
+$device->setDeviceConnectionType($connectionType);
+$device->setDeviceEnergyType($energyType);
 $saveResult = $device->save();
 
 // Check if disease exist in the table

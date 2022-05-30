@@ -10,6 +10,8 @@
 	{# Multiple select jQuery plugin #}
 	<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 	<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+	<link href="https://code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css" rel="stylesheet" />
+	<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js" integrity="sha256-eTyxS0rkjpLEo16uXTS0uVCS4815lc40K2iVpWDvdSY=" crossorigin="anonymous"></script>
 
 	{# Additional scripts and stylesheets #}
 	<script type="text/javascript">
@@ -33,6 +35,21 @@
 			});
 
 			$('#disease').select2();
+
+			$("#connectionType").autocomplete({
+				source: {{deviceConnectionTypes | json_encode | raw}},
+				minLength: 0
+			});
+
+			$("#energyType").autocomplete({
+				source: {{deviceEnergyTypes | json_encode | raw}},
+				minLength: 0
+			});
+
+			$("#deviceType").autocomplete({
+				source: {{deviceTypes | json_encode | raw}},
+				minLength: 0
+			});
 		});
 
 		function getICDCode() {
@@ -146,6 +163,14 @@
 						<label for="disease" class="form-label">Associated Diseases</label>
 						<select multiple id="disease"  name="disease[]" class="form-control" required /><!--Empty--></select>
 						<a id="popupOpen2" class="link-secondary text-end" onmouseover="" style="cursor: pointer;">Disease Select</a>
+					</div>
+					<div class="mb-3">
+						<label for="energyType" class="form-label">Energy Type</label>
+						<input type="text" id="energyType" name="energyType" class="form-control" required />
+					</div>
+					<div class="mb-3">
+						<label for="connectionType" class="form-label">Connection Type</label>
+						<input type="text" id="connectionType" name="connectionType" class="form-control" required />
 					</div>
 
 

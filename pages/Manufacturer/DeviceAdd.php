@@ -13,6 +13,11 @@ use buzzingpixel\twigswitch\SwitchTwigExtension;
 use Umpirsky\Twig\Extension\PhpFunctionExtension;
 
 require_once $_SERVER["DOCUMENT_ROOT"] . "/vendor/autoload.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/controller/advancedSearchOptions.php";
+
+$deviceTypes = populateDeviceTypeDropdown();
+$deviceEnergyTypes = populateDeviceEnergyTypeDropdown();
+$deviceconnectionTypes = populateDeviceConnectionTypeDropdown();
 
 $pathToPages = $_SERVER["DOCUMENT_ROOT"] . "/pages/";
 
@@ -25,4 +30,4 @@ $twig->addExtension(new SwitchTwigExtension());
 
 $template = $twig->load("./Manufacturer/DeviceAdd.twig");
 
-echo $template->render(["uri" => $_SERVER["REQUEST_URI"], "session" => $_SESSION]);
+echo $template->render(["uri" => $_SERVER["REQUEST_URI"], "session" => $_SESSION, "deviceTypes" => $deviceTypes, "deviceEnergyTypes" => $deviceEnergyTypes, "deviceConnectionTypes" => $deviceconnectionTypes]);
