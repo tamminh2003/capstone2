@@ -41,26 +41,35 @@ if ($device->getUserUserId() != $_SESSION["user_id"]) {
 Utility\log("Device found for deletion.");
 
 // Remove associated files
-$documents = PoctDeviceAditionalInfoQuery::create()->filterByPoctDevice($device)->find();
-if (!$documents->isEmpty()) {
+try {
+  $documents = PoctDeviceAditionalInfoQuery::create()->filterByPoctDevice($device)->find();
+  if (!$documents->isEmpty()) {
 
-  $client = Utility\getGoogleClient();
-  $service = new Google\Service\Drive($client);
+    $client = Utility\getGoogleClient();
+    $service = new Google\Service\Drive($client);
 
-  foreach ($documents as $document) {
-    $fileId = $document->getPoctDeviceAditionalInfoDetails();
-    $result = $service->files->delete($fileId);
-    $document->delete();
+    foreach ($documents as $document) {
+      $fileId = $document->getPoctDeviceAditionalInfoDetails();
+      $result = $service->files->delete($fileId);
+      $document->delete();
+    }
   }
-
+} catch (Exception $e) {
+  Utility\log("ERROR: manufacturer/deleteDevice.php api - remove associated files");
+  Utility\log($e);
 }
 
 // Remove associated diseases
-$hasDiseases = PoctDeviceHasDiseaseQuery::create()->filterByPoctDevice($device)->find();
-if (!$hasDiseases->isEmpty()) {
-  foreach ($hasDiseases as $hasDisease) {
-    $hasDisease->delete();
+try {
+  $hasDiseases = PoctDeviceHasDiseaseQuery::create()->filterByPoctDevice($device)->find();
+  if (!$hasDiseases->isEmpty()) {
+    foreach ($hasDiseases as $hasDisease) {
+      $hasDisease->delete();
+    }
   }
+} catch (Exception $e) {
+  Utility\log("ERROR: manufacturer/deleteDevice.php api - remove associated diseases");
+  Utility\log($e);
 }
 
 $device->delete();
