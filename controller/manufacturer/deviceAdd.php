@@ -69,6 +69,7 @@ if (isset($diseaseDetails)) {
 			$disease->save();
 		} else {
 			// Ignore if disease already exist.
+			$disease = $diseaseQuery->getFirst();
 		}
 
 		// Associate device and disease
