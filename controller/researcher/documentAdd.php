@@ -29,7 +29,7 @@ $service = new Google\Service\Drive($client);
  * Add new file
  */
 $file = new Google\Service\Drive\DriveFile();
-$file->setName($_POST["filename"]);
+$file->setName($_FILES["file"]["name"]);
 $file = $service->files->create(
   $file,
   array(
@@ -61,7 +61,7 @@ $filetype = "research";
 $document = new PoctDeviceAditionalInfo();
 $document->setIdpoctDevice($_POST["device_id"]);
 $document->setUserUserId($_POST["user_id"]);
-$document->setPoctDeviceAditionalInfoLabel($_POST["filename"]);
+$document->setPoctDeviceAditionalInfoLabel($_FILES["file"]["name"]);
 $document->setPoctDeviceAditionalInfoType($filetype);
 $document->setPoctDeviceAditionalInfoDetails($file->id);
 $saved = $document->save();
