@@ -54,6 +54,8 @@ function getDeviceById($deviceId)
   $device["device_type"] = $query->getDeviceType();
   $device["device_descripition"] = $query->getDeviceDescripition();
   $device["thumbnail"] = $query->getDeviceImageUrl();
+  $device["energyType"] = $query->getDeviceEnergyType();
+  $device["connectionType"] = $query->getDeviceConnectionType();
 
   return $device;
 }
