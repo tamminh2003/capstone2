@@ -1,5 +1,6 @@
 <?php
 session_start();
+$register = isset($_GET['registered']);
 
 use Umpirsky\Twig\Extension\PhpFunctionExtension;
 
@@ -15,4 +16,4 @@ $twig->addExtension(new PhpFunctionExtension(['str_contains']));
 
 $template = $twig->load("Login.twig");
 
-echo $template->render(["uri" => $_SERVER["REQUEST_URI"], "session" => $_SESSION]);
+echo $template->render(["uri" => $_SERVER["REQUEST_URI"], "session" => $_SESSION, "registered" => $register]);
