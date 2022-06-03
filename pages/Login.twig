@@ -9,6 +9,9 @@
 
 				<div class="card-title mt-3">
 					<h1 class="text-center text-primary py-2">Login Form</h1>
+					{% if(registered == true) %}
+						<div class="alert alert-success">Registration successful. Proceed to login</div>
+					{% endif %}
 				</div>
 
 				<div id="DisplayDiv" class="text-danger text-center" style="font-weight:bold"></div>
