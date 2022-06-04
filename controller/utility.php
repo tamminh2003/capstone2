@@ -2,9 +2,11 @@
 
 namespace Utility;
 
-use Propel\PoctDeviceQuery;
-use Propel\PoctDeviceAditionalInfoQuery;
 use Sabre\HTTP\Response;
+use Propel\PoctDeviceQuery;
+use Propel\PoctDeviceHasDisease;
+use Propel\PoctDeviceHasDiseaseQuery;
+use Propel\PoctDeviceAditionalInfoQuery;
 
 require_once $_SERVER["DOCUMENT_ROOT"] . "/vendor/autoload.php";
 require_once $_SERVER["DOCUMENT_ROOT"] . "/generated-conf/config.php";
@@ -58,6 +60,25 @@ function getDeviceById($deviceId)
   $device["connectionType"] = $query->getDeviceConnectionType();
 
   return $device;
+}
+
+function getDiseaseByDevice($deviceId)
+{
+  $collection = PoctDeviceHasDiseaseQuery::create()
+    ->joinWithDisease()
+    ->filterByPoctDeviceId($deviceId)
+    ->find();
+
+  $diseases = [];
+  foreach ($collection as $query) {
+    $disease = $query->getDisease();
+    $diseases[] = [
+      "diseaseApi" => $disease->getDiseaseApiKey(),
+      "diseaseName" => $disease->getDiseaseName()
+    ];
+  }
+
+  return $diseases;
 }
 
 function getDocumentById($docId)
