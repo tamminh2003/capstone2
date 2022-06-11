@@ -21,7 +21,7 @@ function Register_userRegister() {
     }
 
     function userCompanyCharCheck(company) {
-        const userCompanyCheck = /^[a-zA-Z0-9_\s]+$/;
+        const userCompanyCheck = /^[a-zA-Z0-9\s-.]+$/;
         return userCompanyCheck.test(company);
     }
 
