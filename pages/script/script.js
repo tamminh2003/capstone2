@@ -1,7 +1,7 @@
 function Register_userRegister() {
 
     function nameCharCheck(str) {
-        const basicCheck = /^[a-zA-Z]*$/;
+        const basicCheck = /^[a-zA-Z\s]*$/;
         return basicCheck.test(str);
     }
 
