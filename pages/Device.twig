@@ -28,11 +28,12 @@
 								<p>Device Energy Type:
 									{{ device.energyType }}</p>
 								<div id="disease-list">
+									<p>Diseases Device is Rated for:</p>
 									{% for disease in diseases %}
-										<p><b>{{disease.diseaseApi}}</b> {{disease.diseaseName}}</p>
+										<p><b>ID:</b> {{disease.diseaseApi}} |
+											<b>Disease/Condition:</b> {{disease.diseaseName}}</p>
 									{% endfor %}
 								</div>
-
 							</div>
 						</div>
 						<div class="row">
