@@ -23,6 +23,16 @@
 									{{ device.device_model }}</p>
 								<p>Device Type:
 									{{ device.device_type }}</p>
+								<p>Device Connection Type:
+									{{ device.connectionType }}</p>
+								<p>Device Energy Type:
+									{{ device.energyType }}</p>
+								<div id="disease-list">
+									{% for disease in diseases %}
+										<p><b>{{disease.diseaseApi}}</b> {{disease.diseaseName}}</p>
+									{% endfor %}
+								</div>
+
 							</div>
 						</div>
 						<div class="row">

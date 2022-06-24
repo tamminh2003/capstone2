@@ -39,6 +39,11 @@ $RDocuments = rDocumentList($_GET["device_id"]);
  */
 $documents = documentList($_GET["device_id"]);
 
+/**
+ * Load diseases of device
+ */
+$diseases = Utility\getDiseaseByDevice($_GET["device_id"]);
+
 $pathToPages = $_SERVER["DOCUMENT_ROOT"] . "/pages/";
 $twigLoader = new \Twig\Loader\FilesystemLoader($pathToPages);
 $twig = new Twig\Environment($twigLoader);
@@ -46,4 +51,14 @@ $twig->addExtension(new PhpFunctionExtension(["str_contains"]));
 $twig->addExtension(new SwitchTwigExtension());
 $template = $twig->load("./Device.twig");
 
-echo $template->render(["uri" => $_SERVER["REQUEST_URI"], "session" => $_SESSION, "device" => $device, "documents" => $documents, "images" => $images, "RDocuments" => $RDocuments]);
+echo $template->render(
+  [
+    "uri" => $_SERVER["REQUEST_URI"],
+    "session" => $_SESSION,
+    "device" => $device,
+    "documents" => $documents,
+    "images" => $images,
+    "RDocuments" => $RDocuments,
+    "diseases" => $diseases
+  ]
+);

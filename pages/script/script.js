@@ -21,7 +21,7 @@ function Register_userRegister() {
     }
 
     function userCompanyCharCheck(company) {
-        const userCompanyCheck = /^[a-zA-Z0-9_]+$/;
+        const userCompanyCheck = /^[a-zA-Z0-9_\s]+$/;
         return userCompanyCheck.test(company);
     }
 
@@ -136,17 +136,20 @@ function Register_userRegister() {
         .then(response => response.text())
         .then(text => {
             if (text == 'SUCCESS') {
-                document.querySelector("#DisplayDiv").innerHTML =
-                    "You have successfully registered your account. " +
-                    "Proceed to the Login page to login to system."
+                window.location.assign("/pages/Login.php?registered")
+                // document.querySelector("#DisplayDiv").innerHTML =
+                //     "You have successfully registered your account. " +
+                //     "Proceed to the Login page to login to system."
             }
             else if (text == 'DOUBLE_JEOPARDY') {
-                document.querySelector("#DisplayDiv").innerHTML =
-                    "You can only have 1 account registered for every email address."
+                alert("You can only have 1 account registered for every email address.")
+                // document.querySelector("#DisplayDiv").innerHTML =
+                //     "You can only have 1 account registered for every email address."
             }
             else if (text == 'USERNAME') {
-                document.querySelector("#DisplayDiv").innerHTML =
-                    "Username already taken. Please create a different one that works."
+                alert("Username already taken. Please create a different one that works.")
+                // document.querySelector("#DisplayDiv").innerHTML =
+                //     "Username already taken. Please create a different one that works."
             }
         })
 }
